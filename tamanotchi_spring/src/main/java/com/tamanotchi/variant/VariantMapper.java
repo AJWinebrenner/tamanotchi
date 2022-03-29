@@ -14,13 +14,17 @@ public class VariantMapper implements org.springframework.jdbc.core.RowMapper<Va
 
     @Override
     public Variant mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new Variant(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getInt("stage"),
-                rs.getInt("fave_food"),
-                rs.getInt("max_exp"),
-                rs.getInt("upgrade")
-        );
+        try {
+            return new Variant(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("stage"),
+                    rs.getInt("fave_food"),
+                    rs.getInt("max_exp"),
+                    rs.getInt("upgrade")
+            );
+        } catch (Exception e){
+            return null;
+        }
     }
 }

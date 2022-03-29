@@ -1,8 +1,5 @@
 package com.tamanotchi.variant;
 
-
-import com.tamanotchi.house.House;
-import com.tamanotchi.house.HouseMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +29,10 @@ public class VariantDataAccessService implements VariantDAO{
         var sql = """
                 SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE variants.id = ?;
                 """;
-        return jdbcTemplate.queryForObject(sql, new VariantMapper(), variantId);
+        try {
+            return jdbcTemplate.queryForObject(sql, new VariantMapper(), variantId);
+        } catch (Exception e){
+            return null;
+        }
     }
 }
