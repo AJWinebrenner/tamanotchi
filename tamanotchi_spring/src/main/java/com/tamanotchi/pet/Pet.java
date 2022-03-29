@@ -5,15 +5,15 @@ import java.util.Objects;
 public class Pet {
 
     private String name;
-    private int house;
-    private int type;
-    private int happiness;
-    private int energy;
+    private Integer house;
+    private Integer type;
+    private Integer happiness;
+    private Integer energy;
     private Mood mood;
-    private int exp;
-    private int money;
+    private Integer exp;
+    private Integer money;
 
-    public Pet(String name, int house, int type, int happiness, int energy, Mood mood, int exp, int money) {
+    public Pet(String name, Integer house, Integer type, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
         this.name = name;
         this.house = house;
         this.type = type;
@@ -32,35 +32,35 @@ public class Pet {
         this.name = name;
     }
 
-    public int getHouse() {
+    public Integer getHouse() {
         return house;
     }
 
-    public void setHouse(int house) {
+    public void setHouse(Integer house) {
         this.house = house;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public int getHappiness() {
+    public Integer getHappiness() {
         return happiness;
     }
 
-    public void setHappiness(int happiness) {
+    public void setHappiness(Integer happiness) {
         this.happiness = happiness;
     }
 
-    public int getEnergy() {
+    public Integer getEnergy() {
         return energy;
     }
 
-    public void setEnergy(int energy) {
+    public void setEnergy(Integer energy) {
         this.energy = energy;
     }
 
@@ -72,19 +72,19 @@ public class Pet {
         this.mood = mood;
     }
 
-    public int getExp() {
+    public Integer getExp() {
         return exp;
     }
 
-    public void setExp(int exp) {
+    public void setExp(Integer exp) {
         this.exp = exp;
     }
 
-    public int getMoney() {
+    public Integer getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(Integer money) {
         this.money = money;
     }
 
@@ -93,7 +93,7 @@ public class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return house == pet.house && type == pet.type && happiness == pet.happiness && energy == pet.energy && exp == pet.exp && money == pet.money && Objects.equals(name, pet.name) && mood == pet.mood;
+        return Objects.equals(name, pet.name) && Objects.equals(house, pet.house) && Objects.equals(type, pet.type) && Objects.equals(happiness, pet.happiness) && Objects.equals(energy, pet.energy) && mood == pet.mood && Objects.equals(exp, pet.exp) && Objects.equals(money, pet.money);
     }
 
     @Override
