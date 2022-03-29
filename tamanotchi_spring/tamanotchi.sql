@@ -143,7 +143,7 @@ INSERT INTO houses(
 )
 VALUES(
     'house',
-    10,
+    20,
     1,
     2,
     1
@@ -204,4 +204,25 @@ VALUES(
     2,
     10,
     2
+);
+
+INSERT INTO pets(
+    name,
+    house,
+    variant,
+    happiness,
+    energy,
+    mood,
+    exp,
+    money
+)
+VALUES(
+    'jeff',
+    3,
+    3,
+    1,
+    10,
+    1,
+    10,
+    10
 );
