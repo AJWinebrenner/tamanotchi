@@ -41,17 +41,17 @@ public class PetSQL implements PetDAO{
 
         try {
             return jdbc.queryForObject(sql, (rs, rowNum) ->
-                    new Pet(
-                            rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getInt("house"),
-                            rs.getInt("variant"),
-                            rs.getInt("happiness"),
-                            rs.getInt("energy"),
-                            Mood.moodOf(rs.getInt("mood")),
-                            rs.getInt("exp"),
-                            rs.getInt("money")
-                    ),
+                new Pet(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("house"),
+                    rs.getInt("variant"),
+                    rs.getInt("happiness"),
+                    rs.getInt("energy"),
+                    Mood.moodOf(rs.getInt("mood")),
+                    rs.getInt("exp"),
+                    rs.getInt("money")
+                ),
                 id
             );
         } catch (Exception e) {
@@ -61,16 +61,62 @@ public class PetSQL implements PetDAO{
 
     @Override
     public int add(Pet pet) {
-        return 0;
+        String sql = "INSERT INTO pets (name, house, variant, happiness, energy, mood, exp, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+        return jdbc.update(sql,
+                pet.getName(),
+                pet.getHouse(),
+                pet.getVariant(),
+                pet.getHappiness(),
+                pet.getEnergy(),
+                pet.getMood().value(),
+                pet.getExp(),
+                pet.getMoney()
+        );
     }
 
     @Override
     public int updateById(Integer id, Pet update) {
-        return 0;
+
+        String sql = "UPDATE pets SET (name, house, variant, happiness, energy, mood, exp, money)=(?, ?, ?, ?, ?, ?, ?, ?) WHERE id = ?";
+
+        Pet original = getById(id);
+
+        String newName = update.getName();
+        if (newName == null) newName = original.getName();
+        Integer newHouse = update.getHouse();
+        if (newHouse == null) newHouse = original.getHouse();
+        Integer newVariant = update.getVariant();
+        if (newVariant == null) newVariant = original.getVariant();
+        Integer newHappiness = update.getHappiness();
+        if (newHappiness == null) newHappiness = original.getHappiness();
+        Integer newEnergy = update.getEnergy();
+        if (newEnergy == null) newEnergy = original.getEnergy();
+        Mood newMood = update.getMood();
+        if (newMood == null) newMood = original.getMood();
+        Integer newExp = update.getExp();
+        if (newExp == null) newExp = original.getExp();
+        Integer newMoney = update.getMoney();
+        if (newMoney == null) newMoney = original.getMoney();
+
+        return jdbc.update(sql,
+                newName,
+                newHouse,
+                newVariant,
+                newHappiness,
+                newEnergy,
+                newMood.value(),
+                newExp,
+                newMoney,
+                id
+        );
     }
 
     @Override
     public int deleteById(Integer id) {
-        return 0;
+
+        String sql = "DELETE FROM pets WHERE id = ?";
+
+        return jdbc.update(sql, id);
     }
 }

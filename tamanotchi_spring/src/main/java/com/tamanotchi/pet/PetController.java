@@ -1,8 +1,6 @@
 package com.tamanotchi.pet;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,20 @@ public class PetController {
     @GetMapping(path = "pets/{id}")
     public Pet getPetById(@PathVariable("id") Integer id) {
         return service.getPetById(id);
+    }
+
+    @PostMapping(path = "pets")
+    public void addNewPet(@RequestBody Pet pet){
+        service.addNewPet(pet);
+    }
+
+    @PutMapping(path = "pets/{id}")
+    public void updatePetById(@PathVariable("id") Integer id, @RequestBody Pet pet){
+        service.updatePetById(id, pet);
+    }
+
+    @DeleteMapping(path = "pets/{id}")
+    public void deletePetById(@PathVariable("id") Integer id){
+        service.deletePetById(id);
     }
 }
