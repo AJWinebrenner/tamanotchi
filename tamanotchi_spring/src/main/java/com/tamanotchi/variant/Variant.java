@@ -1,8 +1,8 @@
-package com.tamanotchi.type;
+package com.tamanotchi.variant;
 
 import java.util.Objects;
 
-public class Type {
+public class Variant {
         private Integer Id;
         private String name;
         private Integer stage;
@@ -10,10 +10,10 @@ public class Type {
         private Integer max_exp;
         private Integer upgrade;
 
-        public Type() {
+        public Variant() {
         }
 
-        public Type(String name, Integer stage, Integer fave_food, Integer max_exp, Integer upgrade) {
+        public Variant(String name, Integer stage, Integer fave_food, Integer max_exp, Integer upgrade) {
         this.name = name;
         this.stage = stage;
         this.fave_food = fave_food;
@@ -71,7 +71,7 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type{" +
+        return "Variant{" +
                 "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", stage=" + stage +
@@ -85,8 +85,8 @@ public class Type {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Type type = (Type) o;
-        return Objects.equals(Id, type.Id) && Objects.equals(name, type.name) && Objects.equals(stage, type.stage) && Objects.equals(fave_food, type.fave_food) && Objects.equals(max_exp, type.max_exp) && Objects.equals(upgrade, type.upgrade);
+        Variant variant = (Variant) o;
+        return Objects.equals(Id, variant.Id) && Objects.equals(name, variant.name) && Objects.equals(stage, variant.stage) && Objects.equals(fave_food, variant.fave_food) && Objects.equals(max_exp, variant.max_exp) && Objects.equals(upgrade, variant.upgrade);
     }
 
     @Override

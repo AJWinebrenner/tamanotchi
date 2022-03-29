@@ -6,7 +6,7 @@ public class Pet {
 
     private String name;
     private Integer house;
-    private Integer type;
+    private Integer variant;
     private Integer happiness;
     private Integer energy;
     private Mood mood;
@@ -17,10 +17,10 @@ public class Pet {
         
     }
 
-    public Pet(String name, Integer house, Integer type, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
+    public Pet(String name, Integer house, Integer variant, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
         this.name = name;
         this.house = house;
-        this.type = type;
+        this.variant = variant;
         this.happiness = happiness;
         this.energy = energy;
         this.mood = mood;
@@ -44,12 +44,12 @@ public class Pet {
         this.house = house;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getVariant() {
+        return variant;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setVariant(Integer variant) {
+        this.variant = variant;
     }
 
     public Integer getHappiness() {
@@ -97,12 +97,12 @@ public class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return Objects.equals(name, pet.name) && Objects.equals(house, pet.house) && Objects.equals(type, pet.type) && Objects.equals(happiness, pet.happiness) && Objects.equals(energy, pet.energy) && mood == pet.mood && Objects.equals(exp, pet.exp) && Objects.equals(money, pet.money);
+        return Objects.equals(name, pet.name) && Objects.equals(house, pet.house) && Objects.equals(variant, pet.variant) && Objects.equals(happiness, pet.happiness) && Objects.equals(energy, pet.energy) && mood == pet.mood && Objects.equals(exp, pet.exp) && Objects.equals(money, pet.money);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, house, type, happiness, energy, mood, exp, money);
+        return Objects.hash(name, house, variant, happiness, energy, mood, exp, money);
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Pet {
         return "Pet{" +
                 "name='" + name + '\'' +
                 ", house=" + house +
-                ", type=" + type +
+                ", type=" + variant +
                 ", happiness=" + happiness +
                 ", energy=" + energy +
                 ", mood=" + mood +
