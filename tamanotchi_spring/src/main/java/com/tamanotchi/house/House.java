@@ -6,14 +6,14 @@ public class House {
 
     private String name;
     private Integer price;
-    private Integer happiness_bonuses;
+    private Integer happiness_bonus;
     private Integer size;
     private Integer upgrade;
 
     public House(String name, Integer price, Integer happiness_bonuses, Integer size, Integer upgrade) {
         this.name = name;
         this.price = price;
-        this.happiness_bonuses = happiness_bonuses;
+        this.happiness_bonus = happiness_bonuses;
         this.size = size;
         this.upgrade = upgrade;
     }
@@ -35,12 +35,12 @@ public class House {
         this.price = price;
     }
 
-    public Integer getHappiness_bonuses() {
-        return happiness_bonuses;
+    public Integer getHappiness_bonus() {
+        return happiness_bonus;
     }
 
-    public void setHappiness_bonuses(Integer happiness_bonuses) {
-        this.happiness_bonuses = happiness_bonuses;
+    public void setHappiness_bonus(Integer happiness_bonus) {
+        this.happiness_bonus = happiness_bonus;
     }
 
     public Integer getSize() {
@@ -67,12 +67,12 @@ public class House {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         House house = (House) o;
-        return Objects.equals(name, house.name) && Objects.equals(price, house.price) && Objects.equals(happiness_bonuses, house.happiness_bonuses) && Objects.equals(size, house.size) && Objects.equals(upgrade, house.upgrade);
+        return Objects.equals(name, house.name) && Objects.equals(price, house.price) && Objects.equals(happiness_bonus, house.happiness_bonus) && Objects.equals(size, house.size) && Objects.equals(upgrade, house.upgrade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, happiness_bonuses, size, upgrade);
+        return Objects.hash(name, price, happiness_bonus, size, upgrade);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class House {
         return "House{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", happiness_bonuses=" + happiness_bonuses +
+                ", happiness_bonuses=" + happiness_bonus +
                 ", size=" + size +
                 ", upgrade=" + upgrade +
                 '}';

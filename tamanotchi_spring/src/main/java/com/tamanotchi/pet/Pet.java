@@ -13,6 +13,10 @@ public class Pet {
     private Integer exp;
     private Integer money;
 
+    public Pet() {
+        
+    }
+
     public Pet(String name, Integer house, Integer type, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
         this.name = name;
         this.house = house;
