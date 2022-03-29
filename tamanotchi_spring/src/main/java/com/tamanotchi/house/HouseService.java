@@ -1,5 +1,8 @@
 package com.tamanotchi.house;
 
+import com.tamanotchi.pet.Pet;
+import com.tamanotchi.pet.PetNotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +17,24 @@ public class HouseService {
     }
 
     public List<House> selectAllHouses() {
-        List<House> houses = houseDAO.selectAllHouses();
-        return houses;
+        List<House> selected = houseDAO.selectAllHouses();
+        if (selected == null){
+            throw new HouseNotFoundException("House not found");
+        }else{
+            return selected;
+        }
     }
 
     public House selectHouseById(Integer houseId) {
-        return houseDAO.selectHouseById(houseId);
+        House selected= houseDAO.selectHouseById(houseId);
+        if (selected == null){
+            throw new HouseNotFoundException("House with id number "+ houseId + " does not exist");
+        }else{
+            return selected;
+        }
+
     }
+
+
+
 }
