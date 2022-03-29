@@ -21,6 +21,15 @@ public class Variant {
         this.upgrade = upgrade;
     }
 
+    public Variant(Integer id, String name, Integer stage, Integer fave_food, Integer max_exp, Integer upgrade) {
+        Id = id;
+        this.name = name;
+        this.stage = stage;
+        this.fave_food = fave_food;
+        this.max_exp = max_exp;
+        this.upgrade = upgrade;
+    }
+
     public Integer getId() {
         return Id;
     }
