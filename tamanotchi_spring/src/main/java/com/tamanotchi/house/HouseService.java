@@ -1,8 +1,13 @@
 package com.tamanotchi.house;
 
+
 import com.tamanotchi.pet.Pet;
 import com.tamanotchi.pet.PetNotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
+
+import com.tamanotchi.house.House;
+import com.tamanotchi.house.HouseDAO;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
