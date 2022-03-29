@@ -1,8 +1,6 @@
 package com.tamanotchi.variant;
 
 
-import com.tamanotchi.house.House;
-import com.tamanotchi.house.HouseMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
