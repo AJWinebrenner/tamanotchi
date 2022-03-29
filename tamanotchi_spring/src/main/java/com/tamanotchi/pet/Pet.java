@@ -1,4 +1,4 @@
-package pet;
+package com.tamanotchi.pet;
 
 import java.util.Objects;
 

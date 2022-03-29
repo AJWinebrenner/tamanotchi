@@ -1,4 +1,4 @@
-package pet;
+package com.tamanotchi.pet;
 
 public enum Mood {
     IDLE(1),
