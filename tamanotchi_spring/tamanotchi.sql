@@ -34,3 +34,174 @@ CREATE TABLE pets(
     exp INT,
     money INT
 );
+
+INSERT INTO foods(
+    name,
+    price,
+    energy,
+    happiness,
+    isUnhealthy,
+    heals
+)
+VALUES(
+    'medicine',
+    8,
+    0,
+    0,
+    FALSE,
+    TRUE
+);
+
+INSERT INTO foods(
+    name,
+    price,
+    energy,
+    happiness,
+    isUnhealthy,
+    heals
+)
+VALUES(
+    'carrot',
+    2,
+    3,
+    0,
+    FALSE,
+    FALSE
+);
+
+INSERT INTO foods(
+    name,
+    price,
+    energy,
+    happiness,
+    isUnhealthy,
+    heals
+)
+VALUES(
+    'candy',
+    6,
+    0,
+    3,
+    TRUE,
+    FALSE
+);
+
+INSERT INTO foods(
+    name,
+    price,
+    energy,
+    happiness,
+    isUnhealthy,
+    heals
+)
+VALUES(
+    'bread',
+    4,
+    3,
+    1,
+    TRUE,
+    FALSE
+);
+
+INSERT INTO foods(
+    name,
+    price,
+    energy,
+    happiness,
+    isUnhealthy,
+    heals
+)
+VALUES(
+    'fish',
+    3,
+    4,
+    0,
+    FALSE,
+    FALSE
+);
+
+INSERT INTO houses(
+    name,
+    price,
+    happiness_bonus,
+    size,
+    upgrade
+)
+VALUES(
+    'mansion',
+    30,
+    2,
+    3,
+    null
+);
+INSERT INTO houses(
+    name,
+    price,
+    happiness_bonus,
+    size,
+    upgrade
+)
+VALUES(
+    'house',
+    10,
+    1,
+    2,
+    1
+);
+INSERT INTO houses(
+    name,
+    price,
+    happiness_bonus,
+    size,
+    upgrade
+)
+VALUES(
+    'bungalow',
+    10,
+    0,
+    1,
+    2
+);
+
+INSERT INTO variants(
+    name,
+    stage,
+    fave_food,
+    max_exp,
+    upgrade
+)
+VALUES(
+    'impeckable',
+    3,
+    5,
+    40,
+    null
+);
+INSERT INTO variants(
+    name,
+    stage,
+    fave_food,
+    max_exp,
+    upgrade
+)
+VALUES(
+    'nugget',
+    2,
+    4,
+    25,
+    1
+);
+INSERT INTO variants(
+    name,
+    stage,
+    fave_food,
+    max_exp,
+    upgrade
+)
+VALUES(
+    'chickpea',
+    1,
+    2,
+    10,
+    2
+);
