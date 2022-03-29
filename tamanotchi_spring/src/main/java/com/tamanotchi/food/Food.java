@@ -12,6 +12,8 @@ public class Food {
     private boolean isUnhealthy;
     private boolean heals;
 
+    public Food() {
+    }
 
     public Food(Integer foodId, String name, Integer price, Integer energy, Integer happiness, boolean isUnhealthy, boolean heals) {
         this.foodId = foodId;
@@ -108,6 +110,5 @@ public class Food {
                 ", heals=" + heals +
                 '}';
     }
-
 
 }
