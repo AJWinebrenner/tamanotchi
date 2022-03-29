@@ -13,10 +13,10 @@ public class House {
     public House() {
     }
 
-    public House(String name, Integer price, Integer happiness_bonuses, Integer size, Integer upgrade) {
+    public House(String name, Integer price, Integer happiness_bonus, Integer size, Integer upgrade) {
         this.name = name;
         this.price = price;
-        this.happiness_bonus = happiness_bonuses;
+        this.happiness_bonus = happiness_bonus;
         this.size = size;
         this.upgrade = upgrade;
     }
@@ -83,7 +83,7 @@ public class House {
         return "House{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", happiness_bonuses=" + happiness_bonus +
+                ", happiness_bonus=" + happiness_bonus +
                 ", size=" + size +
                 ", upgrade=" + upgrade +
                 '}';

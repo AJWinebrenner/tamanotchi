@@ -1,5 +1,7 @@
 package com.tamanotchi.house;
 
+import com.tamanotchi.house.House;
+import com.tamanotchi.house.HouseDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
