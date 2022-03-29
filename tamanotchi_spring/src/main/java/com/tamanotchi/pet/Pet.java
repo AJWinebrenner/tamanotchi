@@ -9,6 +9,8 @@ public class Pet {
     private Integer variant;
     private Integer happiness;
     private Integer energy;
+    private Integer max_happiness;
+    private Integer max_energy;
     private Mood mood;
     private Integer exp;
     private Integer money;
@@ -23,6 +25,8 @@ public class Pet {
         this.variant = variant;
         this.happiness = happiness;
         this.energy = energy;
+        this.max_happiness = 10;
+        this.max_energy = 10;
         this.mood = mood;
         this.exp = exp;
         this.money = money;
@@ -66,6 +70,22 @@ public class Pet {
 
     public void setEnergy(Integer energy) {
         this.energy = energy;
+    }
+
+    public Integer getMax_happiness() {
+        return max_happiness;
+    }
+
+    public void setMax_happiness(Integer max_happiness) {
+        this.max_happiness = max_happiness;
+    }
+
+    public Integer getMax_energy() {
+        return max_energy;
+    }
+
+    public void setMax_energy(Integer max_energy) {
+        this.max_energy = max_energy;
     }
 
     public Mood getMood() {
