@@ -31,7 +31,7 @@ public class PetService {
         int added = DAO.add(pet);
 
         if (added != 1) {
-            throw new IllegalStateException("Pet could not be create");
+            throw new IllegalStateException("Pet could not be created");
         }
     }
 
