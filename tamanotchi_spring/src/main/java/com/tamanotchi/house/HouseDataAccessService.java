@@ -2,6 +2,7 @@ package com.tamanotchi.house;
 
 import com.tamanotchi.pet.Mood;
 import com.tamanotchi.pet.Pet;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -37,7 +38,12 @@ public class HouseDataAccessService implements HouseDAO{
         var sql = """
                 SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE houses.id = ?;
                 """;
+<<<<<<< HEAD
             return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+=======
+        try{
+            return jdbcTemplate.queryForObject(sql,(rs, rowNum) ->
+>>>>>>> 5f318b4c09c0877a90f33eb9696ecefb32ad745c
                     new House(
                             rs.getInt("id"),
                             rs.getString("name"),
@@ -46,5 +52,13 @@ public class HouseDataAccessService implements HouseDAO{
                             rs.getInt("size"),
                             rs.getInt("upgrade")
                     ), houseId);
+<<<<<<< HEAD
+=======
+
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+
+>>>>>>> 5f318b4c09c0877a90f33eb9696ecefb32ad745c
     }
 }
