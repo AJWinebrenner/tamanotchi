@@ -1,4 +1,4 @@
-package pet;
+package src.main.java.pet;
 
 import java.util.Objects;
 
