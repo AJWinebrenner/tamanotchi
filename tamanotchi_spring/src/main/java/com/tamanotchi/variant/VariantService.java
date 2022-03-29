@@ -26,10 +26,10 @@ public class VariantService {
 
     public Variant selectVariantById(Integer variantId) {
         Variant variant = variantDAO.selectVariantById(variantId);
-        if (variant == null){
-            throw new VariantNotFoundException("Variant with id " + variantId + " could not be found.");
-        } else {
-            return variant;
-        }
+            if (variant == null){
+                throw new VariantNotFoundException("Variant with id " + variantId + " could not be found.");
+            } else {
+                return variant;
+            }
     }
 }
