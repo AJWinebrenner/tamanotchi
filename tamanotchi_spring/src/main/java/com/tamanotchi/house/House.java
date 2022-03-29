@@ -10,6 +10,9 @@ public class House {
     private Integer size;
     private Integer upgrade;
 
+    public House() {
+    }
+
     public House(String name, Integer price, Integer happiness_bonuses, Integer size, Integer upgrade) {
         this.name = name;
         this.price = price;
