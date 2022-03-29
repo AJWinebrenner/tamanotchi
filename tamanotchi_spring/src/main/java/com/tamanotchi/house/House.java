@@ -5,14 +5,12 @@ import java.util.Objects;
 public class House {
 
     private String name;
-    private int price;
-    private int happiness_bonuses;
-    private int size;
-    private int upgrade;
+    private Integer price;
+    private Integer happiness_bonuses;
+    private Integer size;
+    private Integer upgrade;
 
-    //Constructor
-
-    public House(String name, int price, int happiness_bonuses, int size, int upgrade) {
+    public House(String name, Integer price, Integer happiness_bonuses, Integer size, Integer upgrade) {
         this.name = name;
         this.price = price;
         this.happiness_bonuses = happiness_bonuses;
@@ -20,7 +18,6 @@ public class House {
         this.upgrade = upgrade;
     }
 
-    //Setters and getters
 
     public String getName() {
         return name;
@@ -30,45 +27,47 @@ public class House {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public int getHappiness_bonuses() {
+    public Integer getHappiness_bonuses() {
         return happiness_bonuses;
     }
 
-    public void setHappiness_bonuses(int happiness_bonuses) {
+    public void setHappiness_bonuses(Integer happiness_bonuses) {
         this.happiness_bonuses = happiness_bonuses;
     }
 
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(Integer size) {
         this.size = size;
     }
 
-    public int getUpgrade() {
+    public Integer getUpgrade() {
         return upgrade;
     }
 
-    public void setUpgrade(int upgrade) {
+    public void setUpgrade(Integer upgrade) {
         this.upgrade = upgrade;
     }
 
-    //Equals and hashCode
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         House house = (House) o;
-        return price == house.price && happiness_bonuses == house.happiness_bonuses && size == house.size && upgrade == house.upgrade && Objects.equals(name, house.name);
+        return Objects.equals(name, house.name) && Objects.equals(price, house.price) && Objects.equals(happiness_bonuses, house.happiness_bonuses) && Objects.equals(size, house.size) && Objects.equals(upgrade, house.upgrade);
     }
 
     @Override
@@ -76,7 +75,6 @@ public class House {
         return Objects.hash(name, price, happiness_bonuses, size, upgrade);
     }
 
-  //ToString
     @Override
     public String toString() {
         return "House{" +
@@ -87,6 +85,8 @@ public class House {
                 ", upgrade=" + upgrade +
                 '}';
     }
+
+
 
 
 
