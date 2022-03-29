@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Pet {
 
+    private Integer id;
     private String name;
     private Integer house;
     private Integer variant;
@@ -19,7 +20,8 @@ public class Pet {
         
     }
 
-    public Pet(String name, Integer house, Integer variant, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
+    public Pet(Integer id, String name, Integer house, Integer variant, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
+        this.id = id;
         this.name = name;
         this.house = house;
         this.variant = variant;
@@ -30,6 +32,14 @@ public class Pet {
         this.mood = mood;
         this.exp = exp;
         this.money = money;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -117,22 +127,25 @@ public class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return Objects.equals(name, pet.name) && Objects.equals(house, pet.house) && Objects.equals(variant, pet.variant) && Objects.equals(happiness, pet.happiness) && Objects.equals(energy, pet.energy) && mood == pet.mood && Objects.equals(exp, pet.exp) && Objects.equals(money, pet.money);
+        return Objects.equals(id, pet.id) && Objects.equals(name, pet.name) && Objects.equals(house, pet.house) && Objects.equals(variant, pet.variant) && Objects.equals(happiness, pet.happiness) && Objects.equals(energy, pet.energy) && mood == pet.mood && Objects.equals(exp, pet.exp) && Objects.equals(money, pet.money);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, house, variant, happiness, energy, mood, exp, money);
+        return Objects.hash(id, name, house, variant, happiness, energy, mood, exp, money);
     }
 
     @Override
     public String toString() {
         return "Pet{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", house=" + house +
-                ", type=" + variant +
+                ", variant=" + variant +
                 ", happiness=" + happiness +
                 ", energy=" + energy +
+                ", max_happiness=" + max_happiness +
+                ", max_energy=" + max_energy +
                 ", mood=" + mood +
                 ", exp=" + exp +
                 ", money=" + money +
