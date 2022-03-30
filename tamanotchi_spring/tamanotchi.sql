@@ -246,7 +246,7 @@ INSERT INTO pets(
 )
 
 VALUES(
-    'Malcom',
+    'Malcolm',
     3,
     2,
     1,

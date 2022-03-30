@@ -11,9 +11,14 @@
   --meter-size: 40px;
   --happiness-size: 0;
   --energy-size: 0;
+
+  --red: #e93841;
+  --light-green: #59e150;
 }
 
 * {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -22,6 +27,10 @@
 
 body {
   background-color: antiquewhite;
+}
+
+h1 {
+  font-size: 24px;
 }
 
 .sprite {
