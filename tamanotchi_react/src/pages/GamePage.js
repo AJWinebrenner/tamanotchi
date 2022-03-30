@@ -8,6 +8,7 @@ const GamePage = ({petId}) => {
     const [currentPetName, setCurrentPetName] = useState("-");
     const [currentStage, setCurrentStage] = useState(1);
     const [currentMoney, setCurrentMoney] = useState(0);
+    const [currentHouse, setCurrentHouse] = useState();
     
         // put in money and stage in state 
     
@@ -22,6 +23,10 @@ const GamePage = ({petId}) => {
           fetch(`http://localhost:8080/variants/${pet.variant}`)
             .then(response => response.json())
             .then(variant => setCurrentStage(variant.stage))
+            console.log(pet.house)
+          fetch(`http://localhost:8080/houses/${pet.house}`)
+            .then(response =>response.json())
+            .then(house => setCurrentHouse(house))
         }) // not sure we need this here or after if statement
       .catch(error => console.error(error)); 
     }
@@ -52,7 +57,7 @@ const GamePage = ({petId}) => {
             </section>
             <div className="middle-flex">
                 <PetContainer pet={currentPet}/>
-                <ActivityContainer/>
+                <ActivityContainer pet={currentPet} currentHouse={currentHouse}/>
             </div>
         </>
     );
