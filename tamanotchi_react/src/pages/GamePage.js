@@ -4,7 +4,19 @@ import PetContainer from "../containers/PetContainer";
 
 const GamePage = ({petId}) => {
 
-    const[foodId, setFoodId]= useState(2);
+    const[foodId, setFoodId]= useState(0);
+    
+    const feedPet = (selectedFoodId) => {
+        console.log(selectedFoodId)
+        if(foodId!=selectedFoodId){
+            setFoodId(selectedFoodId)
+        }
+        setTimeout(() => {
+            setFoodId(0)
+            console.log("5 seconds later")
+          }, 5000);
+    }
+    
 
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
@@ -22,6 +34,7 @@ const GamePage = ({petId}) => {
     const [currentPetName, setCurrentPetName] = useState("-");
     const [currentStage, setCurrentStage] = useState(1);
     const [currentMoney, setCurrentMoney] = useState(0);
+    const [currentHouse, setCurrentHouse] = useState();
     
         // put in money and stage in state 
     
@@ -36,6 +49,10 @@ const GamePage = ({petId}) => {
           fetch(`http://localhost:8080/variants/${pet.variant}`)
             .then(response => response.json())
             .then(variant => setCurrentStage(variant.stage))
+            console.log(pet.house)
+          fetch(`http://localhost:8080/houses/${pet.house}`)
+            .then(response =>response.json())
+            .then(house => setCurrentHouse(house))
         }) // not sure we need this here or after if statement
       .catch(error => console.error(error)); 
     }
@@ -51,6 +68,8 @@ const GamePage = ({petId}) => {
     useEffect(loadPet, [petId]);
     // useEffect(getFields, [currentPet]);
 
+
+
     return (
         <>
             <section id="banner" className="middle-flex break">
@@ -65,8 +84,8 @@ const GamePage = ({petId}) => {
                 </div>
             </section>
             <div className="middle-flex">
-                <PetContainer pet={currentPet} foodId={foodId}/>
-                <ActivityContainer/>
+                <PetContainer pet={currentPet} foodId={foodId} />
+                <ActivityContainer pet={currentPet} currentHouse={currentHouse} feedPet={feedPet}/>
             </div>
         </>
     );

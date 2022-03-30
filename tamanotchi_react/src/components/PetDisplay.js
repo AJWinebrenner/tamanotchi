@@ -5,7 +5,7 @@ const PetDisplay = ({variant, mood, foodId, petId}) => {
     const [folder, setFolder] = useState(0); //needs default
     const [displayMood, setDisplayMood] = useState(1);
     const [emote, setEmote] = useState(0); //0 is blank sprite
-    console.log(foodId)
+    
 
     useEffect(() => setFolder(variant), [variant]);
 
@@ -20,6 +20,8 @@ const PetDisplay = ({variant, mood, foodId, petId}) => {
             }) // not sure we need this here or after if statement
           .catch(error => console.error(error)); 
         }
+    
+    
 
     if (!foodId) {
         return(
