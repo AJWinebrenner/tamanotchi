@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const House = (currentHouse) => {
+const House = ({currentHouse}) => {
 
+    
     return(
         <>
-            {currentHouse.name}
             {/* I assume will eventually be an image of the house */}
             <p>image of the house</p>
-            {/* <img className="food" src={require(`../sprites/houses/${currentHouse.id}.png`)}/>  */}
+            <img className="sprite" alt="alternate image of house" src={require(`../sprites/houses/1.png`)}/> 
         </>
     );
 }
