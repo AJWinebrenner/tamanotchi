@@ -2,7 +2,7 @@
   --sprite-size: 20px;
   --scale: 8;
   --pixel: 8px;
-  --card-size: 26px;
+  --card-size: 30px;
   --card-gap: 5px;
   --display-size: 44px;
   --btn-size: 11px;
@@ -57,7 +57,7 @@ body {
   display: flex;
   padding: calc(var(--scale)*var(--card-gap));
   gap: calc(var(--scale)*var(--card-gap));
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	align-content: flex-start;
 	align-items: center;
 	flex-flow: row wrap;

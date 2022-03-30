@@ -3,7 +3,7 @@ import SaveFile from "../components/SaveFile";
 
 const HomePage = () => {
 
-    const [petCards, setPetCards] = useState([]);
+    const [saveCards, setSaveCards] = useState([]);
     
     const getPets = () => {
         fetch("http://localhost:8080/pets")
@@ -11,18 +11,15 @@ const HomePage = () => {
             .then(pets => {
                 const newPetList = [];
                 for (const pet of pets) {
-                    console.log(pet);
                     newPetList.push(
                         <SaveFile
                             key={pet.id}
-                            pet={pet}
                             name={pet.name}
                             variant={pet.variant}
                         />
                     );
                 }
-                console.log(newPetList);
-                setPetCards(newPetList);
+                setSaveCards(newPetList);
             })
             // catch error
             .catch(error => console.error(error))   
@@ -34,7 +31,7 @@ const HomePage = () => {
         <>
             <h1>Home Page</h1>
             <section className="card-flex">
-                {petCards}
+                {saveCards}
             </section>
         </>
     );

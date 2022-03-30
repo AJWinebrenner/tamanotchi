@@ -10,13 +10,13 @@ import {
 
 function App() {
 
-  const [currentPet, setCurrentPet] = useState(1);
+  const [petId, setPetId] = useState(1);
 
   return (
     <Router>
       <Routes>
         <Route index element={<HomePage/>}/>
-        <Route path="/game" element={<GamePage currentPet={currentPet}/>}/>
+        <Route path="/game" element={<GamePage petId={petId}/>}/>
       </Routes>
     </Router>
   );

@@ -1,8 +1,10 @@
-import { React } from "react";
+import { useState, useEffect } from "react";
 import ActivityContainer from "../containers/ActivityContainer";
 import PetContainer from "../containers/PetContainer";
 
-const GamePage = ({currentPet}) => {
+const GamePage = ({petId}) => {
+
+    const [currentPet, setCurrentPet] = useState()
 
     return (
         <>
@@ -18,7 +20,7 @@ const GamePage = ({currentPet}) => {
                 </div>
             </section>
             <div className="middle-flex">
-                <PetContainer/>
+                <PetContainer pet={currentPet}/>
                 <ActivityContainer/>
             </div>
         </>

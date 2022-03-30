@@ -1,20 +1,12 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 
-const PetDisplay = (variant, mood, food) => {
+const PetDisplay = ({variant, mood, food}) => {
 
-    const [folder, setFolder] = useState(3);
+    const [folder, setFolder] = useState(0); //needs default
     const [displayMood, setDisplayMood] = useState(1);
     const [emote, setEmote] = useState(0); //0 is blank sprite
 
-    const findFolder = (variant) => {
-        if (Number.isInteger(variant)){
-            setFolder(variant);
-        } else {
-            setFolder(3);
-        }
-    }
-
-    useEffect(findFolder, [variant]);
+    useEffect(() => setFolder(variant), [variant]);
 
     if (true) {
         return(
@@ -27,7 +19,7 @@ const PetDisplay = (variant, mood, food) => {
         return(
             <div id="pet-display" className="pixel-box">
                 <img id="food-sprite" className="sprite" src={`../sprites/foods/${food}.png`}></img>
-                <img id="pet-sprite" className="sprite" src={`../sprites/variants/${variant}/eat.gif`}></img>
+                <img id="pet-sprite" className="sprite" src={`../sprites/variants/${folder}/eat.gif`}></img>
             </div>
         );
     }
