@@ -224,9 +224,31 @@ INSERT INTO pets(
     money
 )
 VALUES(
-    'jeff',
+    'Jeff',
     3,
     3,
+    1,
+    10,
+    1,
+    0,
+    10
+);
+
+INSERT INTO pets(
+    name,
+    house,
+    variant,
+    happiness,
+    energy,
+    mood,
+    exp,
+    money
+)
+
+VALUES(
+    'Malcom',
+    3,
+    2,
     1,
     10,
     1,
