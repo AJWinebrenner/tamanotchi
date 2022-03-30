@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
+:root {
+  --sprite-size: 20px;
+  --scale: 8;
+  --pixel: 8px;
+  --card-gap: 5px;
+  --display-size: 44px;
+  --btn-size: 11px;
+  --bar-size: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: antiquewhite;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sprite {
+  image-rendering: pixelated;
+  height: calc(var(--sprite-size)*var(--scale));
+  width: calc(var(--sprite-size)*var(--scale));
+}
+
+.pixel-box {
+  padding: var(--pixel);
+  border: var(--pixel) solid black;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.break {
+	margin: 0 0 var(--pixel) 0;
+}
+
+.middle-flex {
   display: flex;
-  flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+  flex-wrap: wrap;
+	gap: var(--pixel);
+}
+
+.column-flex{
+  display: flex;
+  flex-flow: column nowrap;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.card-flex {
+  display: flex;
+  padding: calc(var(--scale)*var(--card-gap));
+  gap: calc(var(--scale)*var(--card-gap));
+	justify-content: space-between;
+	align-content: flex-start;
+	align-items: center;
+	flex-flow: row wrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card {
+  image-rendering: pixelated;
+  /* background-image: some card sprite;  */
+  height: calc(var(--sprite-size)*var(--scale)*2);
+  width: calc(var(--sprite-size)*var(--scale)*2);
+}
+
+.display {
+  height: calc(var(--display-size)*var(--scale));
+  width: calc(var(--display-size)*var(--scale));
+}
+
+.btn {
+  height: calc(var(--btn-size)*var(--scale));
+  flex-grow: 1;
+}
+
+.bar {
+  height: calc(var(--bar-size)*var(--scale));
+  width: calc(var(--display-size)*var(--scale));
+}
+
+#banner__stage {
+  width: calc(8px*var(--scale));
+}
+
+#banner__name {
+  width: calc(26px*var(--scale));
+}
+
+#banner__money {
+  width: calc(8px*var(--scale));
 }
