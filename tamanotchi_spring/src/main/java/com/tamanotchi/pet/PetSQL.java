@@ -27,7 +27,7 @@ public class PetSQL implements PetDAO{
                 rs.getInt("variant"),
                 rs.getInt("happiness"),
                 rs.getInt("energy"),
-                Mood.moodOf(rs.getInt("mood")),
+                rs.getInt("mood"),
                 rs.getInt("exp"),
                 rs.getInt("money")
             )
@@ -48,7 +48,7 @@ public class PetSQL implements PetDAO{
                     rs.getInt("variant"),
                     rs.getInt("happiness"),
                     rs.getInt("energy"),
-                    Mood.moodOf(rs.getInt("mood")),
+                    rs.getInt("mood"),
                     rs.getInt("exp"),
                     rs.getInt("money")
                 ),
@@ -69,7 +69,7 @@ public class PetSQL implements PetDAO{
                 pet.getVariant(),
                 pet.getHappiness(),
                 pet.getEnergy(),
-                pet.getMood().value(),
+                pet.getMood(),
                 pet.getExp(),
                 pet.getMoney()
         );
@@ -92,7 +92,7 @@ public class PetSQL implements PetDAO{
         if (newHappiness == null) newHappiness = original.getHappiness();
         Integer newEnergy = update.getEnergy();
         if (newEnergy == null) newEnergy = original.getEnergy();
-        Mood newMood = update.getMood();
+        Integer newMood = update.getMood();
         if (newMood == null) newMood = original.getMood();
         Integer newExp = update.getExp();
         if (newExp == null) newExp = original.getExp();
@@ -105,7 +105,7 @@ public class PetSQL implements PetDAO{
                 newVariant,
                 newHappiness,
                 newEnergy,
-                newMood.value(),
+                newMood,
                 newExp,
                 newMoney,
                 id

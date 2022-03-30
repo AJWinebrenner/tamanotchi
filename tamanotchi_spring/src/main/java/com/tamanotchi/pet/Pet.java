@@ -12,7 +12,7 @@ public class Pet {
     private Integer energy;
     private Integer max_happiness;
     private Integer max_energy;
-    private Mood mood;
+    private Integer mood;
     private Integer exp;
     private Integer money;
 
@@ -20,7 +20,7 @@ public class Pet {
         
     }
 
-    public Pet(Integer id, String name, Integer house, Integer variant, Integer happiness, Integer energy, Mood mood, Integer exp, Integer money) {
+    public Pet(Integer id, String name, Integer house, Integer variant, Integer happiness, Integer energy, Integer mood, Integer exp, Integer money) {
         this.id = id;
         this.name = name;
         this.house = house;
@@ -98,11 +98,11 @@ public class Pet {
         this.max_energy = max_energy;
     }
 
-    public Mood getMood() {
+    public Integer getMood() {
         return mood;
     }
 
-    public void setMood(Mood mood) {
+    public void setMood(Integer mood) {
         this.mood = mood;
     }
 
