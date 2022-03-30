@@ -2,6 +2,7 @@
   --sprite-size: 20px;
   --scale: 8;
   --pixel: 8px;
+  --card-size: 26px;
   --card-gap: 5px;
   --display-size: 44px;
   --btn-size: 11px;
@@ -65,8 +66,8 @@ body {
 .card {
   image-rendering: pixelated;
   /* background-image: some card sprite;  */
-  height: calc(var(--sprite-size)*var(--scale)*2);
-  width: calc(var(--sprite-size)*var(--scale)*2);
+  height: calc(var(--card-size)*var(--scale));
+  width: calc(var(--card-size)*var(--scale));
 }
 
 .display {

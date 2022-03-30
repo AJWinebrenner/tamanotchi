@@ -4,7 +4,7 @@ const SaveFile = (pet) => {
     
     return(
 
-        <div className="pixel-box card">
+        <div className="pixel-box card center-text">
             <h2>
                 {`${pet.name}`}
             </h2>
