@@ -97,7 +97,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   left: var(--pixel);
-  background-color: red;
+  background-color: darkred;
   height: var(--pixel);
   width: calc(var(--happiness-size)*var(--meter-size)*var(--scale));
 }
@@ -105,10 +105,16 @@ body {
 .happiness::after {
   display: block;
   position: absolute;
+  content: "";
   background-image: url('./sprites/icons/heart.png');
-  /* image-rendering: pixelated; */
-  /* height: calc(var(--icon-size)*var(--scale)); */
-  /* width: calc(var(--icon-size)*var(--scale)); */
+  image-rendering: pixelated;
+  background-size: calc(var(--icon-size)*var(--scale));
+  height: calc(var(--icon-size)*var(--scale));
+  width: calc(var(--icon-size)*var(--scale));
+  
+  top: 50%;
+  transform: translate(-40%, -50%);
+  left: calc(var(--happiness-size)*var(--meter-size)*var(--scale));
 }
 
 .energy::before {
@@ -121,6 +127,21 @@ body {
   background-color: green;
   height: var(--pixel);
   width: calc(var(--energy-size)*var(--meter-size)*var(--scale));
+}
+
+.energy::after {
+  display: block;
+  position: absolute;
+  content: "";
+  background-image: url('./sprites/icons/energy.png');
+  image-rendering: pixelated;
+  background-size: calc(var(--icon-size)*var(--scale));
+  height: calc(var(--icon-size)*var(--scale));
+  width: calc(var(--icon-size)*var(--scale));
+  
+  top: 50%;
+  transform: translate(-40%, -50%);
+  left: calc(var(--energy-size)*var(--meter-size)*var(--scale));
 }
 
 #banner__stage {
