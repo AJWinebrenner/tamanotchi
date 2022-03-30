@@ -7,6 +7,9 @@
   --display-size: 44px;
   --btn-size: 11px;
   --bar-size: 5px;
+  --meter-size: 40px;
+  --happiness-size: 0;
+  --energy-size: 0;
 }
 
 * {
@@ -81,8 +84,33 @@ body {
 }
 
 .bar {
+  position: relative;
   height: calc(var(--bar-size)*var(--scale));
   width: calc(var(--display-size)*var(--scale));
+}
+
+.happiness::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+  left: var(--pixel);
+  background-color: red;
+  height: var(--pixel);
+  width: calc(var(--happiness-size)*var(--meter-size)*var(--scale));
+}
+
+.energy::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+  left: var(--pixel);
+  background-color: green;
+  height: var(--pixel);
+  width: calc(var(--energy-size)*var(--meter-size)*var(--scale));
 }
 
 #banner__stage {

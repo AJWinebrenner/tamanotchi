@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SaveFile from "../components/SaveFile";
 
-const HomePage = () => {
+const HomePage = ({setPetId}) => {
 
     const [saveCards, setSaveCards] = useState([]);
     
@@ -14,8 +14,10 @@ const HomePage = () => {
                     newPetList.push(
                         <SaveFile
                             key={pet.id}
+                            id={pet.id}
                             name={pet.name}
                             variant={pet.variant}
+                            setId={setPetId}
                         />
                     );
                 }

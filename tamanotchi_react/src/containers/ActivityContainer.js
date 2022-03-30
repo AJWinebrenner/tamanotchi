@@ -10,7 +10,7 @@ const ActivityContainer = () => {
                 <House/>
             </div>
             <div className="middle-flex break">
-                <button id="house-btn" className="btn pixel-box"></button>
+                <button id="house-btn" className="btn pixel-box selected"></button>
                 <button id="shop-btn" className="btn pixel-box"></button>
                 <button id="game-btn" className="btn pixel-box"></button>
             </div>
