@@ -2,6 +2,7 @@
   --sprite-size: 20px;
   --scale: 8;
   --pixel: 8px;
+  --icon-size: 5px;
   --card-size: 30px;
   --card-gap: 5px;
   --display-size: 44px;
@@ -89,7 +90,7 @@ body {
   width: calc(var(--display-size)*var(--scale));
 }
 
-.happiness::after {
+.happiness::before {
   display: block;
   position: absolute;
   content: "";
@@ -101,7 +102,16 @@ body {
   width: calc(var(--happiness-size)*var(--meter-size)*var(--scale));
 }
 
-.energy::after {
+.happiness::after {
+  display: block;
+  position: absolute;
+  background-image: url('./sprites/icons/heart.png');
+  /* image-rendering: pixelated; */
+  /* height: calc(var(--icon-size)*var(--scale)); */
+  /* width: calc(var(--icon-size)*var(--scale)); */
+}
+
+.energy::before {
   display: block;
   position: absolute;
   content: "";
