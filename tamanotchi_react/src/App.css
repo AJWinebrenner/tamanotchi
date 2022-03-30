@@ -11,6 +11,9 @@
   --meter-size: 40px;
   --happiness-size: 0;
   --energy-size: 0;
+
+  --red: #e93841;
+  --light-green: #59e150;
 }
 
 * {
@@ -24,6 +27,10 @@
 
 body {
   background-color: antiquewhite;
+}
+
+h1 {
+  font-size: 32px;
 }
 
 .sprite {

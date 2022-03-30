@@ -56,6 +56,8 @@ const GamePage = ({petId}) => {
 
     return (
         <>
+            <div className="break"/>
+            <h1 className="break center-text">TAMANOTCHI</h1>
             <section id="banner" className="middle-flex break">
                 <div id="banner__stage" className="pixel-box center-text">
                     {currentStage}
