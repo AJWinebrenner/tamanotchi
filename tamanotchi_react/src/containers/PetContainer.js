@@ -26,7 +26,7 @@ const PetContainer = ({pet,foodId}) => {
     return(
         <section>
             {/* placeholder values*/}
-            <PetDisplay variant={pet.variant} mood={pet.mood} food={foodId}/>
+            <PetDisplay variant={pet.variant} mood={pet.mood} foodId={foodId}/>
             <Bar value={pet.happiness} max={pet.max_happiness} className={"happiness"}/>
             <Bar value={pet.energy} max={pet.max_energy} className={"energy"}/>
         </section>

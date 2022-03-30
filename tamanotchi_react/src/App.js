@@ -10,7 +10,7 @@ import {
 
 function App() {
 
-  const [petId, setPetId] = useState(1);
+  const [petId, setPetId] = useState(0);
 
 
   return (

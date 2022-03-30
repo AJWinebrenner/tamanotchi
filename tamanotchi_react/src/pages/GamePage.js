@@ -4,7 +4,7 @@ import PetContainer from "../containers/PetContainer";
 
 const GamePage = ({petId}) => {
 
-    const[foodId, setFoodId]= useState(0);
+    const[foodId, setFoodId]= useState(2);
 
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
