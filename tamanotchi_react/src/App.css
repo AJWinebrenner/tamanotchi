@@ -98,7 +98,7 @@ body {
   left: var(--pixel);
   background-color: red;
   height: var(--pixel);
-  width: calc(var(--happiness-size)*var(--meter-size)*var(--scale));
+  width: calc(.5*var(--meter-size)*var(--scale));
 }
 
 .energy::after {
