@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 
-const PetDisplay = ({variant, mood, food, petId}) => {
+const PetDisplay = ({variant, mood, foodId, petId}) => {
 
     const [folder, setFolder] = useState(0); //needs default
     const [displayMood, setDisplayMood] = useState(1);
@@ -20,7 +20,7 @@ const PetDisplay = ({variant, mood, food, petId}) => {
           .catch(error => console.error(error)); 
         }
 
-    if (true) {
+    if (!foodId) {
         return(
             <div id="pet-display" className="pixel-box column-flex display break">
                 <img id="emote-sprite" className="sprite" src={require(`../sprites/emotes/${emote}.gif`)}/>
@@ -29,9 +29,9 @@ const PetDisplay = ({variant, mood, food, petId}) => {
         );
     } else {
         return(
-            <div id="pet-display" className="pixel-box">
-                <img id="food-sprite" className="sprite" src={`../sprites/foods/${food}.png`}></img>
-                <img id="pet-sprite" className="sprite" src={`../sprites/variants/${folder}/eat.gif`}></img>
+            <div id="pet-display" className="pixel-box column-flex display break">
+                <img id="food-sprite" className="sprite" src={require(`../sprites/foods/${foodId}.png`)}/>
+                <img id="pet-sprite" className="sprite" src={require(`../sprites/variants/${folder}/eat.gif`)}/>
             </div>
         );
     }

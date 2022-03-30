@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import Bar from "../components/Bar";
 import PetDisplay from "../components/PetDisplay";
 
-const PetContainer = ({pet}) => {
-
-    // console.log(pet);
+const PetContainer = ({pet,foodId}) => {
+// console.log(pet);
     // test
     // const [fakePet, setFakePet] = useState(
     //     {
@@ -27,7 +26,7 @@ const PetContainer = ({pet}) => {
     return(
         <section>
             {/* placeholder values*/}
-            <PetDisplay variant={pet.variant} mood={pet.mood} food={0}/>
+            <PetDisplay variant={pet.variant} mood={pet.mood} food={foodId}/>
             <Bar value={pet.happiness} max={pet.max_happiness} className={"happiness"}/>
             <Bar value={pet.energy} max={pet.max_energy} className={"energy"}/>
         </section>

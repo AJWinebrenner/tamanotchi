@@ -4,6 +4,8 @@ import PetContainer from "../containers/PetContainer";
 
 const GamePage = ({petId}) => {
 
+    const[foodId, setFoodId]= useState(0);
+
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
         "name": "blank",
@@ -63,7 +65,7 @@ const GamePage = ({petId}) => {
                 </div>
             </section>
             <div className="middle-flex">
-                <PetContainer pet={currentPet}/>
+                <PetContainer pet={currentPet} foodId={foodId}/>
                 <ActivityContainer/>
             </div>
         </>
