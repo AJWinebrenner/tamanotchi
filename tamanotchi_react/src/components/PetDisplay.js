@@ -11,7 +11,7 @@ const PetDisplay = ({variant, mood, food}) => {
     if (true) {
         return(
             <div id="pet-display" className="pixel-box column-flex display break">
-                <img id="emote-sprite" className="sprite" src={require(`../sprites/emotes/${emote}.png`)}/>
+                <img id="emote-sprite" className="sprite" src={require(`../sprites/emotes/${emote}.gif`)}/>
                 <img id="pet-sprite" className="sprite" src={require(`../sprites/variants/${folder}/${displayMood}.gif`)}/>
             </div>
         );
