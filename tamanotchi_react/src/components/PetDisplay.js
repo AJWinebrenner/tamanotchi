@@ -1,12 +1,24 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 
-const PetDisplay = ({variant, mood, food}) => {
+const PetDisplay = ({variant, mood, food, petId}) => {
 
     const [folder, setFolder] = useState(0); //needs default
     const [displayMood, setDisplayMood] = useState(1);
     const [emote, setEmote] = useState(0); //0 is blank sprite
 
     useEffect(() => setFolder(variant), [variant]);
+
+    useEffect(() => setDisplayMood(mood), [mood]);
+
+    const changeEmote = () => {
+        fetch(`http://localhost:8080/pets/${petId}`)
+          .then(response => response.json())
+          .then(pet => {
+              setDisplayMood(pet.mood);
+              console.log(pet.mood);
+            }) // not sure we need this here or after if statement
+          .catch(error => console.error(error)); 
+        }
 
     if (true) {
         return(

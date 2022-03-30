@@ -4,7 +4,19 @@ import PetContainer from "../containers/PetContainer";
 
 const GamePage = ({petId}) => {
 
-    const [currentPet, setCurrentPet] = useState();
+    const [currentPet, setCurrentPet] = useState({
+        "id": 0,
+        "name": "blank",
+        "house": 3,
+        "variant": 0,
+        "happiness": 1,
+        "energy": 10,
+        "max_happiness": 10,
+        "max_energy": 10,
+        "mood": 1,
+        "exp": 0,
+        "money": 0
+    });
     const [currentPetName, setCurrentPetName] = useState("-");
     const [currentStage, setCurrentStage] = useState(1);
     const [currentMoney, setCurrentMoney] = useState(0);
