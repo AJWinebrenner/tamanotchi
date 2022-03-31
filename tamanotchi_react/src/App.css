@@ -176,6 +176,8 @@ h1 {
   background-color: aquamarine;
   height: 295px;
   width: 320px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /*  all divs have no padding/border/margin */
@@ -183,16 +185,36 @@ h1 {
   padding:0;
   margin:0;
   float: left;
+  width: 40px;
+  height: 40px;
 }
 
 #minigame-chick{
-  width: 40px;
-  height: 40px;
   background-color: yellow;
   position: relative;
   top: 255px;
   left: 135px;
 }
+
+.animate-left{
+  animation: left 500ms;
+}
+
+.animate-right{
+  animation: right 500ms;
+}
+
+@keyframes left {
+  0%{left: 135px}
+  50%{left: 20px}
+  100%{left: 135px}
+} 
+
+@keyframes right {
+  0%{left: 135px}
+  50%{left: 250px}
+  100%{left: 135px}
+} 
 
 #minigame-block{
   height: 40px;
@@ -201,4 +223,10 @@ h1 {
   position: relative;
   /* this should changed randomly from  -40px to 240px */
   left: 95px;
+  animation: block 1s infinite linear;
 }
+
+   @keyframes block{
+   0%{top: 0px}
+   100%{top: 255px} 
+}  

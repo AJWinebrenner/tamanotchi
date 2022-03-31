@@ -70,7 +70,7 @@ useEffect(getFoods, []);
             <div className="pixel-box display break">
            { showHouse ? <House currentHouseNum={currentHouseNum}/> : null}
            { showShop ? <>{allFoods}</> : null}
-           { showGame ? <MiniGame/> : null}
+           { showGame  && <MiniGame/> ? <MiniGame/> : null}
             </div>
             <div className="middle-flex break">
                 <button onClick={handleShowHouseClick} id="house-btn" className="btn pixel-box selected">House</button>
