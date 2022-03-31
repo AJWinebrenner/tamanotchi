@@ -3,8 +3,8 @@
   --scale: 8;
   --pixel: 8px;
   --icon-size: 5px;
-  --card-size: 30px;
-  --card-gap: 5px;
+  --save-size: 30px;
+  --save-gap: 5px;
   --display-size: 44px;
   --btn-size: 11px;
   --bar-size: 5px;
@@ -92,21 +92,21 @@ h1 {
   align-items: center;
 }
 
-.card-flex {
+.save-flex {
   display: flex;
-  padding: calc(var(--scale)*var(--card-gap));
-  gap: calc(var(--scale)*var(--card-gap));
+  padding: calc(var(--scale)*var(--save-gap));
+  gap: calc(var(--scale)*var(--save-gap));
 	/* justify-content: space-between; */
 	align-content: flex-start;
 	align-items: center;
 	flex-flow: row wrap;
 }
 
-.card {
+.save {
   image-rendering: pixelated;
   /* background-image: some card sprite;  */
-  height: calc(var(--card-size)*var(--scale));
-  width: calc(var(--card-size)*var(--scale));
+  height: calc(var(--save-size)*var(--scale));
+  width: calc(var(--save-size)*var(--scale));
 }
 
 .display {

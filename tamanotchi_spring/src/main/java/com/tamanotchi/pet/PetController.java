@@ -37,4 +37,9 @@ public class PetController {
     public void deletePetById(@PathVariable("id") Integer id){
         service.deletePetById(id);
     }
+
+    @PatchMapping(path = "pets/{id}/upgrade")
+    public void upgradeHouse(@PathVariable("id") Integer id){
+        service.upgradeHouse(id);
+    }
 }

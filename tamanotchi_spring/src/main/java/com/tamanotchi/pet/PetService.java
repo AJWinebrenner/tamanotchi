@@ -2,6 +2,9 @@ package com.tamanotchi.pet;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import com.tamanotchi.house.House;
+import com.tamanotchi.variant.Variant;
+
 
 import java.util.List;
 
@@ -40,12 +43,6 @@ public class PetService {
         if (original == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
-        if (pet.getHappiness() > original.getMax_happiness()) {
-            throw new IllegalArgumentException("happiness cannot be larger than " + original.getMax_happiness());
-        }
-        if (pet.getEnergy() > original.getMax_energy()) {
-            throw new IllegalArgumentException("energy cannot be larger than " + original.getMax_energy());
-        }
 
         int result = DAO.updateById(id, pet);
 
@@ -65,4 +62,31 @@ public class PetService {
             throw new IllegalStateException("Pet with id " + id + " could not be deleted");
         }
     }
+
+    public void upgradeHouse(Integer id) {
+        Pet pet = DAO.getById(id);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+
+        House upgrade = DAO.selectHouseById(DAO.selectHouseById(id).getUpgrade());
+
+        Integer money = pet.getMoney();
+        Integer price = upgrade.getPrice();
+
+        if (money>= price) {
+            pet.setMoney(money - price);
+            pet.setHouse(upgrade.getId());
+
+            int result = DAO.updateById(id, pet);
+
+            if (result != 1) {
+                throw new IllegalStateException("House was not upgraded");
+            }
+        } else {
+            throw new IllegalStateException("You're broke; no house for you");
+        }
+
+    }
+
 }

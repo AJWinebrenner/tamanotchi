@@ -32,7 +32,7 @@ const HomePage = ({setPetId}) => {
     return(
         <>
             <h1>Home Page</h1>
-            <section className="card-flex">
+            <section className="save-flex">
                 {saveCards}
             </section>
         </>

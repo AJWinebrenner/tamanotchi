@@ -15,7 +15,7 @@ const SaveFile = ({id, name, variant, setId}) => {
         <div onClick={() => {
             setId(id);
             routeChange();
-            }} className="pixel-box card column-flex">
+            }} className="pixel-box save column-flex">
             <h2 className="break">
                 {name}
             </h2>

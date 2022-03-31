@@ -8,10 +8,10 @@ import java.util.List;
 @Repository
 public class VariantDataAccessService implements VariantDAO{
 
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbc;
 
-    public VariantDataAccessService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public VariantDataAccessService(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
     }
 
 
@@ -20,7 +20,7 @@ public class VariantDataAccessService implements VariantDAO{
         var sql = """
                 SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants;
                 """;
-        return jdbcTemplate.query(sql, new VariantMapper());
+        return jdbc.query(sql, new VariantMapper());
 
     }
 
@@ -30,7 +30,7 @@ public class VariantDataAccessService implements VariantDAO{
                 SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE variants.id = ?;
                 """;
         try {
-            return jdbcTemplate.queryForObject(sql, new VariantMapper(), variantId);
+            return jdbc.queryForObject(sql, new VariantMapper(), variantId);
         } catch (Exception e){
             return null;
         }
