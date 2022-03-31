@@ -8,13 +8,15 @@ const GamePage = ({petId}) => {
     
     const feedPet = (selectedFoodId) => {
         console.log(selectedFoodId)
-        if(foodId!=selectedFoodId){
+        if(foodId ===  0){
+            //back end fetch to feed foodId to petId
             setFoodId(selectedFoodId)
+            setTimeout(() => {
+                setFoodId(0)
+                console.log("5 seconds later")
+              }, 1000);
+            loadPet();
         }
-        setTimeout(() => {
-            setFoodId(0)
-            console.log("5 seconds later")
-          }, 4000);
     }
     
 
