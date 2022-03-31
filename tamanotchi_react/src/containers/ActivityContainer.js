@@ -17,6 +17,7 @@ const handleShowHouseClick = () => {
     setShowShop(false)
     setShowGame(false)
     setShowHouse(true)
+
 }
 
 const handleShowShopClick = () => {
