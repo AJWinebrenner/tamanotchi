@@ -1,7 +1,9 @@
 :root {
   --sprite-size: 20px;
+  --title-size: 3px;
+  --font-size: 2px;
   --scale: 8;
-  --pixel: 8px;
+  --pixel: calc(var(--scale) * 1px);
   --icon-size: 5px;
   --save-size: 30px;
   --save-gap: 5px;
@@ -19,7 +21,7 @@
 
 * {
   font-family: 'Press Start 2P', cursive;
-  font-size: 16px;
+  font-size: calc(var(--font-size)*var(--scale));
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -31,7 +33,7 @@ body {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: calc(var(--title-size)*var(--scale));
 }
 
 .sprite {
