@@ -52,7 +52,6 @@ const GamePage = ({petId}) => {
     const upgradeHouse = () => {
         //back end request
         loadPet();
-    }
 
     useEffect(loadPet, [petId]);
 
