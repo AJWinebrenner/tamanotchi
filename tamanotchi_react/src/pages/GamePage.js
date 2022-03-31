@@ -50,8 +50,11 @@ const GamePage = ({petId}) => {
     }
 
     const upgradeHouse = () => {
-        //back end request
-        loadPet();
+        fetch(`http://localhost:8080/pets/${petId}/upgrade`, {
+            method: "PATCH"
+        })
+        .then(loadPet)
+        
     }
 
     useEffect(loadPet, [petId]);
