@@ -230,7 +230,7 @@ h1 {
   height: 40px;
 }
 
-#minigame-chick{
+.minigame-chick{
   background-color: yellow;
   position: relative;
   top: 255px;
