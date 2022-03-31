@@ -113,8 +113,7 @@ h1 {
   display: flex;
   padding: calc(var(--scale)*var(--save-gap));
   gap: calc(var(--scale)*var(--save-gap));
-	/* justify-content: space-between; */
-	align-content: flex-start;
+  justify-content: center;
 	align-items: center;
 	flex-flow: row wrap;
 }
@@ -133,8 +132,17 @@ h1 {
 }
 
 .btn {
+  background-color: var(--white);
   height: calc(var(--btn-size)*var(--scale));
   flex-grow: 1;
+}
+
+.btn:hover {
+  background-color: var(--beige);
+}
+
+.btn:active {
+  border-color: var(--grey);
 }
 
 .bare-btn {
@@ -143,7 +151,6 @@ h1 {
 }
 
 .bare-btn:hover {
-  /* padding: calc(var(--pixel)/2); */
   transform: translateX(calc(var(--pixel)*-1));
 }
 
