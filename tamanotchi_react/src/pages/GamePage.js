@@ -77,7 +77,7 @@ const GamePage = ({petId}) => {
         <>
             <div className="break"/>
             <h1 className="break center-text">TAMA-NOT-CHI</h1>
-            <section id="banner" className="middle-flex break">
+            <section id="banner" className="middle-flex break gap">
                 <div id="banner__stage" className="pixel-box center-text">
                     {currentStage}
                 </div>
@@ -88,7 +88,7 @@ const GamePage = ({petId}) => {
                     {currentPet.money}
                 </div>
             </section>
-            <div className="middle-flex">
+            <div className="middle-flex gap">
 
                 <PetContainer pet={currentPet} foodId={foodId} />
                 <ActivityContainer pet={currentPet} feedPet={feedPet}/>

@@ -74,7 +74,7 @@ useEffect(getFoods, [pet]);
            { showShop ? <>{allFoods}</> : null}
            { showGame ? <p>an amazing game</p> : null}
             </div>
-            <div className="middle-flex break">
+            <div className="middle-flex break gap">
                 <button onClick={handleShowHouseClick} id="house-btn" className="btn pixel-box selected">House</button>
                 <button onClick={handleShowShopClick} id="shop-btn" className="btn pixel-box">Shop</button>
                 <button onClick={handleShowGameClick} id="game-btn" className="btn pixel-box">Game</button>
