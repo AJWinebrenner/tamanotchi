@@ -9,4 +9,5 @@ public interface PetDAO {
     public int add(Pet pet);
     public int updateById(Integer id, Pet update);
     public int deleteById(Integer id);
+    public int upgradeHouse(Integer petId, Integer nextUpgrade, Integer price);
 }
