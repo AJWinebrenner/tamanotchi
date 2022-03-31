@@ -219,13 +219,16 @@ h1 {
 }
 
 #banner__stage {
+  background-color: var(--light-pink);
   width: calc(8px*var(--scale));
 }
 
 #banner__name {
+  background-color: var(--white);
   width: calc(26px*var(--scale));
 }
 
 #banner__money {
+  background-color: var(--yellow);
   width: calc(8px*var(--scale));
 }
