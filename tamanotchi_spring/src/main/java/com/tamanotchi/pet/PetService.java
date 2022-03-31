@@ -2,6 +2,9 @@ package com.tamanotchi.pet;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import com.tamanotchi.house.House;
+import com.tamanotchi.variant.Variant;
+
 
 import java.util.List;
 
@@ -60,16 +63,30 @@ public class PetService {
         }
     }
 
-    public void upgradeHouse(Integer petId, Integer nextUpgrade, Integer price) {
-        if (DAO.getById(petId) == null) {
-            throw new PetNotFoundException("Pet with id " + petId + " could not be found");
+    public void upgradeHouse(Integer id) {
+        Pet pet = DAO.getById(id);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
 
-        int result = DAO.upgradeHouse(petId, nextUpgrade, price);
+        House upgrade = DAO.selectHouseById(DAO.selectHouseById(id).getUpgrade());
 
-        if (result != 1) {
-            throw new IllegalStateException("House was not upgraded");
+        Integer money = pet.getMoney();
+        Integer price = upgrade.getPrice();
+
+        if (money>= price) {
+            pet.setMoney(money - price);
+            pet.setHouse(upgrade.getId());
+
+            int result = DAO.updateById(id, pet);
+
+            if (result != 1) {
+                throw new IllegalStateException("House was not upgraded");
+            }
+        } else {
+            throw new IllegalStateException("You're broke; no house for you");
         }
+
     }
 
 }

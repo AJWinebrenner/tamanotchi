@@ -1,5 +1,8 @@
 package com.tamanotchi.pet;
 
+import com.tamanotchi.house.House;
+import com.tamanotchi.variant.Variant;
+
 import java.util.List;
 
 public interface PetDAO {
@@ -9,5 +12,6 @@ public interface PetDAO {
     public int add(Pet pet);
     public int updateById(Integer id, Pet update);
     public int deleteById(Integer id);
-    public int upgradeHouse(Integer petId, Integer nextUpgrade, Integer price);
+    House selectHouseById(Integer houseId);
+    Variant selectVariantById(Integer variantId);
 }

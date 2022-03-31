@@ -1,7 +1,5 @@
 package com.tamanotchi.house;
 
-import com.tamanotchi.pet.Mood;
-import com.tamanotchi.pet.Pet;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,10 +9,10 @@ import java.util.List;
 @Repository
 public class HouseDataAccessService implements HouseDAO{
 
-    private  JdbcTemplate jdbcTemplate;
+    private  JdbcTemplate jdbc;
 
-    public HouseDataAccessService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public HouseDataAccessService(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
     }
 
     @Override
@@ -22,7 +20,7 @@ public class HouseDataAccessService implements HouseDAO{
         var sql = """
                 SELECT id, name, price, happiness_bonus, size, upgrade FROM houses
                 """;
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
+        return jdbc.query(sql, (rs, rowNum) ->
                 new House(
                         rs.getInt("id"),
                         rs.getString("name"),
@@ -39,7 +37,7 @@ public class HouseDataAccessService implements HouseDAO{
                 SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE houses.id = ?;
                 """;
         try{
-            return jdbcTemplate.queryForObject(sql,(rs, rowNum) ->
+            return jdbc.queryForObject(sql,(rs, rowNum) ->
                     new House(
                             rs.getInt("id"),
                             rs.getString("name"),

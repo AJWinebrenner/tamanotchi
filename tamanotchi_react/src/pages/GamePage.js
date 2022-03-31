@@ -48,6 +48,24 @@ const GamePage = ({petId}) => {
             }, 4000);
         return () => clearTimeout(timer);
     }
+<<<<<<< HEAD
+=======
+    
+    const upgradeHouse = (updatedPet) => { 
+        console.log("upgrading house")
+            fetch ("http://localhost:8080/pets", {
+                method: "PATCH", 
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body: JSON.stringify(updatedPet)
+    
+                
+            })
+        }
+    
+    
+>>>>>>> 47a29e2e43e0c911d36f853c86bf09077029fcec
 
     const upgradeHouse = () => {
         //back end request
@@ -79,5 +97,6 @@ const GamePage = ({petId}) => {
         </>
     );
 }
+
 
 export default GamePage;
