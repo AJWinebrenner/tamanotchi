@@ -5,16 +5,20 @@ import PetContainer from "../containers/PetContainer";
 const GamePage = ({petId}) => {
 
     const[foodId, setFoodId]= useState(0);
+
+    let blocked = false;
     
     const feedPet = (selectedFoodId) => {
-        console.log(selectedFoodId)
-        if(foodId!=selectedFoodId){
-            setFoodId(selectedFoodId)
-        }
-        setTimeout(() => {
-            setFoodId(0)
-            console.log("5 seconds later")
-          }, 4000);
+        if (blocked) return;
+        blocked = true;
+        //back end fetch to feed foodId to petId
+        setFoodId(selectedFoodId)
+        const timer = setTimeout(() => {
+            setFoodId(0);
+            loadPet();
+            blocked = false;
+            }, 4000);
+        return () => clearTimeout(timer);
     }
     
 
@@ -33,7 +37,7 @@ const GamePage = ({petId}) => {
     });
     const [currentPetName, setCurrentPetName] = useState("-");
     const [currentStage, setCurrentStage] = useState(1);
-    const [currentMoney, setCurrentMoney] = useState(0);
+    // const [currentMoney, setCurrentMoney] = useState(0);
     
         // put in money and stage in state 
     
@@ -43,8 +47,8 @@ const GamePage = ({petId}) => {
       .then(response => response.json())
       .then(pet => {
           setCurrentPet(pet);
-          setCurrentPetName(pet.name);
-          setCurrentMoney(pet.money);
+        //   setCurrentPetName(pet.name);
+        //   setCurrentMoney(pet.money);
           fetch(`http://localhost:8080/variants/${pet.variant}`)
             .then(response => response.json())
             .then(variant => setCurrentStage(variant.stage))
@@ -73,21 +77,21 @@ const GamePage = ({petId}) => {
         <>
             <div className="break"/>
             <h1 className="break center-text">TAMA-NOT-CHI</h1>
-            <section id="banner" className="middle-flex break">
+            <section id="banner" className="middle-flex break gap">
                 <div id="banner__stage" className="pixel-box center-text">
                     {currentStage}
                 </div>
                 <div id="banner__name" className="pixel-box center-text">
-                    {currentPetName}
+                    {currentPet.name}
                 </div>
                 <div id="banner__money" className="pixel-box center-text">
-                    {currentMoney}
+                    {currentPet.money}
                 </div>
             </section>
-            <div className="middle-flex">
+            <div className="middle-flex gap">
 
                 <PetContainer pet={currentPet} foodId={foodId} />
-                <ActivityContainer pet={currentPet} currentHouseNum={currentPet.house} feedPet={feedPet}/>
+                <ActivityContainer pet={currentPet} feedPet={feedPet}/>
 
             </div>
         </>

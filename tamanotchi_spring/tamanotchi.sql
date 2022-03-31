@@ -127,6 +127,23 @@ VALUES(
     FALSE
 );
 
+INSERT INTO foods(
+    name,
+    price,
+    energy,
+    happiness,
+    isUnhealthy,
+    heals
+)
+VALUES(
+    'apple',
+    5,
+    1,
+    1,
+    FALSE,
+    FALSE
+);
+
 INSERT INTO houses(
     name,
     price,

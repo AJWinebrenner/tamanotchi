@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const House = ({currentHouseNum}) => {
+const House = ({houseNum}) => {
 
     const [currentHouse, setCurrentHouse] = useState({
-        "id": 0,
+        "id": 3,
         "name": "bungalow",
         "price": 10,
         "happiness_bonus": 0,
@@ -11,29 +11,23 @@ const House = ({currentHouseNum}) => {
         "upgrade": 2
     });
 
-    const [currentHouseName, setCurrentHouseName] = useState(currentHouse.name);
-    const [currentHouseId, setCurrentHouseId] = useState(currentHouseNum);
-
-
     // fetch the house
     const loadHouse = () => {
-        fetch(`http://localhost:8080/houses/${currentHouseId}`)
-          .then(response => response.json())
-          .then(house => {
-              setCurrentHouseName(house.name);
-              setCurrentHouseId(house.id);
-            }) // not sure we need this here or after if statement
+        fetch(`http://localhost:8080/houses/${houseNum}`)
+            .then(response => response.json())
+            .then(house => {
+                setCurrentHouse(house);
+            }) // cleaned up state a bit
             .catch(error => console.error(error)); 
-          }
+        }
 
-          useEffect(loadHouse, [currentHouseId]);
-          useEffect(loadHouse, [currentHouseName]);
+    useEffect(loadHouse, [houseNum]);
 
     return(
         <>
             {/* I assume will eventually be an image of the house */}
-            <h2>{currentHouseName}</h2>
-            <img className="sprite" alt="alternate image of house" src={require(`../sprites/houses/${currentHouseId}.png`)}/> 
+            <h2>{currentHouse.name}</h2>
+            <img className="sprite" alt="alternate image of house" src={require(`../sprites/houses/${currentHouse.id}.png`)}/> 
         </>
     );
 }

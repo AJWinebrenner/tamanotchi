@@ -4,12 +4,13 @@ import Food from "../components/Food";
 import MiniGame from "../components/MiniGame";
 
 
-const ActivityContainer = ({currentPet,currentHouseNum, feedPet}) => {
+const ActivityContainer = ({pet, feedPet}) => {
 
 // what to display intially
 const [showHouse, setShowHouse] = useState(true);
 const [showShop, setShowShop] = useState(false);
 const [showGame, setShowGame] = useState(false);
+
 
 // function that turns all buttons to their opposite
 
@@ -31,7 +32,7 @@ const handleShowGameClick = () => {
     setShowHouse(false)
 }
 
-
+console.log(pet);
 // fetch all food here, pass as prop to shop
 
 const [allFoods, setAllFoods] = useState([]);
@@ -53,26 +54,27 @@ const getFoods = () => {
                         heals={food.heals}
                         unhealthy={food.unhealthy}
                         feedPet={feedPet}
+                        money={pet.money}
                     />
                 );
             }
-            setAllFoods(...allFoods, newFoodList);
+            setAllFoods(newFoodList);
         })
         // catch error
         .catch(error => console.error(error))   
 }
 
-useEffect(getFoods, []);
+useEffect(getFoods, [pet]);
 
     return(
         <section>
             {/* conditional render */}
             <div className="pixel-box display break">
-           { showHouse ? <House currentHouseNum={currentHouseNum}/> : null}
+           { showHouse ? <House houseNum={pet.house}/> : null}
            { showShop ? <>{allFoods}</> : null}
            { showGame  && <MiniGame/> ? <MiniGame/> : null}
             </div>
-            <div className="middle-flex break">
+            <div className="middle-flex break gap">
                 <button onClick={handleShowHouseClick} id="house-btn" className="btn pixel-box selected">House</button>
                 <button onClick={handleShowShopClick} id="shop-btn" className="btn pixel-box">Shop</button>
                 <button onClick={handleShowGameClick} id="game-btn" className="btn pixel-box">Game</button>
