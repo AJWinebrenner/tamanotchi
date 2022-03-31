@@ -12,7 +12,7 @@ const Food = ({id, name, price, energy, happiness, heals, unhealthy, feedPet, mo
         // trigger function higher up passed in but give it food 'id'
     }
     return(
-        <div className = "pixel-box middle-flex break">
+        <div className = " middle-flex break">
             <h3>{name}:</h3> <span>{price}</span>
             <button id={id} onClick={handleEatingClick}>Eat!</button>
             {/* <img className="food" src={require(`../sprites/foods/${id}.png`)}/> */}
