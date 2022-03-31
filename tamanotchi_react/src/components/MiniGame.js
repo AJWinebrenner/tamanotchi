@@ -3,10 +3,17 @@ import '../App.css';
 import Cards from "./Cards";
 
 const MiniGame = () => {
+
+    const [startGame, setStartGame] = useState(false)
+
+    const handleStartButtonClick = () => {
+        setStartGame(!startGame)
+    }
     return (
 
     <div className="viewboxactivity">
-         { <Cards /> ? <Cards/> : null}
+        { startGame ? null : <button onClick={handleStartButtonClick}>Start Game!</button>}
+        { startGame ? <Cards/> : null}
     </div>
     )
 }

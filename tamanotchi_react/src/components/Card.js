@@ -4,7 +4,7 @@ function Card({item, id, handleClick}){
 
     return (
         <div className={"card" + itemClass} onClick={() => handleClick(id)}>
-            <img className="icon"src={item.img} alt="" />
+            <img className="icon" src={item.img} alt="" />
         </div>
     )
 }
