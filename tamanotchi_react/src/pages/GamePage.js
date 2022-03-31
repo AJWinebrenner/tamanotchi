@@ -41,6 +41,10 @@ const GamePage = ({petId}) => {
         blocked = true;
         //back end fetch to feed foodId to petId
         setFoodId(selectedFoodId)
+        fetch(`http://localhost:8080/pets/${petId}/feed/${selectedFoodId}`, {
+            method: "PATCH"
+        })
+        //
         const timer = setTimeout(() => {
             setFoodId(0);
             loadPet();
