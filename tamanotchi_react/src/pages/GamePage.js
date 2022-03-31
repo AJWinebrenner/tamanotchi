@@ -4,7 +4,35 @@ import PetContainer from "../containers/PetContainer";
 
 const GamePage = ({petId}) => {
 
+    const [currentPet, setCurrentPet] = useState({
+        "id": 0,
+        "name": "-",
+        "house": 3,
+        "variant": 0,
+        "happiness": 1,
+        "energy": 10,
+        "max_happiness": 10,
+        "max_energy": 10,
+        "mood": 1,
+        "exp": 0,
+        "money": 0
+    });
+    const [currentStage, setCurrentStage] = useState(1);
     const[foodId, setFoodId]= useState(0);
+    
+    const loadPet = () => {
+    console.log(currentPet);
+    fetch(`http://localhost:8080/pets/${petId}`)
+      .then(response => response.json())
+      .then(pet => {
+          setCurrentPet(pet);
+          fetch(`http://localhost:8080/variants/${pet.variant}`)
+            .then(response => response.json())
+            .then(variant => setCurrentStage(variant.stage))
+            .catch(error => console.error(error)); 
+        })
+      .catch(error => console.error(error)); 
+    }
 
     let blocked = false;
     
@@ -20,58 +48,8 @@ const GamePage = ({petId}) => {
             }, 4000);
         return () => clearTimeout(timer);
     }
-    
-
-    const [currentPet, setCurrentPet] = useState({
-        "id": 0,
-        "name": "blank",
-        "house": 3,
-        "variant": 0,
-        "happiness": 1,
-        "energy": 10,
-        "max_happiness": 10,
-        "max_energy": 10,
-        "mood": 1,
-        "exp": 0,
-        "money": 0
-    });
-    const [currentPetName, setCurrentPetName] = useState("-");
-    const [currentStage, setCurrentStage] = useState(1);
-    // const [currentMoney, setCurrentMoney] = useState(0);
-    
-        // put in money and stage in state 
-    
-    const loadPet = () => {
-    console.log(currentPet);
-    fetch(`http://localhost:8080/pets/${petId}`)
-      .then(response => response.json())
-      .then(pet => {
-          setCurrentPet(pet);
-        //   setCurrentPetName(pet.name);
-        //   setCurrentMoney(pet.money);
-          fetch(`http://localhost:8080/variants/${pet.variant}`)
-            .then(response => response.json())
-            .then(variant => setCurrentStage(variant.stage))
-            console.log(pet.house)
-        //   fetch(`http://localhost:8080/houses/${pet.house}`)
-        //     .then(response =>response.json())
-        //     .then(house => setCurrentHouse(house))
-        }) // not sure we need this here or after if statement
-      .catch(error => console.error(error)); 
-    }
-
-
-    // const getFields = () => {
-    //     if (currentPet) {
-    //         setCurrentPetName(currentPet.name);
-    //         setCurrentMoney(currentPet.money);   
-    //     }
-    // }
 
     useEffect(loadPet, [petId]);
-    // useEffect(getFields, [currentPet]);
-
-
 
     return (
         <>

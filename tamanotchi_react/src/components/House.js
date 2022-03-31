@@ -24,11 +24,11 @@ const House = ({houseNum}) => {
     useEffect(loadHouse, [houseNum]);
 
     return(
-        <>
+        <div className="column-flex">
             {/* I assume will eventually be an image of the house */}
             <h2>{currentHouse.name}</h2>
             <img className="sprite" alt="alternate image of house" src={require(`../sprites/houses/${currentHouse.id}.png`)}/> 
-        </>
+        </div>
     );
 }
 

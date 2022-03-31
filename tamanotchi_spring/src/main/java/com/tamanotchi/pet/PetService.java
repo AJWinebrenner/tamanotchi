@@ -40,12 +40,6 @@ public class PetService {
         if (original == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
-        if (pet.getHappiness() > original.getMax_happiness()) {
-            throw new IllegalArgumentException("happiness cannot be larger than " + original.getMax_happiness());
-        }
-        if (pet.getEnergy() > original.getMax_energy()) {
-            throw new IllegalArgumentException("energy cannot be larger than " + original.getMax_energy());
-        }
 
         int result = DAO.updateById(id, pet);
 

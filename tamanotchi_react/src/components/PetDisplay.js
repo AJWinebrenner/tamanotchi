@@ -1,40 +1,38 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 
-const PetDisplay = ({variant, mood, foodId, petId}) => {
+const PetDisplay = ({variant, mood, foodId}) => {
 
-    const [folder, setFolder] = useState(0); //needs default
     const [displayMood, setDisplayMood] = useState(1);
     const [emote, setEmote] = useState(0); //0 is blank sprite
     
-
-    useEffect(() => setFolder(variant), [variant]);
-
-    useEffect(() => setDisplayMood(mood), [mood]);
-
-    const changeEmote = () => {
-        fetch(`http://localhost:8080/pets/${petId}`)
-          .then(response => response.json())
-          .then(pet => {
-              setDisplayMood(pet.mood);
-              console.log(pet.mood);
-            }) // not sure we need this here or after if statement
-          .catch(error => console.error(error)); 
-        }
+    const startEmote = (moodNum) => {
+        setEmote(moodNum);
+        const timer = setTimeout(() => {
+            setEmote(0);
+            }, 4000);
+        return () => clearTimeout(timer);
+    }
     
-    
+    const checkMood = () => {
+        if (displayMood === mood) return;
+        setDisplayMood(mood);
+        startEmote(mood);
+    }         
+
+    useEffect(checkMood, [mood]);
 
     if (!foodId) {
         return(
             <div id="pet-display" className="pixel-box column-flex display break">
                 <img id="emote-sprite" className="sprite" src={require(`../sprites/emotes/${emote}.gif`)}/>
-                <img id="pet-sprite" className="sprite" src={require(`../sprites/variants/${folder}/${displayMood}.gif`)}/>
+                <img id="pet-sprite" className="sprite" src={require(`../sprites/variants/${variant}/${displayMood}.gif`)}/>
             </div>
         );
     } else {
         return(
             <div id="pet-display" className="pixel-box column-flex display break">
                 <img id="food-sprite" className="sprite" src={require(`../sprites/foods/${foodId}.png`)}/>
-                <img id="pet-sprite" className="sprite" src={require(`../sprites/variants/${folder}/eat.gif`)}/>
+                <img id="pet-sprite" className="sprite" src={require(`../sprites/variants/${variant}/eat.gif`)}/>
             </div>
         );
     }
