@@ -57,7 +57,7 @@ const getFoods = () => {
                     />
                 );
             }
-            setAllFoods(...allFoods, newFoodList);
+            setAllFoods(newFoodList);
         })
         // catch error
         .catch(error => console.error(error))   
