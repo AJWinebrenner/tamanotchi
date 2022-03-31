@@ -35,7 +35,7 @@ const GamePage = ({petId}) => {
     });
     const [currentPetName, setCurrentPetName] = useState("-");
     const [currentStage, setCurrentStage] = useState(1);
-    const [currentMoney, setCurrentMoney] = useState(0);
+    // const [currentMoney, setCurrentMoney] = useState(0);
     
         // put in money and stage in state 
     
@@ -45,8 +45,8 @@ const GamePage = ({petId}) => {
       .then(response => response.json())
       .then(pet => {
           setCurrentPet(pet);
-          setCurrentPetName(pet.name);
-          setCurrentMoney(pet.money);
+        //   setCurrentPetName(pet.name);
+        //   setCurrentMoney(pet.money);
           fetch(`http://localhost:8080/variants/${pet.variant}`)
             .then(response => response.json())
             .then(variant => setCurrentStage(variant.stage))
@@ -80,10 +80,10 @@ const GamePage = ({petId}) => {
                     {currentStage}
                 </div>
                 <div id="banner__name" className="pixel-box center-text">
-                    {currentPetName}
+                    {currentPet.name}
                 </div>
                 <div id="banner__money" className="pixel-box center-text">
-                    {currentMoney}
+                    {currentPet.money}
                 </div>
             </section>
             <div className="middle-flex">

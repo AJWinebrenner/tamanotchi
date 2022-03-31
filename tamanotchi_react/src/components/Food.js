@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 
-const Food = ({id, name, price, energy, happiness, heals, unhealthy, feedPet}) => {
+const Food = ({id, name, price, energy, happiness, heals, unhealthy, feedPet, money}) => {
 
+    console.log(money);
     const handleEatingClick = (event) => {
         console.log(event.target.id)
-        feedPet(event.target.id)
+        console.log(money);
+        if(money >= price){
+            feedPet(event.target.id)
+        }
         // trigger function higher up passed in but give it food 'id'
     }
     return(

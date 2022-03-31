@@ -3,12 +3,13 @@ import House from "../components/House";
 import Food from "../components/Food";
 
 
-const ActivityContainer = ({currentPet,currentHouseNum, feedPet}) => {
+const ActivityContainer = ({pet,currentHouseNum, feedPet}) => {
 
 // what to display intially
 const [showHouse, setShowHouse] = useState(true);
 const [showShop, setShowShop] = useState(false);
 const [showGame, setShowGame] = useState(false);
+
 
 // function that turns all buttons to their opposite
 
@@ -30,7 +31,7 @@ const handleShowGameClick = () => {
     setShowHouse(false)
 }
 
-
+console.log(pet);
 // fetch all food here, pass as prop to shop
 
 const [allFoods, setAllFoods] = useState([]);
@@ -52,6 +53,7 @@ const getFoods = () => {
                         heals={food.heals}
                         unhealthy={food.unhealthy}
                         feedPet={feedPet}
+                        money={pet.money}
                     />
                 );
             }
@@ -61,7 +63,7 @@ const getFoods = () => {
         .catch(error => console.error(error))   
 }
 
-useEffect(getFoods, []);
+useEffect(getFoods, [pet]);
 
     return(
         <section>
