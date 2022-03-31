@@ -14,7 +14,7 @@ const GamePage = ({petId}) => {
         setTimeout(() => {
             setFoodId(0)
             console.log("5 seconds later")
-          }, 5000);
+          }, 4000);
     }
     
 
