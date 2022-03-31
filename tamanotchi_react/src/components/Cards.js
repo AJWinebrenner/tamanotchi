@@ -19,12 +19,17 @@ function Cards(){
         { id: 7, img: '/img/mansion.png', stat: "" },
         { id: 8, img: '/img/house.png', stat: "" },
         { id: 8, img: '/img/house.png', stat: "" }
-    ].sort(() => Math.random() - 0.5))
+    ].sort(() => Math.random() - 0.5)) // randomly assign cards each time page is refreshed/game restarted
 
+    // saving the index of the previous card clicked
     const [prev, setPrev] = useState(-1)
 
+    const [gameComplete, setGameComplete] = useState(false)
+
     function check(current){
+        // compares the second cards id to the first cards id
         if(items[current].id == items[prev].id){
+            // if it's a match, both cards are given the "correct" className (css attributes)
             items[current].stat = "correct"
             items[prev].stat = "correct"
             setItems([...items])
@@ -40,14 +45,32 @@ function Cards(){
                 setPrev(-1)
             }, 1000)
         }
+        let counter = 0;
+        for (let i = 0; i<16; i++){
+            if (items[i].stat === "correct"){
+                counter+=1
+            }
+        }
+        if (counter === 16){
+            console.log(gameComplete)
+        }
     }
 
+    // the index of the card in the array is parsed in
     function handleClick(id){
+        
+        // prev set to -1 to indicate this is the first card (of a potential pair) being clicked.
         if(prev === -1){
+            // the card we selected is given the "active" stat 
+            // and given the active class in the card component below
             items[id].stat = "active"
+            // now our original state is updated with our updated item
             setItems([...items])
+            // prev is now set to the id of the item/card clicked
             setPrev(id)
         }else{
+            // the second card picked calls the 'check' function
+            // and passes in the item/card index
             check(id)
         }
     }
@@ -55,6 +78,8 @@ function Cards(){
     return (
         <div className="container">
             { items.map((item, index) => (
+                //  'id' is just this index within the map/array
+                // handleclick function is passed down
                 <Card key={index} item={item} id={index} handleClick={handleClick} />
             )) }
         </div>
