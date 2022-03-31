@@ -12,6 +12,7 @@
   --happiness-size: 0;
   --energy-size: 0;
 
+  --black: #000000;
   --red: #e93841;
   --light-green: #59e150;
 }
@@ -39,9 +40,21 @@ h1 {
   width: calc(var(--sprite-size)*var(--scale));
 }
 
+.icon {
+  display: inline-block;
+  image-rendering: pixelated;
+  height: calc(var(--icon-size)*var(--scale));
+  width: calc(var(--icon-size)*var(--scale));
+}
+
+.coin-text {
+  position: relative;
+  left: calc(var(--pixel)*-3.3);
+}
+
 .pixel-box {
   padding: var(--pixel);
-  border: var(--pixel) solid black;
+  border: var(--pixel) solid var(--black);
 }
 
 .center-text {
@@ -55,9 +68,22 @@ h1 {
 .middle-flex {
   display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
+  flex-wrap: wrap;
+}
+
+.gap {
+  gap: var(--pixel);
+}
+
+.space-flex {
+  display: flex;
+	justify-content: space-between;
+	align-items: center;
   flex-wrap: wrap;
 	gap: var(--pixel);
+  margin-left: var(--pixel);
+  margin-right: var(--pixel);
 }
 
 .column-flex{
@@ -84,6 +110,7 @@ h1 {
 }
 
 .display {
+  background-color: white;
   height: calc(var(--display-size)*var(--scale));
   width: calc(var(--display-size)*var(--scale));
 }
@@ -91,6 +118,20 @@ h1 {
 .btn {
   height: calc(var(--btn-size)*var(--scale));
   flex-grow: 1;
+}
+
+.bare-btn {
+  background-color: antiquewhite;
+  border: calc(var(--pixel)/4) solid var(--black);
+}
+
+.bare-btn:hover {
+  /* padding: calc(var(--pixel)/2); */
+  transform: translateX(calc(var(--pixel)*-1));
+}
+
+.bare-btn:active {
+
 }
 
 .bar {

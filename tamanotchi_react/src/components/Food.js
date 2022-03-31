@@ -12,10 +12,16 @@ const Food = ({id, name, price, energy, happiness, heals, unhealthy, feedPet, mo
         // trigger function higher up passed in but give it food 'id'
     }
     return(
-        <div className = " middle-flex break">
-            <h3>{name}:</h3> <span>{price}</span>
-            <button id={id} onClick={handleEatingClick}>Eat!</button>
-            {/* <img className="food" src={require(`../sprites/foods/${id}.png`)}/> */}
+        <div className = "space-flex break">
+            <div className="middle-flex">
+                <img className="coin icon" src={require(`../sprites/icons/coin.png`)}></img>
+                <p className="coin-text">{price}</p> 
+                <p>{name}</p>
+                
+            </div>
+            <button id={id} className="bare-btn" onClick={handleEatingClick}>
+                <img id={id} className="icon" src={require(`../sprites/foods/${id}.png`)}/>
+            </button>
         </div>
     );
 }
