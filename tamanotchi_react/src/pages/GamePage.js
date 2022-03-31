@@ -89,7 +89,7 @@ const GamePage = ({petId}) => {
             <div className="middle-flex">
 
                 <PetContainer pet={currentPet} foodId={foodId} />
-                <ActivityContainer pet={currentPet} currentHouseNum={currentPet.house} feedPet={feedPet}/>
+                <ActivityContainer pet={currentPet} feedPet={feedPet}/>
 
             </div>
         </>
