@@ -5,18 +5,20 @@ import PetContainer from "../containers/PetContainer";
 const GamePage = ({petId}) => {
 
     const[foodId, setFoodId]= useState(0);
+
+    let blocked = false;
     
     const feedPet = (selectedFoodId) => {
-        console.log(selectedFoodId)
-        if (foodId === 0) {
-            //back end fetch to feed foodId to petId
-            setFoodId(selectedFoodId)
-            setTimeout(() => {
-                setFoodId(0)
-                console.log("5 seconds later")
-              }, 1000);
-            // loadPet();
-        }
+        if (blocked) return;
+        blocked = true;
+        //back end fetch to feed foodId to petId
+        setFoodId(selectedFoodId)
+        const timer = setTimeout(() => {
+            setFoodId(0);
+            loadPet();
+            blocked = false;
+            }, 4000);
+        return () => clearTimeout(timer);
     }
     
 
