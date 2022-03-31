@@ -1,5 +1,6 @@
 package com.tamanotchi.pet;
 
+import com.tamanotchi.food.Food;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tamanotchi.house.House;
@@ -91,4 +92,41 @@ public class PetService {
 
     }
 
+    public void feedPet(Integer id, Integer foodId) {
+        Pet pet = DAO.getById(id);
+        Food food = DAO.selectFoodById(foodId);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+        Integer money = pet.getMoney();
+        Integer petEnergy = pet.getEnergy();
+        Integer petHappiness= pet.getHappiness();
+        Integer foodEnergy= food.getEnergy();
+        Integer foodHappiness= food.getHappiness();
+        Integer price = food.getPrice();
+        Integer maxEnergy = pet.getMax_energy();
+        Integer maxHappiness= pet.getMax_happiness();
+
+        Integer updatedEnergy = petEnergy+foodEnergy;
+        Integer updatedHappiness = petHappiness+foodHappiness;
+        if (money>= price) {
+            if(updatedEnergy>=maxEnergy){
+                pet.setEnergy(maxEnergy);
+            }else{
+                pet.setEnergy(updatedEnergy);
+            }
+            if(updatedHappiness>=maxHappiness){
+                pet.setHappiness(maxHappiness);
+            }else{
+                pet.setHappiness(updatedHappiness);
+            }
+            pet.setMoney(money - price);
+            int result = DAO.updateById(id, pet);
+            if (result != 1) {
+                throw new IllegalStateException("Pet was not fed");
+            }
+        } else {
+            throw new IllegalStateException("You're broke; no food for you");
+        }
+    }
 }

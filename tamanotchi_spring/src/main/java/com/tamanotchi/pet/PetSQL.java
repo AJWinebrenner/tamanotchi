@@ -1,5 +1,6 @@
 package com.tamanotchi.pet;
 
+import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
 import com.tamanotchi.variant.Variant;
 import com.tamanotchi.variant.VariantMapper;
@@ -162,6 +163,30 @@ public class PetSQL implements PetDAO{
                                 rs.getInt("upgrade")
                         ), variantId);
         } catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Food selectFoodById(Integer foodId) {
+
+        String sql = "SELECT id, name, price, energy, happiness, isUnhealthy, heals FROM foods WHERE id = ?";
+
+        try {
+            return jdbc.queryForObject(sql, (rs, rowNum) ->
+                            new Food(
+                                    rs.getInt("id"),
+                                    rs.getString("name"),
+                                    rs.getInt("price"),
+                                    rs.getInt("energy"),
+                                    rs.getInt("happiness"),
+                                    rs.getBoolean("isUnhealthy"),
+                                    rs.getBoolean("heals")
+                            ),
+                    foodId
+            );
+
+        } catch (Exception e) {
             return null;
         }
     }
