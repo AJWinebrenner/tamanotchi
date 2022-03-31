@@ -49,6 +49,11 @@ const GamePage = ({petId}) => {
         return () => clearTimeout(timer);
     }
 
+    const upgradeHouse = () => {
+        //back end request
+        loadPet();
+    }
+
     useEffect(loadPet, [petId]);
 
     return (
@@ -69,7 +74,7 @@ const GamePage = ({petId}) => {
             <div className="middle-flex gap">
 
                 <PetContainer pet={currentPet} foodId={foodId} />
-                <ActivityContainer pet={currentPet} feedPet={feedPet}/>
+                <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} />
 
             </div>
         </>

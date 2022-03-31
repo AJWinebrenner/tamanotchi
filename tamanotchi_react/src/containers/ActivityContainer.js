@@ -3,7 +3,7 @@ import House from "../components/House";
 import Food from "../components/Food";
 
 
-const ActivityContainer = ({pet, feedPet}) => {
+const ActivityContainer = ({pet, feedPet,upgradeHouse}) => {
 
 // what to display intially
 const [showHouse, setShowHouse] = useState(true);
@@ -17,6 +17,7 @@ const handleShowHouseClick = () => {
     setShowShop(false)
     setShowGame(false)
     setShowHouse(true)
+
 }
 
 const handleShowShopClick = () => {
@@ -69,7 +70,7 @@ useEffect(getFoods, [pet]);
         <section>
             {/* conditional render */}
             <div className="pixel-box display break">
-           { showHouse ? <House houseNum={pet.house}/> : null}
+           { showHouse ? <House houseNum={pet.house} money={pet.money} upgradeHouse={upgradeHouse}/> : null}
            { showShop ? <>{allFoods}</> : null}
            { showGame ? <p>an amazing game</p> : null}
             </div>
