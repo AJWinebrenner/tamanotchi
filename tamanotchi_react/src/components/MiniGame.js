@@ -5,11 +5,10 @@ import Cards from "./Cards";
 const MiniGame = () => {
     return (
 
-    <div className="minigame-container">
+    <div className="viewboxactivity">
       <h1>Mini-Game</h1>
          { <Cards /> ? <Cards/> : null}
     </div>
-        
     )
 }
 

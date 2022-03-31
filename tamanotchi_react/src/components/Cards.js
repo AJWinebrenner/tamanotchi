@@ -3,10 +3,10 @@ import Card from './Card'
 
 function Cards(){
     const [items, setItems] = useState([
-        { id: 1, img: '/img/html.png', stat: "" },
-        { id: 1, img: '/img/html.png', stat: "" },
-        { id: 2, img: '/img/css.png', stat: "" },
-        { id: 2, img: '/img/css.png', stat: "" },
+        { id: 1, img: '/img/candy.png', stat: "" },
+        { id: 1, img: '/img/candy.png', stat: "" },
+        { id: 2, img: '/img/medicine.png', stat: "" },
+        { id: 2, img: '/img/medicine.png', stat: "" },
         { id: 3, img: '/img/js.png', stat: "" },
         { id: 3, img: '/img/js.png', stat: "" },
         { id: 4, img: '/img/scss.png', stat: "" },
@@ -55,7 +55,7 @@ function Cards(){
     return (
         <div className="container">
             { items.map((item, index) => (
-                <Card key={index} itemStat={item.stat} itemImg={item.img} id={index} handleClick={handleClick} />
+                <Card key={index} item={item} id={index} handleClick={handleClick} />
             )) }
         </div>
     )
