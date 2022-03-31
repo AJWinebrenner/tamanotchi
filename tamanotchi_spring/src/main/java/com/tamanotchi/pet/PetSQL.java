@@ -119,4 +119,27 @@ public class PetSQL implements PetDAO{
 
         return jdbc.update(sql, id);
     }
+
+    @Override
+    public int upgradeHouse(Integer petId, Integer nextUpdate, Integer price) {
+
+        String sql = "UPDATE pets SET (house, money)=(?,?) WHERE id = ?";
+
+        Pet original = getById(petId);
+
+        Integer newHouse = nextUpdate - 1;
+        if (newHouse == 3) newHouse = original.getHouse();
+
+        Integer newMoney = null;
+        if (original.getMoney() >= price) {
+            newMoney = original.getMoney() - price;
+        }
+
+        return jdbc.update(sql,
+                nextUpdate,
+                newMoney
+        );
+
+        //return jdbc.update(sql, petId);
+    }
 }
