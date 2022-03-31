@@ -69,7 +69,9 @@ public class PetService {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
 
-        House upgrade = DAO.selectHouseById(DAO.selectHouseById(id).getUpgrade());
+//        House upgrade = DAO.selectHouseById((DAO.selectHouseById(id).getUpgrade())-1);
+        House upgrade = DAO.selectHouseById(pet.getHouse()-1);
+        System.out.println(upgrade);
 
         Integer money = pet.getMoney();
         Integer price = upgrade.getPrice();
