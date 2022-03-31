@@ -65,4 +65,17 @@ public class PetService {
             throw new IllegalStateException("Pet with id " + id + " could not be deleted");
         }
     }
+
+    public void upgradeHouse(Integer petId, Integer nextUpgrade, Integer price) {
+        if (DAO.getById(petId) == null) {
+            throw new PetNotFoundException("Pet with id " + petId + " could not be found");
+        }
+
+        int result = DAO.upgradeHouse(petId, nextUpgrade, price);
+
+        if (result != 1) {
+            throw new IllegalStateException("House was not upgraded");
+        }
+    }
+
 }
