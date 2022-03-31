@@ -38,8 +38,8 @@ public class PetController {
         service.deletePetById(id);
     }
 
-    @PatchMapping(path = "pets/{id}/house/{nextUpgrade}")
-    public void upgradeHouse(@PathVariable("id") Integer petId,@PathVariable("nextUpgrade")Integer nextUpgrade, @RequestBody Integer price){
-        service.upgradeHouse(petId, nextUpgrade, price);
+    @PatchMapping(path = "pets/{id}/upgrade")
+    public void upgradeHouse(@PathVariable("id") Integer id){
+        service.upgradeHouse(id);
     }
 }

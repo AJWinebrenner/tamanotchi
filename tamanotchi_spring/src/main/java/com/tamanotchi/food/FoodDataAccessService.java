@@ -8,17 +8,17 @@ import java.util.List;
 @Repository("name")
 public class FoodDataAccessService implements FoodDAO {
 
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbc;
 
-    public FoodDataAccessService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public FoodDataAccessService(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
     }
 
     @Override
     public List<Food> selectAllFood() {
         String sql = "SELECT id, name, price, energy, happiness, isUnhealthy, heals FROM foods";
 
-        return jdbcTemplate.query(sql, (rs, rowNum) ->
+        return jdbc.query(sql, (rs, rowNum) ->
                 new Food(
                         rs.getInt("id"),
                         rs.getString("name"),
@@ -37,7 +37,7 @@ public class FoodDataAccessService implements FoodDAO {
         String sql = "SELECT id, name, price, energy, happiness, isUnhealthy, heals FROM foods WHERE id = ?";
 
         try {
-            return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
+            return jdbc.queryForObject(sql, (rs, rowNum) ->
                             new Food(
                                     rs.getInt("id"),
                                     rs.getString("name"),

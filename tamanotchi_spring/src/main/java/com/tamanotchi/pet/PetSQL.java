@@ -1,5 +1,9 @@
 package com.tamanotchi.pet;
 
+import com.tamanotchi.house.House;
+import com.tamanotchi.variant.Variant;
+import com.tamanotchi.variant.VariantMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -121,25 +125,45 @@ public class PetSQL implements PetDAO{
     }
 
     @Override
-    public int upgradeHouse(Integer petId, Integer nextUpdate, Integer price) {
+    public House selectHouseById(Integer houseId) {
+        var sql = """
+                SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE houses.id = ?;
+                """;
+        try{
+            return jdbc.queryForObject(sql,(rs, rowNum) ->
+                    new House(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getInt("price"),
+                            rs.getInt("happiness_bonus"),
+                            rs.getInt("size"),
+                            rs.getInt("upgrade")
+                    ), houseId);
 
-        String sql = "UPDATE pets SET (house, money)=(?,?) WHERE id = ?";
 
-        Pet original = getById(petId);
-
-        Integer newHouse = nextUpdate - 1;
-        if (newHouse == 3) newHouse = original.getHouse();
-
-        Integer newMoney = null;
-        if (original.getMoney() >= price) {
-            newMoney = original.getMoney() - price;
+        }catch(EmptyResultDataAccessException e){
+            return null;
         }
-
-        return jdbc.update(sql,
-                nextUpdate,
-                newMoney
-        );
-
-        //return jdbc.update(sql, petId);
     }
+
+    @Override
+    public Variant selectVariantById(Integer variantId) {
+        var sql = """
+                SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE variants.id = ?;
+                """;
+        try {
+                return jdbc.queryForObject(sql,(rs, rowNum) ->
+                        new Variant(
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getInt("stage"),
+                                rs.getInt("fave_food"),
+                                rs.getInt("max_exp"),
+                                rs.getInt("upgrade")
+                        ), variantId);
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 }
