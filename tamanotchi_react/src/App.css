@@ -176,11 +176,9 @@ h1 {
   background-color: aquamarine;
   height: 295px;
   width: 320px;
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-end; */
 }
 
+/*  all divs have no padding/border/margin */
 #minigame-sky div{
   padding:0;
   margin:0;
@@ -196,6 +194,11 @@ h1 {
   left: 135px;
 }
 
-/* #minigame-block{
-
-} */
+#minigame-block{
+  height: 40px;
+  width: 40px;
+  background-color: tomato;
+  position: relative;
+  /* this should changed randomly from  -40px to 240px */
+  left: 95px;
+}
