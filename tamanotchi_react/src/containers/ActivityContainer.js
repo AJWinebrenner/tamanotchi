@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import House from "../components/House";
 import Food from "../components/Food";
+import MiniGame from "../components/MiniGame";
 
 
 const ActivityContainer = ({currentPet,currentHouseNum, feedPet}) => {
@@ -69,7 +70,7 @@ useEffect(getFoods, []);
             <div className="pixel-box display break">
            { showHouse ? <House currentHouseNum={currentHouseNum}/> : null}
            { showShop ? <>{allFoods}</> : null}
-           { showGame ? <p>an amazing game</p> : null}
+           { showGame ? <MiniGame/> : null}
             </div>
             <div className="middle-flex break">
                 <button onClick={handleShowHouseClick} id="house-btn" className="btn pixel-box selected">House</button>

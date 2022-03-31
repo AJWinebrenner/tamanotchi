@@ -164,3 +164,38 @@ h1 {
 #banner__money {
   width: calc(8px*var(--scale));
 }
+
+
+/* minigame css */
+#minigame-title{
+  text-align: center;
+  background-color: aliceblue;
+}
+
+#minigame-sky{
+  background-color: aquamarine;
+  height: 295px;
+  width: 320px;
+  /* display: flex;
+  justify-content: center;
+  align-items: flex-end; */
+}
+
+#minigame-sky div{
+  padding:0;
+  margin:0;
+  float: left;
+}
+
+#minigame-chick{
+  width: 40px;
+  height: 40px;
+  background-color: yellow;
+  position: relative;
+  top: 255px;
+  left: 135px;
+}
+
+/* #minigame-block{
+
+} */
