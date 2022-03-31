@@ -7,18 +7,18 @@ function Cards(){
         { id: 1, img: '/img/candy.png', stat: "" },
         { id: 2, img: '/img/medicine.png', stat: "" },
         { id: 2, img: '/img/medicine.png', stat: "" },
-        { id: 3, img: '/img/js.png', stat: "" },
-        { id: 3, img: '/img/js.png', stat: "" },
-        { id: 4, img: '/img/scss.png', stat: "" },
-        { id: 4, img: '/img/scss.png', stat: "" },
-        { id: 5, img: '/img/react.png', stat: "" },
-        { id: 5, img: '/img/react.png', stat: "" },
-        { id: 6, img: '/img/vue.png', stat: "" },
-        { id: 6, img: '/img/vue.png', stat: "" },
-        { id: 7, img: '/img/angular.png', stat: "" },
-        { id: 7, img: '/img/angular.png', stat: "" },
-        { id: 8, img: '/img/nodejs.png', stat: "" },
-        { id: 8, img: '/img/nodejs.png', stat: "" }
+        { id: 3, img: '/img/carrot.png', stat: "" },
+        { id: 3, img: '/img/carrot.png', stat: "" },
+        { id: 4, img: '/img/bread.png', stat: "" },
+        { id: 4, img: '/img/bread.png', stat: "" },
+        { id: 5, img: '/img/fish.png', stat: "" },
+        { id: 5, img: '/img/fish.png', stat: "" },
+        { id: 6, img: '/img/apple.png', stat: "" },
+        { id: 6, img: '/img/apple.png', stat: "" },
+        { id: 7, img: '/img/mansion.png', stat: "" },
+        { id: 7, img: '/img/mansion.png', stat: "" },
+        { id: 8, img: '/img/house.png', stat: "" },
+        { id: 8, img: '/img/house.png', stat: "" }
     ].sort(() => Math.random() - 0.5))
 
     const [prev, setPrev] = useState(-1)
