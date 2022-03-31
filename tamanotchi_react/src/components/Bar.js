@@ -1,6 +1,16 @@
 import { useState, useEffect, useMemo } from "react";
 
-const Bar = ({value, max, className}) => {
+const Bar = ({value, max, className, foodId}) => {
+
+    // const [happinessFromFood, setHappinessFromFood]= useState(5);
+
+    // const loadingFoodHappiness= () => {
+    //     fetch(`http://localhost:8080/foods/${foodId}`)
+    //     .then(response=> response.json())
+    //     .then(data=> setHappinessFromFood(data.happiness))
+    // }
+    // useEffect(loadingFoodHappiness,[foodId])
+
 
     const root = document.documentElement;
 
@@ -22,6 +32,8 @@ const Bar = ({value, max, className}) => {
     }
 
     useEffect(setCss, [fraction])
+
+   
 
 
     return(

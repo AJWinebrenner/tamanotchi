@@ -4,6 +4,20 @@ import PetContainer from "../containers/PetContainer";
 
 const GamePage = ({petId}) => {
 
+    const[foodId, setFoodId]= useState(0);
+    
+    const feedPet = (selectedFoodId) => {
+        console.log(selectedFoodId)
+        if(foodId!=selectedFoodId){
+            setFoodId(selectedFoodId)
+        }
+        setTimeout(() => {
+            setFoodId(0)
+            console.log("5 seconds later")
+          }, 5000);
+    }
+    
+
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
         "name": "blank",
@@ -53,6 +67,8 @@ const GamePage = ({petId}) => {
     useEffect(loadPet, [petId]);
     // useEffect(getFields, [currentPet]);
 
+
+
     return (
         <>
             <div className="break"/>
@@ -69,8 +85,10 @@ const GamePage = ({petId}) => {
                 </div>
             </section>
             <div className="middle-flex">
-                <PetContainer pet={currentPet}/>
-                <ActivityContainer pet={currentPet} currentHouseNum={currentPet.house}/>
+
+                <PetContainer pet={currentPet} foodId={foodId} />
+                <ActivityContainer pet={currentPet} currentHouseNum={currentPet.house} feedPet={feedPet}/>
+
             </div>
         </>
     );

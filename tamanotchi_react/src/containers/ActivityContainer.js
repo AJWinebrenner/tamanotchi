@@ -3,7 +3,7 @@ import House from "../components/House";
 import Food from "../components/Food";
 
 
-const ActivityContainer = ({currentHouseNum}) => {
+const ActivityContainer = ({currentPet,currentHouseNum, feedPet}) => {
 
 // what to display intially
 const [showHouse, setShowHouse] = useState(true);
@@ -51,6 +51,7 @@ const getFoods = () => {
                         happiness={food.happiness}
                         heals={food.heals}
                         unhealthy={food.unhealthy}
+                        feedPet={feedPet}
                     />
                 );
             }
