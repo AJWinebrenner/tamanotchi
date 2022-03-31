@@ -21,6 +21,10 @@ const GamePage = ({petId}) => {
         return () => clearTimeout(timer);
     }
     
+    const upgradeHouse = () => { 
+        console.log("upgrading house")
+    }
+    
 
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
@@ -91,7 +95,7 @@ const GamePage = ({petId}) => {
             <div className="middle-flex gap">
 
                 <PetContainer pet={currentPet} foodId={foodId} />
-                <ActivityContainer pet={currentPet} feedPet={feedPet}/>
+                <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse}/>
 
             </div>
         </>
