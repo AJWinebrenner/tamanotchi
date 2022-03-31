@@ -6,7 +6,7 @@ const MiniGame = () => {
     return (
 
     <div className="viewboxactivity">
-      <h1>Mini-Game</h1>
+      <h1 className="minigame-title">Mini-Game</h1>
          { <Cards /> ? <Cards/> : null}
     </div>
     )
