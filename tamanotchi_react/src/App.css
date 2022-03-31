@@ -14,9 +14,24 @@
   --happiness-size: 0;
   --energy-size: 0;
 
-  --black: #000000;
+  --background: antiquewhite;
+
+  --white: #ffffff;
+  --beige: #ffd19d;
+  --grey: #aeb5bd;
+  --light-blue: #4d80c9;
+  --dark-blue: #054494;
+  --brinjal: #511e43;
+  --black: #100820;
+  --brown: #823e2c;
   --red: #e93841;
-  --light-green: #59e150;
+  --orange: #f1892d;
+  --yellow: #ffe947;
+  --light-pink: #ffa9a9;
+  --dark-pink: #eb6c82;
+  --purple: #7d3ebf;
+  --dark-green: #1e8a4c;
+  --light-green: #5ae150;
 }
 
 * {
@@ -29,7 +44,7 @@
 }
 
 body {
-  background-color: antiquewhite;
+  background-color: var(--background);
 }
 
 h1 {
@@ -98,8 +113,7 @@ h1 {
   display: flex;
   padding: calc(var(--scale)*var(--save-gap));
   gap: calc(var(--scale)*var(--save-gap));
-	/* justify-content: space-between; */
-	align-content: flex-start;
+  justify-content: center;
 	align-items: center;
 	flex-flow: row wrap;
 }
@@ -112,28 +126,36 @@ h1 {
 }
 
 .display {
-  background-color: white;
+  background-color: var(--white);
   height: calc(var(--display-size)*var(--scale));
   width: calc(var(--display-size)*var(--scale));
 }
 
 .btn {
+  background-color: var(--white);
   height: calc(var(--btn-size)*var(--scale));
   flex-grow: 1;
 }
 
+.btn:hover {
+  background-color: var(--beige);
+}
+
+.btn:active {
+  border-color: var(--grey);
+}
+
 .bare-btn {
-  background-color: antiquewhite;
+  background-color: var(--background);
   border: calc(var(--pixel)/4) solid var(--black);
 }
 
 .bare-btn:hover {
-  /* padding: calc(var(--pixel)/2); */
   transform: translateX(calc(var(--pixel)*-1));
 }
 
 .bare-btn:active {
-  background-color: white;
+  background-color: var(--white);
 }
 
 .bar {
@@ -149,7 +171,7 @@ h1 {
   top: 50%;
   transform: translateY(-50%);
   left: var(--pixel);
-  background-color: darkred;
+  background-color: var(--dark-pink);
   height: var(--pixel);
   width: calc(var(--happiness-size)*var(--meter-size)*var(--scale));
 }
@@ -176,7 +198,7 @@ h1 {
   top: 50%;
   transform: translateY(-50%);
   left: var(--pixel);
-  background-color: green;
+  background-color: var(--dark-green);
   height: var(--pixel);
   width: calc(var(--energy-size)*var(--meter-size)*var(--scale));
 }
