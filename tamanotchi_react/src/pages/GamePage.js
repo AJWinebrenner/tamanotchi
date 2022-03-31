@@ -21,8 +21,18 @@ const GamePage = ({petId}) => {
         return () => clearTimeout(timer);
     }
     
-    const upgradeHouse = () => { 
+    const upgradeHouse = (updatedPet) => { 
         console.log("upgrading house")
+            fetch ("http://localhost:8080/pets", {
+                method: "PATCH", 
+                headers:{
+                    'Content-type':'application/json'
+                },
+                body: JSON.stringify(updatedPet)
+    
+                
+            })
+        }
     }
     
 
