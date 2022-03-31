@@ -33,7 +33,7 @@ const GamePage = ({petId}) => {
                 
             })
         }
-    }
+    
     
 
     const [currentPet, setCurrentPet] = useState({
@@ -111,5 +111,6 @@ const GamePage = ({petId}) => {
         </>
     );
 }
+
 
 export default GamePage;
