@@ -68,6 +68,20 @@ const GamePage = ({petId}) => {
         .then(loadPet)
     }
 
+    const step = () => {
+        fetch(`http://localhost:8080/pets/${petId}/step`, {
+            method: "PATCH"
+        })
+        .then(loadPet)
+    }
+
+    useEffect(() => {
+            setInterval(() => {
+                step();
+                console.log("something happens every 10 seconds")
+            }, 10000);
+    }, [])
+
     useEffect(loadPet, [petId]);
 
     return (
