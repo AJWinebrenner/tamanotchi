@@ -5,6 +5,8 @@ import com.tamanotchi.house.HouseNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tamanotchi.house.House;
+import com.tamanotchi.pet.Mood;
+
 import com.tamanotchi.variant.Variant;
 
 
@@ -95,11 +97,33 @@ public class PetService {
     }
 
     public void feedPet(Integer id, Integer foodId) {
+        if(isDead(id)) return;
         Pet pet = DAO.getById(id);
         Food food = DAO.selectFoodById(foodId);
+        Variant variant = DAO.selectVariantById(pet.getVariant());
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
+        Integer extraHappiness= 0;
+        if(variant.getFave_food()==foodId){
+            //This needs to be changed
+            extraHappiness=2;
+        }
+        if(food.isUnhealthy()){
+            if(!Pet.hasEatenUnhealthy){
+                Pet.hasEatenUnhealthy= true;
+            }else{
+                pet.setMood(4);
+            }
+        }else {
+            Pet.hasEatenUnhealthy=false;
+        }
+        if(pet.getMood()==4&&food.isHeals()){
+            pet.setMood(1);
+            Pet.hasEatenUnhealthy=false;
+        }
+
+
         Integer money = pet.getMoney();
         Integer petEnergy = pet.getEnergy();
         Integer petHappiness= pet.getHappiness();
@@ -110,7 +134,7 @@ public class PetService {
         Integer maxHappiness= pet.getMax_happiness();
 
         Integer updatedEnergy = petEnergy+foodEnergy;
-        Integer updatedHappiness = petHappiness+foodHappiness;
+        Integer updatedHappiness = petHappiness+foodHappiness + extraHappiness;
         if (money>= price) {
             if(updatedEnergy>=maxEnergy){
                 pet.setEnergy(maxEnergy);
@@ -129,6 +153,24 @@ public class PetService {
             }
         } else {
             throw new IllegalStateException("You're broke; no food for you");
+        }
+
+
+    }
+
+    public boolean isDead(Integer id) {
+        Pet pet = DAO.getById(id);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+        //if no exception, assume pet was found and has the fields required
+        Integer mood = pet.getMood(); // get pet's mood
+        if (mood == Mood.DEAD) {
+            // 5 is dead, but don't need the numbers here
+            return true;
+            
+        } else {
+        return false;
         }
     }
 
