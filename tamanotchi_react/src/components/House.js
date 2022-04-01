@@ -4,6 +4,7 @@ const House = ({houseNum, money, upgradeHouse}) => {
 
     const [currentHouse, setCurrentHouse] = useState({"id": 3,"name": "bungalow","price": 10,"happiness_bonus": 0,"size": 1,"upgrade": 2});
     const [upgradePrice, setUpgradePrice]= useState(99);
+    const [canUpgrade, setCanUpgrade] = useState(false);
 
     // fetch the house
     const loadHouse = () => {
@@ -11,15 +12,22 @@ const House = ({houseNum, money, upgradeHouse}) => {
             .then(response => response.json())
             .then(house => {
                 setCurrentHouse(house);
-                fetch(`http://localhost:8080/houses/${house.upgrade}`)
-                .then(res=> res.json())
-                .then(upgrade => {
+                if(house.upgrade==0){
+                    setCanUpgrade(false)
+                }else{
+                    setCanUpgrade(true)
+                    fetch(`http://localhost:8080/houses/${house.upgrade}`)
+                        .then(res=> res.json())
+                        .then(upgrade => {
                     if(upgrade){
                         setUpgradePrice(upgrade.price);
                     }else{
                         setUpgradePrice(0)
                     }
                 })
+                }
+
+                
             }) // cleaned up state a bit
             .catch(error => console.error(error)); 
         }
@@ -31,9 +39,16 @@ const House = ({houseNum, money, upgradeHouse}) => {
     
     const handleClickUpgrade = () => {
         console.log(money);
-        if(money >= upgradePrice){
-            //upgradeHouse()
+        if(money >= upgradePrice&&currentHouse.upgrade!=0){
+            upgradeHouse()
+            console.log("upgrading house function performed")
+        }else{
+            console.log("no more upgrade")
         }
+        if(currentHouse.upgrade==0){
+            setCanUpgrade(false)
+        }
+        loadHouse()
     }
 
 
@@ -44,7 +59,7 @@ const House = ({houseNum, money, upgradeHouse}) => {
         <div className="column-flex">
             {/* I assume will eventually be an image of the house */}
             <h2>{currentHouse.name}</h2>
-            <button id="upgrade-btn" onClick={handleClickUpgrade} >Upgrade- {upgradePrice}</button>
+            {canUpgrade? <button id="upgrade-btn" onClick={handleClickUpgrade} >Upgrade- {upgradePrice}</button>: null}
             <img className="sprite" alt="alternate image of house" src={require(`../sprites/houses/${currentHouse.id}.png`)}/> 
         </div>
     );
