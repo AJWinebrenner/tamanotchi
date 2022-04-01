@@ -97,6 +97,7 @@ public class PetService {
     }
 
     public void feedPet(Integer id, Integer foodId) {
+        if(isDead(id)) return;
         Pet pet = DAO.getById(id);
         Food food = DAO.selectFoodById(foodId);
         Variant variant = DAO.selectVariantById(pet.getVariant());
@@ -108,19 +109,19 @@ public class PetService {
             //This needs to be changed
             extraHappiness=2;
         }
-        if(food.isUnhealthy()&&!Pet.hasEatenUnhealthy){
-            Pet.hasEatenUnhealthy= true;
-        }else if(Pet.hasEatenUnhealthy&&food.isUnhealthy()){
-            pet.setMood(4);
+        if(food.isUnhealthy()){
+            if(!Pet.hasEatenUnhealthy){
+                Pet.hasEatenUnhealthy= true;
+            }else{
+                pet.setMood(4);
+            }
+        }else {
+            Pet.hasEatenUnhealthy=false;
         }
         if(pet.getMood()==4&&food.isHeals()){
             pet.setMood(1);
             Pet.hasEatenUnhealthy=false;
         }
-
-
-
-
 
 
         Integer money = pet.getMoney();
@@ -146,6 +147,7 @@ public class PetService {
                 pet.setHappiness(updatedHappiness);
             }
             pet.setMoney(money - price);
+            updateMood(pet);
             int result = DAO.updateById(id, pet);
             if (result != 1) {
                 throw new IllegalStateException("Pet was not fed");
@@ -153,6 +155,8 @@ public class PetService {
         } else {
             throw new IllegalStateException("You're broke; no food for you");
         }
+
+
     }
 
     public boolean isDead(Integer id) {
@@ -171,6 +175,7 @@ public class PetService {
         }
     }
 
+
     public void gameWon(Integer id) {
 
         Pet pet = DAO.getById(id);
@@ -185,6 +190,43 @@ public class PetService {
 
         if (result != 1) {
             throw new IllegalStateException("Funds were not added");
+        }
+    }
+
+
+    public void updateMood(Pet pet) {
+
+        int originalMood = pet.getMood();
+        if (originalMood == Mood.DEAD) return;
+
+        int energy = pet.getEnergy();
+        int happiness = pet.getHappiness();
+
+        if (energy == 0 && happiness == 0) {
+            pet.setMood(Mood.DEAD);
+            return;
+        }
+        if (originalMood == Mood.SICK) return;
+
+        int max_energy = pet.getMax_energy();
+        int max_happiness = pet.getMax_happiness();
+
+        double tiredPoint = 0.4;
+        double tiredRecover = 0.6;
+        double happyPoint = 0.75;
+        double happyCalmDown = 0.5;
+
+        if (energy <= max_energy*tiredPoint) {
+            pet.setMood(Mood.TIRED);
+            return;
+        } else if (energy <= max_energy*tiredRecover && originalMood == Mood.TIRED) {
+            return;
+        } else if (happiness >= max_happiness*happyPoint) {
+            pet.setMood(Mood.HAPPY);
+        } else if (happiness >= max_happiness*happyCalmDown && originalMood == Mood.HAPPY) {
+            return;
+        } else {
+            pet.setMood(Mood.IDLE);
         }
     }
 }
