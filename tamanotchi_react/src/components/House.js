@@ -38,27 +38,14 @@ const House = ({houseNum, money, upgradeHouse}) => {
         }
 
     useEffect(loadHouse, [houseNum]);
-
-    //Create another function 
-    //Put request to update the house of the pet 
     
     const handleClickUpgrade = () => {
         console.log(money);
-        if(money >= upgradePrice&&currentHouse.upgrade!=0){
-            upgradeHouse()
-            console.log("upgrading house function performed")
-        }else{
-            console.log("no more upgrade")
-        }
-        if(currentHouse.upgrade==0){
-            setCanUpgrade(false)
-        }
-        loadHouse()
-    }
-
-
-
-    
+        if(money >= upgradePrice && canUpgrade){
+            upgradeHouse();
+            console.log("upgrading house function performed");
+        } //don't load house in function. load pet is the reference. use effect loads house.
+    }  
 
     return(
         <div className="column-flex">
