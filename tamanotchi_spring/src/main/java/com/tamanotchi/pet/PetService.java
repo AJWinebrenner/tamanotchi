@@ -170,4 +170,21 @@ public class PetService {
         return false;
         }
     }
+
+    public void gameWon(Integer id) {
+
+        Pet pet = DAO.getById(id);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+
+        Integer money = pet.getMoney();
+        pet.setMoney(money + 6);
+
+        int result = DAO.updateById(id, pet);
+
+        if (result != 1) {
+            throw new IllegalStateException("Funds were not added");
+        }
+    }
 }

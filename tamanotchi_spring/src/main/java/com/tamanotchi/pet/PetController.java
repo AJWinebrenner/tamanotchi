@@ -46,4 +46,9 @@ public class PetController {
     public void feedPet(@PathVariable("id") Integer id, @PathVariable("foodId") Integer foodId){
         service.feedPet(id,foodId);
     }
+    @PatchMapping(path = "pets/{id}/game-won")
+    public void gameWon(@PathVariable("id") Integer id){
+        service.gameWon(id);
+    }
+
 }
