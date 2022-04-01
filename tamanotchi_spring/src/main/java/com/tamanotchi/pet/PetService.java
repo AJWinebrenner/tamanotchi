@@ -228,5 +228,34 @@ public class PetService {
         } else {
             pet.setMood(Mood.IDLE);
         }
+        // to ask - why not have to return the pet here?
+    }
+
+    // do we need to pass in a variable of how much exp? Assuming here it will always change by 1 unit
+
+    public void giveExp(Integer id, Integer exp) {
+        Pet pet = DAO.getById(id);
+
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+
+        pet.setExp(pet.getExp() + exp);
+        Variant variant = DAO.selectVariantById(pet.getVariant());
+        Integer maxExp = variant.getMax_exp();
+
+
+        if (pet.getExp() >= maxExp) {
+            pet.setExp(maxExp);
+            Integer upgradeId = variant.getUpgrade();
+            // check if upgrade id null
+          //  else
+            // check if house
+            // check if happy
+            // check if not sick
+            // if all above, then // evolve (poss separate function)
+        }
+
+
     }
 }
