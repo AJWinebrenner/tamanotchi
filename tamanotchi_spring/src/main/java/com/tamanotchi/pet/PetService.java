@@ -97,6 +97,7 @@ public class PetService {
     }
 
     public void feedPet(Integer id, Integer foodId) {
+        if(isDead(id)) return;
         Pet pet = DAO.getById(id);
         Food food = DAO.selectFoodById(foodId);
         Variant variant = DAO.selectVariantById(pet.getVariant());
@@ -108,19 +109,19 @@ public class PetService {
             //This needs to be changed
             extraHappiness=2;
         }
-        if(food.isUnhealthy()&&!Pet.hasEatenUnhealthy){
-            Pet.hasEatenUnhealthy= true;
-        }else if(Pet.hasEatenUnhealthy&&food.isUnhealthy()){
-            pet.setMood(4);
+        if(food.isUnhealthy()){
+            if(!Pet.hasEatenUnhealthy){
+                Pet.hasEatenUnhealthy= true;
+            }else{
+                pet.setMood(4);
+            }
+        }else {
+            Pet.hasEatenUnhealthy=false;
         }
         if(pet.getMood()==4&&food.isHeals()){
             pet.setMood(1);
             Pet.hasEatenUnhealthy=false;
         }
-
-
-
-
 
 
         Integer money = pet.getMoney();
@@ -153,6 +154,8 @@ public class PetService {
         } else {
             throw new IllegalStateException("You're broke; no food for you");
         }
+
+
     }
 
     public boolean isDead(Integer id) {
