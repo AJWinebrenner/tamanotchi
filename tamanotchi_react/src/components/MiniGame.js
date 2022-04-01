@@ -2,7 +2,7 @@ import {React, Component, useEffect, useRef, useState } from "react";
 import '../App.css';
 import Cards from "./Cards";
 
-const MiniGame = () => {
+const MiniGame = ({wonGame}) => {
 
     const [startGame, setStartGame] = useState(false)
 
@@ -13,7 +13,7 @@ const MiniGame = () => {
 
     <div className="viewboxactivity">
         { startGame ? null : <button onClick={handleStartButtonClick}>Start Game!</button>}
-        { startGame ? <Cards/> : null}
+        { startGame ? <Cards wonGame={wonGame} /> : null}
     </div>
     )
 }

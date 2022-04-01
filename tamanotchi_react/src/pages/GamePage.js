@@ -58,7 +58,13 @@ const GamePage = ({petId}) => {
             method: "PATCH"
         })
         .then(loadPet)
-        
+    }
+
+    const wonGame = () => {
+        fetch(`http://localhost:8080/pets/${petId}/won-game`, {
+            method: "PATCH"
+        })
+        .then(loadPet)
     }
 
     useEffect(loadPet, [petId]);
@@ -81,7 +87,7 @@ const GamePage = ({petId}) => {
             <div className="middle-flex gap">
 
                 <PetContainer pet={currentPet} foodId={foodId} />
-                <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} />
+                <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} wonGame={wonGame}/>
 
             </div>
         </>

@@ -4,7 +4,7 @@ import Food from "../components/Food";
 import MiniGame from "../components/MiniGame";
 
 
-const ActivityContainer = ({pet, feedPet,upgradeHouse}) => {
+const ActivityContainer = ({pet, feedPet,upgradeHouse, wonGame}) => {
 
 // what to display intially
 const [showHouse, setShowHouse] = useState(true);
@@ -73,7 +73,7 @@ useEffect(getFoods, [pet]);
             <div className="pixel-box display break">
            { showHouse ? <House houseNum={pet.house} money={pet.money} upgradeHouse={upgradeHouse}/> : null}
            { showShop ? <>{allFoods}</> : null}
-           { showGame  && <MiniGame/> ? <MiniGame/> : null}
+           { showGame  && <MiniGame/> ? <MiniGame wonGame={wonGame}/> : null}
             </div>
             <div className="middle-flex break gap">
                 <button onClick={handleShowHouseClick} id="house-btn" className="btn pixel-box selected">House</button>

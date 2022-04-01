@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from './Card'
 
-function Cards(){
+function Cards({wonGame}){
     const [items, setItems] = useState([
         { id: 1, img: '/img/candy.png', stat: "" },
         { id: 1, img: '/img/candy.png', stat: "" },
@@ -52,7 +52,9 @@ function Cards(){
             }
         }
         if (counter === 16){
-            console.log(gameComplete)
+            wonGame();
+            console.log("Player has won!")
+            setGameComplete(true);
         }
     }
 
