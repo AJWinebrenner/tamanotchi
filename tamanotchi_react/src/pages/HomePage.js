@@ -31,7 +31,8 @@ const HomePage = ({setPetId}) => {
 
     return(
         <>
-            <h1>Home Page</h1>
+            <div className="break"/>
+            <h1 className="center-text">Home Page</h1>
             <section className="save-flex">
                 {saveCards}
             </section>

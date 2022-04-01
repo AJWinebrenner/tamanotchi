@@ -41,6 +41,10 @@ const GamePage = ({petId}) => {
         blocked = true;
         //back end fetch to feed foodId to petId
         setFoodId(selectedFoodId)
+        fetch(`http://localhost:8080/pets/${petId}/feed/${selectedFoodId}`, {
+            method: "PATCH"
+        })
+        //
         const timer = setTimeout(() => {
             setFoodId(0);
             loadPet();
@@ -50,8 +54,11 @@ const GamePage = ({petId}) => {
     }
 
     const upgradeHouse = () => {
-        //back end request
-        loadPet();
+        fetch(`http://localhost:8080/pets/${petId}/upgrade`, {
+            method: "PATCH"
+        })
+        .then(loadPet)
+        
     }
 
     useEffect(loadPet, [petId]);
