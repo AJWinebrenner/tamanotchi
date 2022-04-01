@@ -1,5 +1,6 @@
 package com.tamanotchi.pet;
 
+import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
 import com.tamanotchi.variant.Variant;
 
@@ -14,4 +15,5 @@ public interface PetDAO {
     public int deleteById(Integer id);
     House selectHouseById(Integer houseId);
     Variant selectVariantById(Integer variantId);
+    Food selectFoodById(Integer id);
 }

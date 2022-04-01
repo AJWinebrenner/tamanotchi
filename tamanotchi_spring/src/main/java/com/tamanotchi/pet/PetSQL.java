@@ -1,5 +1,6 @@
 package com.tamanotchi.pet;
 
+import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
 import com.tamanotchi.variant.Variant;
 import com.tamanotchi.variant.VariantMapper;
@@ -125,9 +126,9 @@ public class PetSQL implements PetDAO{
     }
 
     @Override
-    public House selectHouseById(Integer houseId) {
+    public House selectHouseById(Integer id) {
         var sql = """
-                SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE houses.id = ?;
+                SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE id = ?;
                 """;
         try{
             return jdbc.queryForObject(sql,(rs, rowNum) ->
@@ -138,7 +139,7 @@ public class PetSQL implements PetDAO{
                             rs.getInt("happiness_bonus"),
                             rs.getInt("size"),
                             rs.getInt("upgrade")
-                    ), houseId);
+                    ), id);
 
 
         }catch(EmptyResultDataAccessException e){
@@ -147,9 +148,9 @@ public class PetSQL implements PetDAO{
     }
 
     @Override
-    public Variant selectVariantById(Integer variantId) {
+    public Variant selectVariantById(Integer id) {
         var sql = """
-                SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE variants.id = ?;
+                SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE id = ?;
                 """;
         try {
                 return jdbc.queryForObject(sql,(rs, rowNum) ->
@@ -160,8 +161,32 @@ public class PetSQL implements PetDAO{
                                 rs.getInt("fave_food"),
                                 rs.getInt("max_exp"),
                                 rs.getInt("upgrade")
-                        ), variantId);
+                        ), id);
         } catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Food selectFoodById(Integer id) {
+
+        String sql = "SELECT id, name, price, energy, happiness, isUnhealthy, heals FROM foods WHERE id = ?";
+
+        try {
+            return jdbc.queryForObject(sql, (rs, rowNum) ->
+                            new Food(
+                                    rs.getInt("id"),
+                                    rs.getString("name"),
+                                    rs.getInt("price"),
+                                    rs.getInt("energy"),
+                                    rs.getInt("happiness"),
+                                    rs.getBoolean("isUnhealthy"),
+                                    rs.getBoolean("heals")
+                            ),
+                    id
+            );
+
+        } catch (Exception e) {
             return null;
         }
     }
