@@ -22,6 +22,14 @@ function Cards({wonGame, handleSetGame}){
         { id: 8, img: '/img/house.png', stat: "" }
     ].sort(() => Math.random() - 0.5)) // randomly assign cards each time page is refreshed/game restarted
 
+
+    // audio attempt
+    let audio = new Audio("/audio/We'll-Be-Right-Back.mp3")
+
+    const startWinningAudio = () => {
+    audio.play()
+  }
+
     // saving the index of the previous card clicked
     const [prev, setPrev] = useState(-1)
 
@@ -54,6 +62,7 @@ function Cards({wonGame, handleSetGame}){
             }
         }
         if (counter === 16){
+            startWinningAudio();
             wonGame();
             console.log("Player has won!")
             setGameComplete(true);
