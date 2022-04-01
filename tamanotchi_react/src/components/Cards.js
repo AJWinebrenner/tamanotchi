@@ -71,7 +71,7 @@ function Cards({wonGame, handleSetGame}){
                 setGameComplete(false)
                 setGameWonDisplay(false)
                 handleSetGame()
-            }, 2000);
+            }, 3000);
         }
     }
 
