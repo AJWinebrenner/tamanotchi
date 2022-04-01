@@ -147,6 +147,7 @@ public class PetService {
                 pet.setHappiness(updatedHappiness);
             }
             pet.setMoney(money - price);
+            updateMood(pet);
             int result = DAO.updateById(id, pet);
             if (result != 1) {
                 throw new IllegalStateException("Pet was not fed");
