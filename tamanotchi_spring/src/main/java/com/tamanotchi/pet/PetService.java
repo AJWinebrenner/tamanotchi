@@ -131,4 +131,40 @@ public class PetService {
             throw new IllegalStateException("You're broke; no food for you");
         }
     }
+
+    public void updateMood(Pet pet) {
+
+        int originalMood = pet.getMood();
+        if (originalMood == Mood.DEAD) return;
+
+        int energy = pet.getEnergy();
+        int happiness = pet.getHappiness();
+
+        if (energy == 0 && happiness == 0) {
+            pet.setMood(Mood.DEAD);
+            return;
+        }
+        if (originalMood == Mood.SICK) return;
+
+        int max_energy = pet.getMax_energy();
+        int max_happiness = pet.getMax_happiness();
+
+        double tiredPoint = 0.4;
+        double tiredRecover = 0.6;
+        double happyPoint = 0.75;
+        double happyCalmDown = 0.5;
+
+        if (energy <= max_energy*tiredPoint) {
+            pet.setMood(Mood.TIRED);
+            return;
+        } else if (energy <= max_energy*tiredRecover && originalMood == Mood.TIRED) {
+            return;
+        } else if (happiness >= max_happiness*happyPoint) {
+            pet.setMood(Mood.HAPPY);
+        } else if (happiness >= max_happiness*happyCalmDown && originalMood == Mood.HAPPY) {
+            return;
+        } else {
+            pet.setMood(Mood.IDLE);
+        }
+    }
 }
