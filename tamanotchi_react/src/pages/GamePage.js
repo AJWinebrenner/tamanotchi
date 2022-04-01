@@ -50,7 +50,7 @@ const GamePage = ({petId}) => {
             setFoodId(0);
             loadPet();
             blocked = false;
-            }, 4000);
+            }, 2000);
         return () => clearTimeout(timer);
     }
 
@@ -79,7 +79,7 @@ const GamePage = ({petId}) => {
             setInterval(() => {
                 step();
                 console.log("something happens every 10 seconds")
-            }, 10000);
+            }, 20000);
     }, [])
 
     useEffect(loadPet, [petId]);
