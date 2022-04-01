@@ -2,7 +2,14 @@ import { useState, useEffect } from "react";
 
 const House = ({houseNum, money, upgradeHouse}) => {
 
-    const [currentHouse, setCurrentHouse] = useState({"id": 3,"name": "bungalow","price": 10,"happiness_bonus": 0,"size": 1,"upgrade": 2});
+    const [currentHouse, setCurrentHouse] = useState({
+        "id": 3,
+        "name": "bungalow",
+        "price": 10,
+        "happiness_bonus": 0,
+        "size": 1,
+        "upgrade": 2
+    });
     const [upgradePrice, setUpgradePrice]= useState(99);
     const [canUpgrade, setCanUpgrade] = useState(false);
 
@@ -12,22 +19,20 @@ const House = ({houseNum, money, upgradeHouse}) => {
             .then(response => response.json())
             .then(house => {
                 setCurrentHouse(house);
-                if(house.upgrade==0){
-                    setCanUpgrade(false)
+                if(!house.upgrade){
+                    setCanUpgrade(false);
                 }else{
-                    setCanUpgrade(true)
+                    setCanUpgrade(true);
                     fetch(`http://localhost:8080/houses/${house.upgrade}`)
                         .then(res=> res.json())
                         .then(upgrade => {
-                    if(upgrade){
-                        setUpgradePrice(upgrade.price);
-                    }else{
-                        setUpgradePrice(0)
-                    }
-                })
-                }
-
-                
+                            if(upgrade){
+                                setUpgradePrice(upgrade.price);
+                            }else{
+                                setUpgradePrice(0)
+                            }
+                        })
+                }               
             }) // cleaned up state a bit
             .catch(error => console.error(error)); 
         }
@@ -57,9 +62,10 @@ const House = ({houseNum, money, upgradeHouse}) => {
 
     return(
         <div className="column-flex">
-            {/* I assume will eventually be an image of the house */}
-            <h2>{currentHouse.name}</h2>
-            {canUpgrade? <button id="upgrade-btn" onClick={handleClickUpgrade} >Upgrade- {upgradePrice}</button>: null}
+            <div id="house-info" className="center-text">
+                <h2 className="break">{currentHouse.name}</h2>
+                {canUpgrade? <button id="upgrade-btn" className="pixel-box" onClick={handleClickUpgrade} >Upgrade- {upgradePrice}</button>: null}
+            </div>
             <img className="sprite" alt="alternate image of house" src={require(`../sprites/houses/${currentHouse.id}.png`)}/> 
         </div>
     );

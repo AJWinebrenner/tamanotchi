@@ -219,6 +219,10 @@ h1 {
   left: calc(var(--energy-size)*var(--meter-size)*var(--scale));
 }
 
+#house-info {
+  height: calc(var(--sprite-size)*var(--scale));
+}
+
 #banner__stage {
   background-color: var(--light-pink);
   width: calc(8px*var(--scale));
