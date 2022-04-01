@@ -97,9 +97,29 @@ public class PetService {
     public void feedPet(Integer id, Integer foodId) {
         Pet pet = DAO.getById(id);
         Food food = DAO.selectFoodById(foodId);
+        Variant variant = DAO.selectVariantById(pet.getVariant());
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
+        Integer extraHappiness= 0;
+        if(variant.getFave_food()==foodId){
+            //This needs to be changed
+            extraHappiness=2;
+        }
+        if(food.isUnhealthy()&&!Pet.hasEatenUnhealthy){
+            Pet.hasEatenUnhealthy= true;
+        }else if(Pet.hasEatenUnhealthy){
+            pet.setMood(4);
+        }
+        if(pet.getMood()==4&&food.isHeals()){
+            pet.setMood(1);
+        }
+
+
+
+
+
+
         Integer money = pet.getMoney();
         Integer petEnergy = pet.getEnergy();
         Integer petHappiness= pet.getHappiness();
@@ -110,7 +130,7 @@ public class PetService {
         Integer maxHappiness= pet.getMax_happiness();
 
         Integer updatedEnergy = petEnergy+foodEnergy;
-        Integer updatedHappiness = petHappiness+foodHappiness;
+        Integer updatedHappiness = petHappiness+foodHappiness + extraHappiness;
         if (money>= price) {
             if(updatedEnergy>=maxEnergy){
                 pet.setEnergy(maxEnergy);
