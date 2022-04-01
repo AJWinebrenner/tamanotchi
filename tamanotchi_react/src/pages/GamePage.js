@@ -38,6 +38,7 @@ const GamePage = ({petId}) => {
     
     const feedPet = (selectedFoodId) => {
         if (blocked) return;
+        if(currentPet.mood==5) return;
         blocked = true;
         //back end fetch to feed foodId to petId
         setFoodId(selectedFoodId)
