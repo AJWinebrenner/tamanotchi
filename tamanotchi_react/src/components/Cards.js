@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Card from './Card'
 
-function Cards({wonGame}){
+function Cards({wonGame, handleSetGame}){
     const [items, setItems] = useState([
         { id: 1, img: '/img/candy.png', stat: "" },
         { id: 1, img: '/img/candy.png', stat: "" },
@@ -24,6 +24,7 @@ function Cards({wonGame}){
     // saving the index of the previous card clicked
     const [prev, setPrev] = useState(-1)
 
+    const [gameWonDisplay, setGameWonDisplay] = useState(false)
     const [gameComplete, setGameComplete] = useState(false)
 
     function check(current){
@@ -55,6 +56,7 @@ function Cards({wonGame}){
             wonGame();
             console.log("Player has won!")
             setGameComplete(true);
+            handleSetGame();
         }
     }
 
