@@ -110,11 +110,12 @@ public class PetService {
         }
         if(food.isUnhealthy()&&!Pet.hasEatenUnhealthy){
             Pet.hasEatenUnhealthy= true;
-        }else if(Pet.hasEatenUnhealthy){
+        }else if(Pet.hasEatenUnhealthy&&food.isUnhealthy()){
             pet.setMood(4);
         }
         if(pet.getMood()==4&&food.isHeals()){
             pet.setMood(1);
+            Pet.hasEatenUnhealthy=false;
         }
 
 
