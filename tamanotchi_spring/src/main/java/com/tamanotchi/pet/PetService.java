@@ -184,7 +184,7 @@ public class PetService {
         }
 
         Integer money = pet.getMoney();
-        pet.setMoney(money + 6);
+        pet.setMoney(money + 10);
 
         int result = DAO.updateById(id, pet);
 
@@ -218,7 +218,6 @@ public class PetService {
 
         if (energy <= max_energy*tiredPoint) {
             pet.setMood(Mood.TIRED);
-            return;
         } else if (energy <= max_energy*tiredRecover && originalMood == Mood.TIRED) {
             return;
         } else if (happiness >= max_happiness*happyPoint) {
@@ -227,6 +226,44 @@ public class PetService {
             return;
         } else {
             pet.setMood(Mood.IDLE);
+        }
+    }
+
+    public void timeStep(Integer id) {
+
+        Pet pet = DAO.getById(id);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+
+        Integer energy = pet.getEnergy();
+        Integer happiness= pet.getHappiness();
+        Integer mood = pet.getMood();
+
+        if (mood == Mood.TIRED){
+            pet.setHappiness(happiness - 1);
+        } else if (mood == Mood.SICK){
+            pet.setHappiness(happiness - 2);
+        }
+
+        if (happiness == 0){
+            pet.setEnergy(energy - 2);
+        } else {
+            pet.setEnergy(energy - 1);
+        }
+
+        if (pet.getEnergy() < 0) {
+            pet.setEnergy(0);
+        }
+        if (pet.getHappiness() < 0) {
+            pet.setHappiness(0);
+        }
+
+        updateMood(pet);
+        int result = DAO.updateById(id, pet);
+
+        if (result != 1) {
+            throw new IllegalStateException("Step was not completed");
         }
     }
 }
