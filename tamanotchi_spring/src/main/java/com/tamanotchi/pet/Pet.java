@@ -15,7 +15,7 @@ public class Pet {
     private Integer mood;
     private Integer exp;
     private Integer money;
-
+    static boolean hasEatenUnhealthy;
     public Pet() {
         
     }
