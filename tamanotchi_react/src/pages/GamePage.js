@@ -61,7 +61,7 @@ const GamePage = ({petId}) => {
     }
 
     const wonGame = () => {
-        fetch(`http://localhost:8080/pets/${petId}/won-game`, {
+        fetch(`http://localhost:8080/pets/${petId}/game-won`, {
             method: "PATCH"
         })
         .then(loadPet)
