@@ -21,7 +21,7 @@ public class HouseController {
     }
 
     @GetMapping(path ="houses/{id}")
-    public House getHouseById(@PathVariable("id") Integer HouseId){
-        return houseService.selectHouseById(HouseId);
+    public House getHouseById(@PathVariable("id") Integer houseId){
+        return houseService.selectHouseById(houseId);
     }
 }

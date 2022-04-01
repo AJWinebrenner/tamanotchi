@@ -4,6 +4,8 @@ import com.tamanotchi.food.Food;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tamanotchi.house.House;
+import com.tamanotchi.pet.Mood;
+
 import com.tamanotchi.variant.Variant;
 
 
@@ -127,6 +129,22 @@ public class PetService {
             }
         } else {
             throw new IllegalStateException("You're broke; no food for you");
+        }
+    }
+
+    public boolean isDead(Integer id) {
+        Pet pet = DAO.getById(id);
+        if (pet == null) {
+            throw new PetNotFoundException("Pet with id " + id + " could not be found");
+        }
+        //if no exception, assume pet was found and has the fields required
+        Integer mood = pet.getMood(); // get pet's mood
+        if (mood == Mood.DEAD) {
+            // 5 is dead, but don't need the numbers here
+            return true;
+            
+        } else {
+        return false;
         }
     }
 }
