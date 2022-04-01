@@ -14,7 +14,7 @@ function Card({item, id, handleClick}){
         // but given ".card.active" (turns card around) because of the css applied
 
         // on click, the handleClick is called with the index of the card clicked
-        <div className={"card" + itemClass} onClick={() => handleClick(id)}>
+        <div className={"card" + itemClass + " card-hover"} onClick={() => handleClick(id)}>
 
             {/* each image found by parsing the string - item.img */}
             <img className="icon" src={item.img} alt="" />

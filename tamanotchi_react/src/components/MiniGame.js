@@ -12,7 +12,7 @@ const MiniGame = ({wonGame}) => {
     return (
 
     <div className="viewboxactivity">
-        { startGame ? null : <button onClick={handleSetGame}>Start Game!</button>}
+        { startGame ? null : <button onClick={handleSetGame} className="pixel-box start-mini-btn">Start Game!</button>}
         { startGame ? <Cards wonGame={wonGame} handleSetGame={handleSetGame}/> : null}
     </div>
     )

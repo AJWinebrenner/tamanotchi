@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Card from './Card'
+import GameComplete from './GameComplete'
 
 function Cards({wonGame, handleSetGame}){
     const [items, setItems] = useState([
@@ -56,7 +57,12 @@ function Cards({wonGame, handleSetGame}){
             wonGame();
             console.log("Player has won!")
             setGameComplete(true);
-            handleSetGame();
+            setGameWonDisplay(true)
+            setTimeout(() => {
+                setGameComplete(false)
+                setGameWonDisplay(false)
+                handleSetGame()
+            }, 2000);
         }
     }
 
@@ -80,12 +86,18 @@ function Cards({wonGame, handleSetGame}){
     }
 
     return (
+        <div>
+            
         <div className="container">
+           
+             
             { items.map((item, index) => (
                 //  'id' is just this index within the map/array
                 // handleclick function is passed down
                 <Card key={index} item={item} id={index} handleClick={handleClick} />
             )) }
+        </div>
+            {gameWonDisplay ? <GameComplete/> : null }
         </div>
     )
 }

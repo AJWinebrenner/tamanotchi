@@ -301,4 +301,40 @@ h1 {
 .minigame-title{
   text-align: center;
 }
+/* game won block css */
 
+.game-complete-container{
+  position:relative;
+  bottom: 175px;
+  text-align: center;
+  animation: zoom-in-zoom-out 2s ease infinite;
+}
+
+.start-mini-btn{
+  position:relative;
+  top:130px;
+  animation: zoom-in-zoom-out 2s ease infinite;
+  cursor: pointer;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.viewboxactivity{
+  height: 320px;
+  width: 315px;
+  text-align: center;
+}
+
+.card-hover{
+  cursor: pointer;
+}
