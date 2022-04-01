@@ -51,4 +51,9 @@ public class PetController {
         service.gameWon(id);
     }
 
+    @PatchMapping(path = "pets/{id}/step")
+    public void timeStep(@PathVariable("id") Integer id){
+        service.timeStep(id);
+    }
+
 }
