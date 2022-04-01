@@ -1,6 +1,7 @@
 package com.tamanotchi.pet;
 
 import com.tamanotchi.food.Food;
+import com.tamanotchi.house.HouseNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tamanotchi.house.House;
@@ -72,9 +73,10 @@ public class PetService {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
 
-//        House upgrade = DAO.selectHouseById((DAO.selectHouseById(id).getUpgrade())-1);
-        House upgrade = DAO.selectHouseById(pet.getHouse()-1);
-        System.out.println(upgrade);
+        House upgrade = DAO.selectHouseById((DAO.selectHouseById(pet.getHouse()).getUpgrade()));
+        if (upgrade == null) {
+            throw new HouseNotFoundException("Upgrade house could not be found");
+        }
 
         Integer money = pet.getMoney();
         Integer price = upgrade.getPrice();
