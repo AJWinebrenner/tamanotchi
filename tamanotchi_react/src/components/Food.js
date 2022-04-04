@@ -14,7 +14,7 @@ const Food = ({id, name, price, energy, happiness, heals, unhealthy, feedPet, mo
     return(
         <div className = "space-flex break">
             <div className="middle-flex">
-                <img className="coin icon" src={require(`../sprites/icons/coin.png`)}></img>
+                <img className="icon" src={require(`../sprites/icons/coin.png`)}></img>
                 <p className="coin-text">{price}</p> 
                 <p>{name}</p>
                 

@@ -15,7 +15,7 @@
   --energy-size: 0;
   --game-size: 40px;
 
-  --background: antiquewhite;
+  --background: #aeb5bd;
 
   --white: #ffffff;
   --beige: #ffd19d;
@@ -234,8 +234,28 @@ h1 {
 }
 
 #banner__money {
-  background-color: var(--yellow);
+  position: relative;
   width: calc(8px*var(--scale));
+}
+
+.coin::before {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  background-image: url('./sprites/icons/coin.png');
+  image-rendering: pixelated;
+  background-size: calc(var(--icon-size)*var(--scale));
+  height: calc(var(--icon-size)*var(--scale));
+  width: calc(var(--icon-size)*var(--scale));
+    
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.onTop {
+  z-index: 1;
 }
 
 .container{

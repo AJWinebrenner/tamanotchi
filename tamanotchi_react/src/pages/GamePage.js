@@ -106,8 +106,9 @@ const GamePage = ({petId}) => {
                 <div id="banner__name" className="pixel-box center-text">
                     {currentPet.name}
                 </div>
-                <div id="banner__money" className="pixel-box center-text">
-                    {currentPet.money}
+                <div id="banner__money">
+                    <div className="coin"/>
+                    <p className="onTop center-text">{currentPet.money}</p>
                 </div>
             </section>
             <div className="middle-flex gap">
