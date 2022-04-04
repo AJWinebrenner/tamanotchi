@@ -102,7 +102,7 @@ INSERT INTO foods(
     heals
 )
 VALUES(
-    'bread',
+    'pizza',
     4,
     3,
     1,
