@@ -88,7 +88,6 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }, [])
 
  // ----------------------------------- 
-
     // audio attempt
     let mainAudio = new Audio("/audio/tamagotchi-main-theme-v1.mp3")
 
@@ -100,11 +99,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
             mainAudio.loop = true
         }
     }
-
     mainAudioFunc();
-
-    
-  
     // -----------------------------------
 
     let navigate = useNavigate(); 
