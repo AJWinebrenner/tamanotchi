@@ -96,7 +96,7 @@ class PetServiceTest {
         underTest.updatePetById(1, pet_update);
 
         ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
-        verify(fakePetDao, times(0)).getById(captor.capture());
+        verify(fakePetDao, times(1)).getById(captor.capture());
         Integer capturedParameter = captor.getValue();
 
         // THEN
@@ -169,17 +169,68 @@ class PetServiceTest {
     }
 
     @Test
-    void feedPet() {
+    void feedPet_CanUpdatePetWhenIdsOfFoodAndPetAreCorrect() {
+        // GIVEN
+        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
+        Pet petAfterEating = new Pet(1, "Bob", 1, 1, 10, 10, 2, 2, 99);
+        Food food = new Food(1, "PIZZA", 1, 20, 20, false, false);
+        Variant variant = new Variant("variant", 1, 2, 500, 2);
 
+        when(fakePetDao.getById(1)).thenReturn(pet);
+        when(fakePetDao.selectFoodById(1)).thenReturn(food);
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.updateById(1, petAfterEating)).thenReturn(1);
 
+        // WHEN
+        underTest.feedPet(1, 1);
+
+        // THEN
+        verify(fakePetDao).updateById(1, petAfterEating);
     }
 
-    @org.junit.jupiter.api.Test
-    void isDead() {
+    @Test
+    void isDead_ReturnsTrueWhenPetIdIsCorrectAndDead() {
+        // GIVEN
+        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 100);
+        when(fakePetDao.getById(1)).thenReturn(pet);
+
+        // WHEN
+        Boolean actual = underTest.isDead(1);
+        Boolean expected = true;
+
+        // THEN
+        assertEquals(actual, expected);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
+    void isDead_ReturnsFalseWhenPetIdIsCorrectAndAlive() {
+        // GIVEN
+        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
+        when(fakePetDao.getById(1)).thenReturn(pet);
+
+        // WHEN
+        Boolean actual = underTest.isDead(1);
+        Boolean expected = false;
+
+        // THEN
+        assertEquals(actual, expected);
+    }
+
+    @Test
     void gameWon() {
+        // GIVEN
+        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
+        Pet updated= new Pet(1, "Bob", 1, 1, 5, 5, 3, 3, 110);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
+        when(fakePetDao.getById(1)).thenReturn(pet);
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.updateById(1, updated)).thenReturn(1);
+
+        // WHEN
+        underTest.gameWon(1);
+
+        // THEN
+        verify(fakePetDao).updateById(1, updated);
     }
 
     @org.junit.jupiter.api.Test
