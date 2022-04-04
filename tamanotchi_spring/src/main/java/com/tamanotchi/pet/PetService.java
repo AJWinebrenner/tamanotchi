@@ -5,7 +5,6 @@ import com.tamanotchi.house.HouseNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tamanotchi.house.House;
-import com.tamanotchi.pet.Mood;
 
 import com.tamanotchi.variant.Variant;
 
@@ -22,7 +21,7 @@ public class PetService {
     }
 
     public List<Pet> getAllPets() {
-        return DAO.getAll();
+        return DAO.getAllPets();
     }
 
     public Pet getPetById(Integer id) {

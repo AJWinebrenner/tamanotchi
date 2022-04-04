@@ -20,7 +20,7 @@ public class PetSQL implements PetDAO{
     }
 
     @Override
-    public List<Pet> getAll() {
+    public List<Pet> getAllPets() {
 
         String sql = "SELECT id, name, house, variant, happiness, energy, mood, exp, money FROM pets";
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PetDAO {
 
-    public List<Pet> getAll();
+    public List<Pet> getAllPets();
     public Pet getById(Integer id);
     public int add(Pet pet);
     public int updateById(Integer id, Pet update);
