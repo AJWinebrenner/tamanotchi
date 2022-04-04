@@ -30,7 +30,6 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     const [idleEmote, setIdleEmote] = useState(0);
     
     const loadPet = () => {
-    console.log(currentPet);
     fetch(`http://localhost:8080/pets/${petId}`)
         .then(response => response.json())
         .then(pet => {
@@ -44,12 +43,9 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }
 
     const checkIdleEmote = () => {
-        console.log("calc idle emote");
         if (currentPet.exp >= currentVariant.max_exp) {
-            console.log("crown");
-            setIdleEmote(6);
+            setIdleEmote("crown");
         } else {
-            console.log("blank");
             setIdleEmote(0);
         }
     }
@@ -57,10 +53,10 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     let blocked = false;
     const feedPet = (selectedFoodId) => {
         if (blocked) return;
-        if(currentPet.mood==5) return;
+        if (currentPet.mood==5) return;
         blocked = true;
         //back end fetch to feed foodId to petId
-        setFoodId(selectedFoodId)
+        setFoodId(selectedFoodId);
         fetch(`http://localhost:8080/pets/${petId}/feed/${selectedFoodId}`, {
             method: "PATCH"
         })
@@ -113,6 +109,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
          if (!audioPlaying){
             toggleAudio();
             mainAudio.volume = 0.1;
+            mainAudio.muted = false;
             mainAudio.play()
             mainAudio.loop = true
         }
@@ -127,7 +124,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }
 
     useEffect(loadPet, [petId]);
-    useEffect(checkIdleEmote, [currentPet,currentVariant]);
+    useEffect(checkIdleEmote, [currentVariant]);
 
     return (
         <>

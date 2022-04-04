@@ -3,69 +3,65 @@ import House from "../components/House";
 import Food from "../components/Food";
 import MiniGame from "../components/MiniGame";
 
+const ActivityContainer = ({pet, feedPet, upgradeHouse, wonGame}) => {
 
-const ActivityContainer = ({pet, feedPet,upgradeHouse, wonGame}) => {
-
-// what to display intially
-const [showHouse, setShowHouse] = useState(true);
-const [showShop, setShowShop] = useState(false);
-const [showGame, setShowGame] = useState(false);
+    // what to display intially
+    const [showHouse, setShowHouse] = useState(true);
+    const [showShop, setShowShop] = useState(false);
+    const [showGame, setShowGame] = useState(false);
 
 
-// function that turns all buttons to their opposite
+    // function that turns all buttons to their opposite
 
-const handleShowHouseClick = () => {
-    setShowShop(false)
-    setShowGame(false)
-    setShowHouse(true)
+    const handleShowHouseClick = () => {
+        setShowShop(false)
+        setShowGame(false)
+        setShowHouse(true)
 
-}
+    }
 
-const handleShowShopClick = () => {
-    setShowShop(true)
-    setShowGame(false)
-    setShowHouse(false)
-}
+    const handleShowShopClick = () => {
+        setShowShop(true)
+        setShowGame(false)
+        setShowHouse(false)
+    }
 
-const handleShowGameClick = () => {
-    setShowShop(false)
-    setShowGame(true)
-    setShowHouse(false)
-}
+    const handleShowGameClick = () => {
+        setShowShop(false)
+        setShowGame(true)
+        setShowHouse(false)
+    }
 
-console.log(pet);
-// fetch all food here, pass as prop to shop
+    const [allFoods, setAllFoods] = useState([]);
 
-const [allFoods, setAllFoods] = useState([]);
+    const getFoods = () => {
+        fetch("http://localhost:8080/foods")
+            .then(response => response.json())
+            .then(foods => {
+                const newFoodList = [];
+                for (const food of foods) {
+                    newFoodList.push(
+                        <Food
+                            key={food.foodId}
+                            id={food.foodId}
+                            name={food.name}
+                            price={food.price}
+                            energy={food.energy}
+                            happiness={food.happiness}
+                            heals={food.heals}
+                            unhealthy={food.unhealthy}
+                            feedPet={feedPet}
+                            money={pet.money}
+                        />
+                    );
+                }
+                setAllFoods(newFoodList);
+            })
+            // catch error
+            .catch(error => console.error(error))   
+    }
 
-const getFoods = () => {
-    fetch("http://localhost:8080/foods")
-        .then(response => response.json())
-        .then(foods => {
-            const newFoodList = [];
-            for (const food of foods) {
-                newFoodList.push(
-                    <Food
-                        key={food.foodId}
-                        id={food.foodId}
-                        name={food.name}
-                        price={food.price}
-                        energy={food.energy}
-                        happiness={food.happiness}
-                        heals={food.heals}
-                        unhealthy={food.unhealthy}
-                        feedPet={feedPet}
-                        money={pet.money}
-                    />
-                );
-            }
-            setAllFoods(newFoodList);
-        })
-        // catch error
-        .catch(error => console.error(error))   
-}
-
-useEffect(getFoods, [pet]);
+    useEffect(getFoods, [pet]);
 
     return(
         <section>

@@ -138,7 +138,7 @@ INSERT INTO foods(
 VALUES(
     'apple',
     5,
-    1,
+    2,
     1,
     FALSE,
     FALSE
