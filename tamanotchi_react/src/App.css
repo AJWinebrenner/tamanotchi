@@ -225,7 +225,7 @@ h1 {
 }
 
 #banner__stage {
-  background-color: var(--light-pink);
+  position: relative;
   width: calc(7px*var(--scale));
 }
 
@@ -260,7 +260,7 @@ h1 {
   position: absolute;
   z-index: -1;
   content: "";
-  background-image: url('./sprites/icons/coin.png');
+  background-image: url('./sprites/icons/crown.png');
   image-rendering: pixelated;
   background-size: calc(var(--icon-size)*var(--scale));
   height: calc(var(--icon-size)*var(--scale));

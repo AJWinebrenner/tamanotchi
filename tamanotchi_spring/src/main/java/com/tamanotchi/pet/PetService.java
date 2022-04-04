@@ -243,7 +243,7 @@ public class PetService {
             pet.setExp(maxExp);
             //check if there is an upgrade
             Integer upgradeId = variant.getUpgrade();
-            if (upgradeId == null) {
+            if (upgradeId == 0 ) {
                 //crown
                 System.out.println("can't upgrade");
             } else {
