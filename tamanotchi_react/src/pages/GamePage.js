@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ActivityContainer from "../containers/ActivityContainer";
 import PetContainer from "../containers/PetContainer";
 
@@ -75,11 +75,15 @@ const GamePage = ({petId}) => {
         .then(loadPet)
     }
 
+    const stepTime = useRef(null);
     useEffect(() => {
-            setInterval(() => {
+            stepTime.current = setInterval(() => {
                 step();
                 console.log("something happens every 10 seconds")
             }, 20000);
+            return() => {
+                clearInterval(stepTime.current);
+            }
     }, [])
 
     useEffect(loadPet, [petId]);
