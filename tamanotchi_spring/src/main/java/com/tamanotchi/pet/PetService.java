@@ -248,11 +248,19 @@ public class PetService {
             pet.setExp(maxExp);
             Integer upgradeId = variant.getUpgrade();
             // check if upgrade id null
-          //  else
-            // check if house
-            // check if happy
-            // check if not sick
-            // if all above, then // evolve (poss separate function)
+            if(upgradeId==null){
+                System.out.println("can't upgrade");
+            }else{
+                //  else
+                // check if house
+                // check if happy
+                // check if not sick
+                // if all above, then // evolve (poss separate function)
+                if(pet.getHouse()-1==pet.getId()&&pet.getMood()!=4&&pet.getMood()!=3&&pet.getMood()!=5){
+                    pet.setVariant(pet.getVariant()-1);
+                }
+            }
+
         }
 
 
