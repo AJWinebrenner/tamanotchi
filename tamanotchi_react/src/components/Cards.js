@@ -10,8 +10,8 @@ function Cards({wonGame, handleSetGame}){
         { id: 2, img: '/img/medicine.png', stat: "" },
         { id: 3, img: '/img/carrot.png', stat: "" },
         { id: 3, img: '/img/carrot.png', stat: "" },
-        { id: 4, img: '/img/bread.png', stat: "" },
-        { id: 4, img: '/img/bread.png', stat: "" },
+        { id: 4, img: '/img/pizza.png', stat: "" },
+        { id: 4, img: '/img/pizza.png', stat: "" },
         { id: 5, img: '/img/fish.png', stat: "" },
         { id: 5, img: '/img/fish.png', stat: "" },
         { id: 6, img: '/img/apple.png', stat: "" },
@@ -24,11 +24,12 @@ function Cards({wonGame, handleSetGame}){
 
 
     // audio attempt
-    let audio = new Audio("/audio/We'll-Be-Right-Back.mp3")
+    let gameWonAudio = new Audio("/audio/We'll-Be-Right-Back.mp3")
 
     const startWinningAudio = () => {
-    audio.play()
-  }
+        gameWonAudio.volume = 0.2;
+        gameWonAudio.play()
+    }
 
     // saving the index of the previous card clicked
     const [prev, setPrev] = useState(-1)

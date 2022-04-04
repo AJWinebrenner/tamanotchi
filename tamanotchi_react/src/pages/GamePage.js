@@ -3,7 +3,7 @@ import ActivityContainer from "../containers/ActivityContainer";
 import PetContainer from "../containers/PetContainer";
 import { useNavigate } from "react-router-dom";
 
-const GamePage = ({petId}) => {
+const GamePage = ({petId, toggleAudio, audioPlaying}) => {
 
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
@@ -86,6 +86,26 @@ const GamePage = ({petId}) => {
                 clearInterval(stepTime.current);
             }
     }, [])
+
+ // ----------------------------------- 
+
+    // audio attempt
+    let mainAudio = new Audio("/audio/tamagotchi-main-theme-v1.mp3")
+
+    const mainAudioFunc = () => {
+         if (!audioPlaying){
+            toggleAudio();
+            mainAudio.volume = 0.1;
+            mainAudio.play()
+            mainAudio.loop = true
+        }
+    }
+
+    mainAudioFunc();
+
+    
+  
+    // -----------------------------------
 
     let navigate = useNavigate(); 
     const routeChange = () => { 

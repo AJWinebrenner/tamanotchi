@@ -11,6 +11,9 @@ import {
 function App() {
 
   const [petId, setPetId] = useState(JSON.parse(window.localStorage.getItem('petId'))) || 1;
+  const [audioPlaying, setAudioPlaying] = useState(false);
+
+  const toggleAudio = () => {setAudioPlaying(true)};
 
   useEffect(() => {
     window.localStorage.setItem('petId', petId);
@@ -21,7 +24,7 @@ function App() {
     <Router>
       <Routes>
         <Route path = "/" index element={<HomePage setPetId={setPetId}/>}/>
-        <Route path="/game" element={<GamePage petId={petId}/>}/>
+        <Route path="/game" element={<GamePage petId={petId} toggleAudio={toggleAudio} audioPlaying={audioPlaying}/>}/>
       </Routes>
     </Router>
   );
