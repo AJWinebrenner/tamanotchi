@@ -2,6 +2,7 @@ package com.tamanotchi.food;
 
 import com.tamanotchi.food.Food;
 import com.tamanotchi.food.FoodDAO;
+import com.tamanotchi.house.HouseNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,11 @@ public class FoodService {
     }
 
     public Food selectFoodById(Integer foodId) {
-        return foodDAO.selectFoodById(foodId);
+        Food selected = foodDAO.selectFoodById(foodId);
+        if (selected == null){
+            throw new FoodNotFoundException("Food with id number "+ foodId + " does not exist");
+        }else{
+            return selected;
+        }
     }
 }
