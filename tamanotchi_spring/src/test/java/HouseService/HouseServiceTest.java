@@ -55,7 +55,7 @@ public class HouseServiceTest {
 //        When
         assertThatThrownBy(() -> {
             underTest.selectAllHouses();}
-        ).hasMessage("House not found");
+        ).hasMessage("Houses not found");
     }
 
     @Test
