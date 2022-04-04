@@ -34,7 +34,6 @@ const SaveFile = ({id, name, mood, exp, variantId, setId}) => {
             {(mood == 5)? <img className="icon corner" src={require(`../sprites/icons/ghost.png`)}/> : (crown? <img className="icon corner" src={require(`../sprites/icons/crown.png`)}/> : null)}
             <div className="save-header break middle-flex gap">
                 <h2>{name}</h2>
-                {(mood==5)? <span></span> : null}
             </div>
             <img className="sprite" src={require(`../sprites/variants/${variantId}/${mood}.gif`)}/>
         </div>

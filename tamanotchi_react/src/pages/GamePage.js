@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import ActivityContainer from "../containers/ActivityContainer";
 import PetContainer from "../containers/PetContainer";
 import { useNavigate } from "react-router-dom";
@@ -102,7 +102,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }, [])
 
  // ----------------------------------- 
-    // audio attempt
+    //audio attempt
     let mainAudio = new Audio("/audio/tamagotchi-main-theme-v1.mp3")
 
     const mainAudioFunc = () => {

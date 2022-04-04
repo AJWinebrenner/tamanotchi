@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import NewSave from "../components/NewSave";
 import SaveFile from "../components/SaveFile";
 
 const HomePage = ({setPetId}) => {
@@ -23,6 +24,7 @@ const HomePage = ({setPetId}) => {
                         />
                     );
                 }
+                newPetList.push(<NewSave key={"newPet"}/>);
                 setSaveCards(newPetList);
             })
             // catch error
