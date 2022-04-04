@@ -338,3 +338,12 @@ h1 {
 .card-hover{
   cursor: pointer;
 }
+.center-box{
+  margin: 0 50%; 
+  transform: translateX(-50%);
+}
+
+#back-btn{ 
+  height: calc(var(--font-size)*3*var(--scale));
+  width: calc(var(--display-size)*var(--scale));
+}

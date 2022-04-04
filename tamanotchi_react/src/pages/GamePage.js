@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import ActivityContainer from "../containers/ActivityContainer";
 import PetContainer from "../containers/PetContainer";
+import { useNavigate } from "react-router-dom";
 
 const GamePage = ({petId}) => {
 
@@ -86,6 +87,12 @@ const GamePage = ({petId}) => {
             }
     }, [])
 
+    let navigate = useNavigate(); 
+    const routeChange = () => { 
+        let path = "/"; 
+        navigate(path);
+    }
+
     useEffect(loadPet, [petId]);
 
     return (
@@ -109,6 +116,8 @@ const GamePage = ({petId}) => {
                 <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} wonGame={wonGame}/>
 
             </div>
+            <button id="back-btn" className="btn pixel-box center-box" onClick={routeChange}>Back</button>
+
         </>
     );
 }

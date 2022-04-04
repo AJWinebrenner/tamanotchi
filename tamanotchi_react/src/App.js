@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route index element={<HomePage setPetId={setPetId}/>}/>
+        <Route path = "/" index element={<HomePage setPetId={setPetId}/>}/>
         <Route path="/game" element={<GamePage petId={petId}/>}/>
       </Routes>
     </Router>

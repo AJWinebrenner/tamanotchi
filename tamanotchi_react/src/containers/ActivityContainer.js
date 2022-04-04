@@ -71,7 +71,7 @@ useEffect(getFoods, [pet]);
         <section>
             {/* conditional render */}
             <div className="pixel-box display break">
-           { showHouse ? <House houseNum={pet.house} money={pet.money} upgradeHouse={upgradeHouse}/> : null}
+           { showHouse ? <House houseNum={pet.house} money={pet.money} upgradeHouse={upgradeHouse} mood={pet.mood}/> : null}
            { showShop ? <>{allFoods}</> : null}
            { showGame  && <MiniGame/> ? <MiniGame wonGame={wonGame}/> : null}
             </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const House = ({houseNum, money, upgradeHouse}) => {
+const House = ({houseNum, money, upgradeHouse, mood}) => {
 
     const [currentHouse, setCurrentHouse] = useState({
         "id": 3,
@@ -19,7 +19,7 @@ const House = ({houseNum, money, upgradeHouse}) => {
             .then(response => response.json())
             .then(house => {
                 setCurrentHouse(house);
-                if(!house.upgrade){
+                if(!house.upgrade||mood==5){
                     setCanUpgrade(false);
                 }else{
                     setCanUpgrade(true);
@@ -37,7 +37,7 @@ const House = ({houseNum, money, upgradeHouse}) => {
             .catch(error => console.error(error)); 
         }
 
-    useEffect(loadHouse, [houseNum]);
+    useEffect(loadHouse, [houseNum,mood]);
     
     const handleClickUpgrade = () => {
         console.log(money);
