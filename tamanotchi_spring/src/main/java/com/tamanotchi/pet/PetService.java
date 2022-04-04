@@ -83,6 +83,7 @@ public class PetService {
         if (money>= price) {
             pet.setMoney(money - price);
             pet.setHouse(upgrade.getId());
+            giveExp(pet, 3);
 
             int result = DAO.updateById(id, pet);
 
@@ -185,6 +186,7 @@ public class PetService {
         Integer money = pet.getMoney();
         pet.setMoney(money + 10);
 
+        giveExp(pet, 2);
         int result = DAO.updateById(id, pet);
 
         if (result != 1) {
@@ -221,45 +223,37 @@ public class PetService {
             return;
         } else if (happiness >= max_happiness*happyPoint) {
             pet.setMood(Mood.HAPPY);
+            giveExp(pet, 1);
         } else if (happiness >= max_happiness*happyCalmDown && originalMood == Mood.HAPPY) {
-            return;
+            giveExp(pet, 1);
         } else {
             pet.setMood(Mood.IDLE);
         }
         // to ask - why not have to return the pet here?
     }
 
-    // do we need to pass in a variable of how much exp? Assuming here it will always change by 1 unit
-
-    public void giveExp(Integer id, Integer exp) {
-        Pet pet = DAO.getById(id);
-
-        if (pet == null) {
-            throw new PetNotFoundException("Pet with id " + id + " could not be found");
-        }
+    public void giveExp(Pet pet, Integer exp) {
 
         pet.setExp(pet.getExp() + exp);
         Variant variant = DAO.selectVariantById(pet.getVariant());
         Integer maxExp = variant.getMax_exp();
 
-
         if (pet.getExp() >= maxExp) {
             pet.setExp(maxExp);
+            //check if there is an upgrade
             Integer upgradeId = variant.getUpgrade();
-            // check if upgrade id null
-            if(upgradeId==null){
+            if (upgradeId == null) {
+                //crown
                 System.out.println("can't upgrade");
-            }else{
-                //  else
+            } else {
+                Variant upgrade = DAO.selectVariantById(upgradeId);
+                House house = DAO.selectHouseById(pet.getHouse());
                 // check if house
                 // check if happy
-                // check if not sick
-                // if all above, then // evolve (poss separate function)
-                if(pet.getHouse()-1==pet.getId()&&pet.getMood()!=4&&pet.getMood()!=3&&pet.getMood()!=5){
-                    pet.setVariant(pet.getVariant()-1);
+                if(house.getSize() >= upgrade.getStage() && pet.getMood() == Mood.HAPPY){
+                    pet.setVariant(upgrade.getId());
                 }
             }
-
         }
 
 
