@@ -93,7 +93,6 @@ public class PetService {
         } else {
             throw new IllegalStateException("You're broke; no house for you");
         }
-
     }
 
     public void feedPet(Integer id, Integer foodId) {
@@ -118,7 +117,7 @@ public class PetService {
         }else {
             Pet.hasEatenUnhealthy=false;
         }
-        if(pet.getMood()==4&&food.isHeals()){
+        if(pet.getMood()==4 && food.isHeals()){
             pet.setMood(1);
             Pet.hasEatenUnhealthy=false;
         }
@@ -255,8 +254,6 @@ public class PetService {
                 }
             }
         }
-
-
     }
 
     public void timeStep(Integer id) {
