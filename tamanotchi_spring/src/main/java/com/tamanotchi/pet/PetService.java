@@ -253,6 +253,7 @@ public class PetService {
                 // check if happy
                 if(house.getSize() >= upgrade.getStage() && pet.getMood() == Mood.HAPPY){
                     pet.setVariant(upgrade.getId());
+                    pet.setExp(0);
                 }
             }
         }
