@@ -55,13 +55,12 @@ public class FoodServiceTest {
 
     @Test
     void selectFoodById_CanThrowFoodNotFoundException() {
-//        can write custom exception and test for that
-//        assertThatThrownBy(() -> {
-//            underTest.selectFoodById(20);}
-//        ).
-//    }
+
+        assertThatThrownBy(() -> {
+            underTest.selectFoodById(20);}
+        ).hasMessage("Food with id number 20 does not exist");
+    }
 
 
     }
 
-}
