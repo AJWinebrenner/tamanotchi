@@ -93,7 +93,6 @@ public class PetService {
         } else {
             throw new IllegalStateException("You're broke; no house for you");
         }
-
     }
 
     public void feedPet(Integer id, Integer foodId) {
