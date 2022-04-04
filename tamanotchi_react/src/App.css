@@ -5,8 +5,9 @@
   --scale: 8;
   --pixel: calc(var(--scale) * 1px);
   --icon-size: 5px;
-  --save-size: 30px;
+  --save-header: 5px;
   --save-gap: 5px;
+  --save-size: 30px;
   --display-size: 44px;
   --btn-size: 11px;
   --bar-size: 5px;
@@ -15,7 +16,7 @@
   --energy-size: 0;
   --game-size: 40px;
 
-  --background: #aeb5bd;
+  --background: #fcf9ee;
 
   --white: #ffffff;
   --beige: #ffd19d;
@@ -59,6 +60,7 @@ h1 {
 }
 
 .icon {
+  z-index: 1;
   display: inline-block;
   image-rendering: pixelated;
   height: calc(var(--icon-size)*var(--scale));
@@ -66,8 +68,10 @@ h1 {
 }
 
 .coin-text {
+  z-index: 2;
   position: relative;
-  left: calc(var(--pixel)*-3.3);
+  transform: translateX(-50%);
+  left: calc(var(--pixel)*-2.4);
 }
 
 .pixel-box {
@@ -100,8 +104,6 @@ h1 {
 	align-items: center;
   flex-wrap: wrap;
 	gap: var(--pixel);
-  margin-left: var(--pixel);
-  margin-right: var(--pixel);
 }
 
 .column-flex{
@@ -120,10 +122,21 @@ h1 {
 }
 
 .save {
+  position: relative;
   image-rendering: pixelated;
   background-color: var(--white); 
   height: calc(var(--save-size)*var(--scale));
   width: calc(var(--save-size)*var(--scale));
+}
+
+.save-header {
+  height: calc(var(--save-header)*var(--scale));
+}
+
+.corner {
+  position: absolute;
+  right: calc(var(--pixel)*-3);
+  top: calc(var(--pixel)*-3);
 }
 
 .display {
@@ -144,19 +157,25 @@ h1 {
 
 .btn:active {
   border-color: var(--grey);
+  color: var(--grey);
 }
 
 .bare-btn {
-  background-color: var(--background);
-  border: calc(var(--pixel)/4) solid var(--black);
+  width: 100%;
+  background: linear-gradient(to right, var(--beige) 50%, var(--background) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: background-position 0.4s;
+  border: none;
 }
 
 .bare-btn:hover {
-  transform: translateX(calc(var(--pixel)*-1));
+  background-position: left bottom;
+  transition: background-position 0.4s;
 }
 
 .bare-btn:active {
-  background-color: var(--white);
+  color: var(--grey);
 }
 
 .bar {

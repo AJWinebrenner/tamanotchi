@@ -70,7 +70,7 @@ INSERT INTO foods(
 VALUES(
     'carrot',
     2,
-    3,
+    2,
     0,
     FALSE,
     FALSE
@@ -88,7 +88,7 @@ VALUES(
     'candy',
     6,
     0,
-    3,
+    2,
     TRUE,
     FALSE
 );
@@ -104,7 +104,7 @@ INSERT INTO foods(
 VALUES(
     'pizza',
     4,
-    3,
+    2,
     1,
     TRUE,
     FALSE
@@ -120,7 +120,7 @@ INSERT INTO foods(
 )
 VALUES(
     'fish',
-    3,
+    4,
     4,
     0,
     FALSE,

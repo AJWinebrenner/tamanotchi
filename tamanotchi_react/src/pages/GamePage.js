@@ -94,7 +94,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     useEffect(() => {
             stepTime.current = setInterval(() => {
                 step();
-                console.log("something happens every 20 seconds")
+                console.log("step");
             }, 20000);
             return() => {
                 clearInterval(stepTime.current);
