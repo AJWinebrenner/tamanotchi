@@ -30,15 +30,18 @@ class FoodDataAccessServiceTest {
         //When
         List <Food> actual = underTest.selectAllFood();
         //Then
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     void selectFoodById() {
         //Given
+        Food expected = new Food(1,"medicine", 8,0,0,false,true);
 
         //When
+        Food actual = underTest.selectFoodById(1);
 
         //Then
+        assertThat(actual).isEqualTo(expected);
     }
 }
