@@ -1,5 +1,8 @@
-package com.tamanotchi.pet;
+package PetService;
 
+import com.tamanotchi.pet.Pet;
+import com.tamanotchi.pet.PetDAO;
+import com.tamanotchi.pet.PetService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
