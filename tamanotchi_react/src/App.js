@@ -10,7 +10,7 @@ import {
 
 function App() {
 
-  const [petId, setPetId] = useState(JSON.parse(window.localStorage.getItem('petId')));
+  const [petId, setPetId] = useState(JSON.parse(window.localStorage.getItem('petId'))) || 1;
 
   useEffect(() => {
     window.localStorage.setItem('petId', petId);

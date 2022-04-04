@@ -16,6 +16,7 @@ const HomePage = ({setPetId}) => {
                             key={pet.id}
                             id={pet.id}
                             name={pet.name}
+                            mood={pet.mood}
                             variant={pet.variant}
                             setId={setPetId}
                         />

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SaveFile = ({id, name, variant, setId}) => {
+const SaveFile = ({id, name, mood, variant, setId}) => {
  
     let navigate = useNavigate(); 
     const routeChange = () => { 
@@ -19,7 +19,7 @@ const SaveFile = ({id, name, variant, setId}) => {
             <h2 className="break">
                 {name}
             </h2>
-            <img className="sprite" src={require(`../sprites/variants/${variant}/1.gif`)}/>
+            <img className="sprite" src={require(`../sprites/variants/${variant}/${mood}.gif`)}/>
         </div>
     );
     
