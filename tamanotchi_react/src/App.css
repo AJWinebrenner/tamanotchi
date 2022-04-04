@@ -121,7 +121,7 @@ h1 {
 
 .save {
   image-rendering: pixelated;
-  /* background-image: some card sprite;  */
+  background-color: var(--white); 
   height: calc(var(--save-size)*var(--scale));
   width: calc(var(--save-size)*var(--scale));
 }
@@ -160,6 +160,7 @@ h1 {
 }
 
 .bar {
+  background-color: var(--white);
   position: relative;
   height: calc(var(--bar-size)*var(--scale));
   width: calc(var(--display-size)*var(--scale));
@@ -225,20 +226,36 @@ h1 {
 
 #banner__stage {
   background-color: var(--light-pink);
-  width: calc(8px*var(--scale));
+  width: calc(7px*var(--scale));
 }
 
 #banner__name {
   background-color: var(--white);
-  width: calc(26px*var(--scale));
+  width: calc(28px*var(--scale));
 }
 
 #banner__money {
   position: relative;
-  width: calc(8px*var(--scale));
+  width: calc(7px*var(--scale));
 }
 
 .coin::before {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  background-image: url('./sprites/icons/coin.png');
+  image-rendering: pixelated;
+  background-size: calc(var(--icon-size)*var(--scale));
+  height: calc(var(--icon-size)*var(--scale));
+  width: calc(var(--icon-size)*var(--scale));
+    
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.crown::before {
   display: block;
   position: absolute;
   z-index: -1;
