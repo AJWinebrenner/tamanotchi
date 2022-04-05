@@ -218,7 +218,7 @@ class PetServiceTest {
     }
 
     @Test
-    void gameWon() {
+    void gameWon_UpdatesPetMoneyAndExpWhenPetExistsAndExpIsNumber() {
         // GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
         Pet updated= new Pet(1, "Bob", 1, 1, 5, 5, 3, 3, 110);
@@ -235,7 +235,7 @@ class PetServiceTest {
     }
 
     @Test
-    void updateMood() {
+    void updateMood_UpdatesMoodWhenPetExists() {
         // GIVEN
         Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
         Variant variant = new Variant("variant", 1, 2, 500, 2);
@@ -255,10 +255,23 @@ class PetServiceTest {
     }
 
     @Test
-    void giveExp() {
+    void giveExp_UpdatesExpWhenPetExists() {
+        // GIVEN
+        Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+
+        // WHEN
+        underTest.giveExp(pet, 1);
+
+        Pet expected = new Pet(1, "Bob", 1, 1, 10, 10, 3, 2, 100);
+        Pet actual = pet;
+
+        // THEN
+        assertEquals(actual, expected);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void timeStep() {
     }
 }
