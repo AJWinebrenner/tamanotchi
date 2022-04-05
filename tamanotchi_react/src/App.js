@@ -12,9 +12,9 @@ import {
 function App() {
 
   const [petId, setPetId] = useState(JSON.parse(window.localStorage.getItem('petId'))) || 1;
-  // const [audioPlaying, setAudioPlaying] = useState(false);
+  const [audioPlaying, setAudioPlaying] = useState(false);
 
-  // const toggleAudio = () => {setAudioPlaying(true)};
+  const toggleAudio = () => {setAudioPlaying(true)};
 
   useEffect(() => {
     window.localStorage.setItem('petId', petId);
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage setPetId={setPetId}/>}/>
         <Route path="/new" element={<NewPetPage/>}/>
-        <Route path="/game" element={<GamePage petId={petId} /*toggleAudio={toggleAudio} audioPlaying={audioPlaying}*//>}/>
+        <Route path="/game" element={<GamePage petId={petId} toggleAudio={toggleAudio} audioPlaying={audioPlaying}/>}/>
       </Routes>
     </Router>
   );
