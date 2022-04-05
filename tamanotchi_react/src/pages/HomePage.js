@@ -24,7 +24,6 @@ const HomePage = ({setPetId}) => {
                         />
                     );
                 }
-                newPetList.push(<NewSave key={"newPet"}/>);
                 setSaveCards(newPetList);
             })
             // catch error
@@ -39,6 +38,7 @@ const HomePage = ({setPetId}) => {
             <h1 className="center-text">Your Pets</h1>
             <section className="save-flex">
                 {saveCards}
+                <NewSave key={"newPet"}/>
             </section>
         </>
     );

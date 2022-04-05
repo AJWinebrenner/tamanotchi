@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const GamePage = ({petId, toggleAudio, audioPlaying}) => {
 
-    console.log("game")
-
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
         "name": "-",
@@ -45,7 +43,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }
 
     const checkIdleEmote = () => {
-        if (currentPet.exp >= currentVariant.max_exp) {
+        if (currentPet.exp >= currentVariant.max_exp && !currentVariant.upgrade && currentPet.mood != 5) {
             setIdleEmote("crown");
         } else {
             setIdleEmote(0);
@@ -55,7 +53,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     let blocked = false;
     const feedPet = (selectedFoodId) => {
         if (blocked) return;
-        if (currentPet.mood==5) return;
+        if (currentPet.mood == 5) return;
         blocked = true;
         //back end fetch to feed foodId to petId
         setFoodId(selectedFoodId);
@@ -86,6 +84,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }
 
     const step = () => {
+        if (currentPet.mood == 5) return;
         fetch(`http://localhost:8080/pets/${petId}/step`, {
             method: "PATCH"
         })
@@ -151,8 +150,9 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
                 <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} wonGame={wonGame}/>
 
             </div>
-            <button id="back-btn" className="btn pixel-box center-box" onClick={routeChange}>Back</button>
-
+            <div className="middle-flex">
+                <button id="back-btn" className="btn pixel-box center-box" onClick={routeChange}>Back</button>
+            </div>
         </>
     );
 }

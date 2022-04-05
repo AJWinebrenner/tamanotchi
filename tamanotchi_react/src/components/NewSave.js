@@ -11,8 +11,9 @@ const NewSave = () => {
     return(
         <div 
             onClick={() => {
-            routeChange();
-            }} className="pixel-box save column-flex"
+                routeChange();
+            }} 
+            className="pixel-box save column-flex"
         >
             <div className="save-header break middle-flex gap">
                 <h2>New Pet</h2>

@@ -229,6 +229,20 @@ VALUES(
     10,
     2
 );
+INSERT INTO variants(
+    name,
+    stage,
+    fave_food,
+    max_exp,
+    upgrade
+)
+VALUES(
+    'rexy',
+    1,
+    5,
+    15,
+    null
+);
 
 INSERT INTO pets(
     name,
@@ -267,6 +281,28 @@ VALUES(
     3,
     2,
     1,
+    10,
+    1,
+    0,
+    10
+);
+
+INSERT INTO pets(
+    name,
+    house,
+    variant,
+    happiness,
+    energy,
+    mood,
+    exp,
+    money
+)
+
+VALUES(
+    'Alan',
+    3,
+    4,
+    5,
     10,
     1,
     0,

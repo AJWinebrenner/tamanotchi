@@ -2,7 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
-import NewPetPage from './pages/GamePage';
+import NewPetPage from './pages/NewPetPage';
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,7 +25,7 @@ function App() {
     <Router>
       <Routes>
         <Route index element={<HomePage setPetId={setPetId}/>}/>
-        <Route path="/new" element={<NewPetPage/>}/>
+        <Route path="/new" element={<NewPetPage setPetId={setPetId}/>}/>
         <Route path="/game" element={<GamePage petId={petId} toggleAudio={toggleAudio} audioPlaying={audioPlaying}/>}/>
       </Routes>
     </Router>

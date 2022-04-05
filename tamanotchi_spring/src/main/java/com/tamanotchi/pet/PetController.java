@@ -1,5 +1,7 @@
 package com.tamanotchi.pet;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,9 @@ public class PetController {
     }
 
     @PostMapping(path = "pets")
-    public void addNewPet(@RequestBody Pet pet){
-        service.addNewPet(pet);
+    public ResponseEntity<Pet> addNewPet(@RequestBody Pet pet){
+        Pet newPet = service.addNewPet(pet);
+        return new ResponseEntity<>(newPet, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "pets/{id}")

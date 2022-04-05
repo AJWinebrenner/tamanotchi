@@ -15,7 +15,7 @@ const SaveFile = ({id, name, mood, exp, variantId, setId}) => {
         fetch(`http://localhost:8080/variants/${variantId}`)
             .then(response => response.json())
             .then(variant => {
-                if (exp >= variant.max_exp) {
+                if (exp >= variant.max_exp && !variant.upgrade) {
                     setCrown(true);
                 }
             })
@@ -27,9 +27,10 @@ const SaveFile = ({id, name, mood, exp, variantId, setId}) => {
         // 2) This is NOT ACCESSIBLE to screenreaders etc but other ways to do this are much more complex
         <div 
             onClick={() => {
-            setId(id);
-            routeChange();
-            }} className="pixel-box save column-flex"
+                setId(id);
+                routeChange();
+            }} 
+            className="pixel-box save column-flex"
         >
             {(mood == 5)? <img className="icon corner" src={require(`../sprites/icons/ghost.png`)}/> : (crown? <img className="icon corner" src={require(`../sprites/icons/crown.png`)}/> : null)}
             <div className="save-header break middle-flex gap">

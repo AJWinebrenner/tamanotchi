@@ -3,20 +3,23 @@ package com.tamanotchi.pet;
 import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
 import com.tamanotchi.variant.Variant;
-import com.tamanotchi.variant.VariantMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository("postgres")
 public class PetSQL implements PetDAO{
 
     private JdbcTemplate jdbc;
+    private SimpleJdbcInsert insertIntoPets;
 
     public PetSQL(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
+        insertIntoPets = new SimpleJdbcInsert(jdbc).withTableName("pets").usingGeneratedKeyColumns("id");
     }
 
     @Override
@@ -66,18 +69,30 @@ public class PetSQL implements PetDAO{
 
     @Override
     public int add(Pet pet) {
-        String sql = "INSERT INTO pets (name, house, variant, happiness, energy, mood, exp, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+//        String sql = "INSERT INTO pets (name, house, variant, happiness, energy, mood, exp, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
+//
+//        return jdbc.update(sql,
+//                pet.getName(),
+//                pet.getHouse(),
+//                pet.getVariant(),
+//                pet.getHappiness(),
+//                pet.getEnergy(),
+//                pet.getMood(),
+//                pet.getExp(),
+//                pet.getMoney()
+//        );
 
-        return jdbc.update(sql,
-                pet.getName(),
-                pet.getHouse(),
-                pet.getVariant(),
-                pet.getHappiness(),
-                pet.getEnergy(),
-                pet.getMood(),
-                pet.getExp(),
-                pet.getMoney()
-        );
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("name", pet.getName());
+        parameters.put("house", pet.getHouse());
+        parameters.put("variant", pet.getVariant());
+        parameters.put("happiness", pet.getHappiness());
+        parameters.put("energy", pet.getEnergy());
+        parameters.put("mood", pet.getMood());
+        parameters.put("exp", pet.getExp());
+        parameters.put("money", pet.getMoney());
+
+        return insertIntoPets.executeAndReturnKey(parameters).intValue();
     }
 
     @Override
