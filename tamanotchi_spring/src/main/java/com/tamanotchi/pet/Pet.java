@@ -16,8 +16,9 @@ public class Pet {
     private Integer exp;
     private Integer money;
     static boolean hasEatenUnhealthy;
-    public Pet() {
-        
+
+    public Pet(Integer id) {
+        this.id = id;
     }
 
     public Pet(Integer id, String name, Integer house, Integer variant, Integer happiness, Integer energy, Integer mood, Integer exp, Integer money) {
