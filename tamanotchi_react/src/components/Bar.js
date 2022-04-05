@@ -16,8 +16,6 @@ const Bar = ({value, max, className}) => {
     const fraction = useMemo(() => calcFraction(value, max), [value,max]);
 
     const setCss = () => {
-        console.log(value);
-        console.log(fraction);
         root.style.setProperty(`--${className}-size`, fraction)
     }
 

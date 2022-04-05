@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import NewSave from "../components/NewSave";
 import SaveFile from "../components/SaveFile";
 
 const HomePage = ({setPetId}) => {
@@ -16,11 +17,14 @@ const HomePage = ({setPetId}) => {
                             key={pet.id}
                             id={pet.id}
                             name={pet.name}
-                            variant={pet.variant}
+                            mood={pet.mood}
+                            exp={pet.exp}
+                            variantId={pet.variant}
                             setId={setPetId}
                         />
                     );
                 }
+                newPetList.push(<NewSave key={"newPet"}/>);
                 setSaveCards(newPetList);
             })
             // catch error
@@ -32,7 +36,7 @@ const HomePage = ({setPetId}) => {
     return(
         <>
             <div className="break"/>
-            <h1 className="center-text">Home Page</h1>
+            <h1 className="center-text">Your Pets</h1>
             <section className="save-flex">
                 {saveCards}
             </section>
