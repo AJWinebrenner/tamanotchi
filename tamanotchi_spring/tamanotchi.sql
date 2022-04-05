@@ -286,3 +286,25 @@ VALUES(
     0,
     10
 );
+
+INSERT INTO pets(
+    name,
+    house,
+    variant,
+    happiness,
+    energy,
+    mood,
+    exp,
+    money
+)
+
+VALUES(
+    'Alan',
+    3,
+    4,
+    5,
+    10,
+    1,
+    0,
+    10
+);
