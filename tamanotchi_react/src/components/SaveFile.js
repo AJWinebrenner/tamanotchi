@@ -15,7 +15,7 @@ const SaveFile = ({id, name, mood, exp, variantId, setId}) => {
         fetch(`http://localhost:8080/variants/${variantId}`)
             .then(response => response.json())
             .then(variant => {
-                if (exp >= variant.max_exp) {
+                if (exp >= variant.max_exp && !variant.upgrade) {
                     setCrown(true);
                 }
             })
