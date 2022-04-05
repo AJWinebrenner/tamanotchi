@@ -2,7 +2,7 @@
   --sprite-size: 20px;
   --title-size: 3px;
   --font-size: 2px;
-  --scale: 8;
+  --scale: 4;
   --pixel: calc(var(--scale) * 1px);
   --icon-size: 5px;
   --save-header: 5px;
@@ -300,8 +300,6 @@ h1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  /* border: solid tomato; */
-  /* gap: 1em; */
 }
 
 .card{
@@ -361,33 +359,34 @@ h1 {
 
 .game-complete-container{
   position:relative;
-  bottom: 175px;
+  bottom: calc(var(--game-size)*var(--scale)*0.5);
   text-align: center;
   animation: zoom-in-zoom-out 2s ease infinite;
 }
 
 .start-mini-btn{
-  position:relative;
-  top:130px;
+  position: relative;
+  top: 50%;
   animation: zoom-in-zoom-out 2s ease infinite;
   cursor: pointer;
 }
 
 @keyframes zoom-in-zoom-out {
   0% {
-    transform: scale(1, 1);
+    transform: scale(1, 1) translateY(-50%);
   }
   50% {
-    transform: scale(1.2, 1.2);
+    transform: scale(1.2, 1.2) translateY(-50%);
   }
   100% {
-    transform: scale(1, 1);
+    transform: scale(1, 1) translateY(-50%);
   }
 }
 
 .viewboxactivity{
-  height: 320px;
-  width: 315px;
+  position: relative;
+  height: calc(var(--game-size)*var(--scale));
+  width: calc(var(--game-size)*var(--scale));
   text-align: center;
 }
 
