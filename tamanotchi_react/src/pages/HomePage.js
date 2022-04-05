@@ -35,7 +35,8 @@ const HomePage = ({setPetId}) => {
     return(
         <>
             <div className="break"/>
-            <h1 className="center-text">Your Pets</h1>
+            <h1 className="break center-text">TAMA-NOT-CHI</h1>
+            <h2 className="center-text">Your Pets</h2>
             <section className="save-flex">
                 {saveCards}
                 <NewSave key={"newPet"}/>

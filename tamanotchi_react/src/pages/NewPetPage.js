@@ -42,7 +42,7 @@ const NewPetPage = ({setPetId}) => {
            
         const timer2 = setTimeout(() => {
             setHatched(true);
-            }, 7000);
+            }, 6500);
     }
 
     const handleNameChange = (e) => {
@@ -75,7 +75,8 @@ const NewPetPage = ({setPetId}) => {
                 routeChange(); 
             })
             .catch(error => console.error(error));     
-            
+        } else {
+            alert("Your new pet needs a name!");
         }
     }
     
@@ -86,28 +87,28 @@ const NewPetPage = ({setPetId}) => {
     if (!hatched) {
         return(
             <>
-            <div className="break"></div>
-            <h1 className="center-text">New Pet</h1>
-            <section className="column-flex">
-                <img onClick={handleEggClick} className="sprite" src={require(`../sprites/misc/${animation}.gif`)} />
-            </section>
+                <div className="break"/>
+                <h1 className="big-break center-text">TAMA-NOT-CHI</h1>
+                <h2 className="center-text big-break">CLICK THE EGG</h2>
+                <section className="column-flex">
+                    <img onClick={handleEggClick} className="sprite" src={require(`../sprites/misc/${animation}.gif`)} />
+                </section>
             </>
         );
 
     } else {
         return(
             <>
-                <div className="break"></div>
-                <h1 className="center-text">Welcome!</h1>
+                <div className="break"/>
+                <h1 className="big-break center-text">TAMA-NOT-CHI</h1>
+                <h2 className="center-text big-break">Welcome!</h2>
                 <section className="column-flex">
-                    <img className="sprite" src={require(`../sprites/variants/${babyId}/2.gif`)}/>
-                    <form onSubmit={handleFormSubmit} id="new-pet-name-form">
-                        <label htmlFor="name-input">Name:</label>
-                        <input onChange={handleNameChange} type="text" id="name-input" name="name-input" value={petName} placeholder="Enter Name Here"/>
-                        <input type="submit"></input>
+                    <img className="sprite big-break" src={require(`../sprites/variants/${babyId}/2.gif`)}/>
+                    <form className="middle-flex gap" onSubmit={handleFormSubmit} id="new-pet-name-form">
+                        <input id="submit-box" className="pixel-box" onChange={handleNameChange} type="text" name="name-input" value={petName} placeholder="Give me a name!"/>
+                        <input id="submit-btn" className="pixel-box btn" type="submit" value="OK"/>
                     </form>
                 </section>
-            
             </>
         );
     }

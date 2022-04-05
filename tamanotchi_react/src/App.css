@@ -87,6 +87,10 @@ h1 {
 	margin: 0 0 var(--pixel) 0;
 }
 
+.big-break{
+  margin: 0 0 calc(var(--save-gap)*var(--scale)) 0;
+}
+
 .middle-flex {
   display: flex;
 	justify-content: center;
@@ -397,4 +401,14 @@ h1 {
 #back-btn{ 
   height: calc(var(--font-size)*3*var(--scale));
   max-width: calc(var(--display-size)*var(--scale));
+}
+
+#submit-btn{ 
+  height: calc(var(--font-size)*3*var(--scale));
+  width: calc(8px*var(--scale));
+}
+
+#submit-box{ 
+  height: calc(var(--font-size)*3*var(--scale));
+  width: calc(35px*var(--scale));
 }
