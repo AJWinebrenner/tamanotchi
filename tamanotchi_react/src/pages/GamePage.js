@@ -43,7 +43,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
     }
 
     const checkIdleEmote = () => {
-        if (currentPet.exp >= currentVariant.max_exp && currentPet.mood != 5) {
+        if (currentPet.exp >= currentVariant.max_exp && !currentVariant.upgrade && currentPet.mood != 5) {
             setIdleEmote("crown");
         } else {
             setIdleEmote(0);
@@ -150,7 +150,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
                 <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} wonGame={wonGame}/>
 
             </div>
-            <button id="back-btn" className="btn pixel-box center-box" onClick={routeChange}>Back</button>
+            <button id="back-btn" className="btn pixel-box center-box break" onClick={routeChange}>Back</button>
 
         </>
     );
