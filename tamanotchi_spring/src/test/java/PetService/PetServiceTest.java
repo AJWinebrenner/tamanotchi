@@ -46,6 +46,19 @@ class PetServiceTest {
     }
 
     @Test
+    void getAllPets_DoesNotErrorWhenAllPetsIsEmpty() {
+        // Given
+        List<Pet> pets = new ArrayList<>();
+        when(fakePetDao.getAllPets()).thenReturn(pets);
+
+        // When
+        List<Pet> actual = underTest.getAllPets();
+
+        // Then
+        assertThat(actual).isEqualTo(pets);
+    }
+
+    @Test
     void getPetById_ReturnsPetWhenIdExists() {
         // GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 1);;
@@ -271,6 +284,23 @@ class PetServiceTest {
         }).isInstanceOf(FoodNotFoundException.class)
                 .hasMessage("Food with id 0 could not be found");
         verify(fakePetDao).selectFoodById(0);
+    }
+
+    @Test
+    void feedPet_WillNotFeedADeadPet() {
+        /// GIVEN
+        Pet pet= new Pet(1, "Bob", 1, 1, 0, 0, 5, 1, 100);
+        Food food = new Food(1, "PIZZA", 1, 20, 20, false, false);
+        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        when(fakePetDao.getById(1)).thenReturn(pet);
+        when(fakePetDao.selectFoodById(1)).thenReturn(food);
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+
+        // WHEN
+        underTest.feedPet(1,1);
+
+        // THEN
+        verify(fakePetDao, never()).updateById(1, pet);
     }
 
     @Test
