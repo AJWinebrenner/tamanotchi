@@ -1,8 +1,9 @@
 const NewPetPage = () => {
 
+    console.log("new pet")
     return(
         <>
-        <div clssName="break"/>
+        <div className="break"/>
         <h1>New Pet</h1>
         </>
     )

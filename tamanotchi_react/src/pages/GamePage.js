@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const GamePage = ({petId, toggleAudio, audioPlaying}) => {
 
+    console.log("game")
+
     const [currentPet, setCurrentPet] = useState({
         "id": 0,
         "name": "-",

@@ -4,7 +4,7 @@ const NewSave = () => {
 
     let navigate = useNavigate(); 
     const routeChange = () => { 
-        let path = `/new`; 
+        let path = "/new"; 
         navigate(path);
     }
 
