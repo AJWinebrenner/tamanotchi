@@ -2,6 +2,7 @@ package PetService;
 
 import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
+import com.tamanotchi.pet.Mood;
 import com.tamanotchi.pet.Pet;
 import com.tamanotchi.pet.PetDAO;
 import com.tamanotchi.pet.PetService;
@@ -233,11 +234,27 @@ class PetServiceTest {
         verify(fakePetDao).updateById(1, updated);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void updateMood() {
+        // GIVEN
+        Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
+        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        House house = new House(1, "Bigger", 10, 1, 1, 2);
+
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.selectHouseById(1)).thenReturn(house);
+
+
+        // WHEN
+        underTest.updateMood(pet);
+        Integer actual = pet.getMood();
+        Integer expected = 2;
+
+        // THEN
+        assertEquals(actual, expected);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void giveExp() {
     }
 
