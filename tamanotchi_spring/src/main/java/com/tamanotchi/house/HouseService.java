@@ -24,7 +24,7 @@ public class HouseService {
     public List<House> selectAllHouses() {
         List<House> selected = houseDAO.selectAllHouses();
         if (selected == null){
-            throw new HouseNotFoundException("House not found");
+            throw new HouseNotFoundException("Houses not found");
         }else{
             return selected;
         }
