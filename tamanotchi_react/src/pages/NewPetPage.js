@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewPetPage = ({setPetId}) => {
 
@@ -8,6 +9,11 @@ const NewPetPage = ({setPetId}) => {
     const[babyId, setBabyId] = useState(3);
     const[petName, setPetName] = useState("");
 
+    let navigate = useNavigate(); 
+    const routeChange = () => { 
+        let path = "/game"; 
+        navigate(path);
+    }
 
     const pickEgg = () => {
         fetch(`http://localhost:8080/variants/`)
@@ -37,12 +43,6 @@ const NewPetPage = ({setPetId}) => {
         const timer2 = setTimeout(() => {
             setHatched(true);
             }, 7000);
-        
-            // handleFormSubmit();    
-        //submit form - take to gamePage 
-
-        //set to id - like for saveCards 
-        // return () => clearTimeout(timer);
     }
 
     const handleNameChange = (e) => {
@@ -66,15 +66,16 @@ const NewPetPage = ({setPetId}) => {
                 "mood": 1,
                 "exp": 0,
                 "money": 10
-            }),
-           })
-            .then(response => response.json())
-            .then(variants => { 
-                const babyObjects = variants.filter(variant => (variant.stage===1));
-                setBabies(babyObjects.map(baby => (baby.id)));
+                }),
+            })
+            .then(response => response.json())       
+            .then(pet => { 
+                console.log(pet);
+                setPetId(pet.id);
+                routeChange(); 
             })
             .catch(error => console.error(error));     
-            setPetId();
+            
         }
     }
     
