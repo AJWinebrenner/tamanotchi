@@ -2,10 +2,7 @@ package PetService;
 
 import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
-import com.tamanotchi.pet.Mood;
-import com.tamanotchi.pet.Pet;
-import com.tamanotchi.pet.PetDAO;
-import com.tamanotchi.pet.PetService;
+import com.tamanotchi.pet.*;
 import com.tamanotchi.variant.Variant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,6 +64,19 @@ class PetServiceTest {
         verify(fakePetDao).getById(1);
         assertEquals(1, capturedParameter);
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    void getPetById_ThrowsErrorWhenPetIdDoesNotExists() {
+        // GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.getPetById(0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
     }
 
     @Test

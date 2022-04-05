@@ -21,7 +21,11 @@ public class PetService {
     }
 
     public List<Pet> getAllPets() {
-        return DAO.getAllPets();
+        List<Pet> allPets =  DAO.getAllPets();
+        if (allPets == null || allPets.size() == 0){
+            throw new PetNotFoundException("No Pets found in Database");
+        }
+        return allPets;
     }
 
     public Pet getPetById(Integer id) {
