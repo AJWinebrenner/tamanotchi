@@ -34,12 +34,13 @@ public class PetService {
         }
     }
 
-    public void addNewPet(Pet pet) {
+    public int addNewPet(Pet pet) {
         int added = DAO.add(pet);
 
-        if (added != 1) {
+        if (added == 0) {
             throw new IllegalStateException("Pet could not be created");
         }
+        return added;
     }
 
     public void updatePetById(Integer id, Pet pet) {
