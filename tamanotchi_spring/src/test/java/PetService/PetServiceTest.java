@@ -1,6 +1,7 @@
 package PetService;
 
 import com.tamanotchi.food.Food;
+import com.tamanotchi.food.FoodNotFoundException;
 import com.tamanotchi.house.House;
 import com.tamanotchi.pet.*;
 import com.tamanotchi.variant.Variant;
@@ -116,6 +117,22 @@ class PetServiceTest {
     }
 
     @Test
+    void updatePetById_WillNotUpdatePetWhenIdDoesNotExist() {
+        // GIVEN
+        Pet pet = new Pet(1,"Bob", 1, 1, 5, 5, 5, 1, 1);
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.updatePetById(0, pet);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
+    }
+
+
+
+    @Test
     void deletePetById_CanDeletePetWhenIdIsCorrect() {
         // GIVEN
         Pet pet = new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 1);
@@ -193,6 +210,19 @@ class PetServiceTest {
     }
 
     @Test
+    void upgradeHouse_WillNotUpgradeHouseWhenPetIdIsWrong() {
+        // GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.upgradeHouse(0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
+    }
+
+    @Test
     void feedPet_CanUpdatePetWhenIdsOfFoodAndPetAreCorrect() {
         // GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
@@ -210,6 +240,37 @@ class PetServiceTest {
 
         // THEN
         verify(fakePetDao).updateById(1, petAfterEating);
+    }
+
+    @Test
+    void feedPet_WillThrowExceptionIfPetIdIsWrong() {
+        /// GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.feedPet(0, 0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
+    }
+
+    @Test
+    void feedPet_WillThrowExceptionIfFoodIdIsWrong() {
+        /// GIVEN
+        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
+        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        when(fakePetDao.getById(1)).thenReturn(pet);
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.selectFoodById(0)).thenReturn(null);
+
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.feedPet(1, 0);
+            // THEN
+        }).isInstanceOf(FoodNotFoundException.class)
+                .hasMessage("Food with id 0 could not be found");
+        verify(fakePetDao).selectFoodById(0);
     }
 
     @Test
@@ -241,6 +302,19 @@ class PetServiceTest {
     }
 
     @Test
+    void isDead_WillThrowExceptionIfPetIdIsWrong() {
+        /// GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.isDead(0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
+    }
+
+    @Test
     void gameWon_UpdatesPetMoneyAndExpWhenPetExistsAndExpIsNumber() {
         // GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
@@ -255,6 +329,19 @@ class PetServiceTest {
 
         // THEN
         verify(fakePetDao).updateById(1, updated);
+    }
+
+    @Test
+    void timeStep_DoesNotGiveRewardsPetWhenIdIsWrong() {
+        /// GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.gameWon(0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
     }
 
     @Test
@@ -316,5 +403,18 @@ class PetServiceTest {
 
         // THEN
         assertEquals(actual, expected);
+    }
+
+    @Test
+    void timeStep_DoesNotUpdatePetWhenIdIsWrong() {
+        /// GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.timeStep(0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
     }
 }

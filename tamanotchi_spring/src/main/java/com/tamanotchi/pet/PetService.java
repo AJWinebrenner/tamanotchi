@@ -1,6 +1,7 @@
 package com.tamanotchi.pet;
 
 import com.tamanotchi.food.Food;
+import com.tamanotchi.food.FoodNotFoundException;
 import com.tamanotchi.house.HouseNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -98,11 +99,15 @@ public class PetService {
     public void feedPet(Integer id, Integer foodId) {
         if(isDead(id)) return;
         Pet pet = DAO.getById(id);
-        Food food = DAO.selectFoodById(foodId);
-        Variant variant = DAO.selectVariantById(pet.getVariant());
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
+        Food food = DAO.selectFoodById(foodId);
+        if (food == null){
+            throw new FoodNotFoundException("Food with id " + foodId + " could not be found");
+        }
+        Variant variant = DAO.selectVariantById(pet.getVariant());
+
         Integer extraHappiness= 0;
         if(variant.getFave_food()==foodId){
             //This needs to be changed
@@ -165,12 +170,11 @@ public class PetService {
         }
         //if no exception, assume pet was found and has the fields required
         Integer mood = pet.getMood(); // get pet's mood
-        if (mood == Mood.DEAD) {
-            // 5 is dead, but don't need the numbers here
-            return true;
-            
+            if (mood == Mood.DEAD) {
+                // 5 is dead, but don't need the numbers here
+                return true;
         } else {
-        return false;
+            return false;
         }
     }
 
