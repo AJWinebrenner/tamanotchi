@@ -6,7 +6,7 @@
 ## What is tamaNOTchi?
 tamaNOTchi is a revamp of the classic pocket digital pet game Tamagotchi. Here, you can create your own pet or select one from an existing list. Play games to earn coins, feed your pet to keep them happy and work to upgrade your pet to its final form. You'll have to look after your pet and maintain a balanced diet otherwise your pet will get sick. If you forget to take care of your pet, their health will deteriorate and they may die.
 ## Setup Instructions
-1. Make sure that you have installed Java and PostgreSQL (insert necessary installations here - npx?).
+1. Make sure that you have installed java, react-router-dom and PostgreSQL,. 
    <br><br>
 2. Clone this repository:
    ``git clone git@github.com:AJWinebrenner/tamanotchi.git``<br><br>
