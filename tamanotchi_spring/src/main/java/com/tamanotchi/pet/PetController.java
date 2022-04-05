@@ -27,8 +27,8 @@ public class PetController {
 
     @PostMapping(path = "pets")
     public ResponseEntity<Pet> addNewPet(@RequestBody Pet pet){
-        int newId = service.addNewPet(pet);
-        return new ResponseEntity<>( new Pet(newId), HttpStatus.CREATED);
+        Pet newPet = service.addNewPet(pet);
+        return new ResponseEntity<>(newPet, HttpStatus.CREATED);
     }
 
     @PutMapping(path = "pets/{id}")
