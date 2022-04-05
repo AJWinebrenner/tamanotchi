@@ -261,6 +261,7 @@ class PetServiceTest {
         Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
         when(fakePetDao.selectVariantById(1)).thenReturn(variant);
 
+
         // WHEN
         underTest.giveExp(pet, 1);
 
@@ -272,6 +273,25 @@ class PetServiceTest {
     }
 
     @Test
-    void timeStep() {
+    void timeStep_UpdatesPetWhenIdIsCorrect() {
+        // GIVEN
+        Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
+        Pet expected = new Pet(1, "Bob", 1, 1, 9, 9, 2, 2, 100);
+        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        House house = new House(1, "Bigger", 10, 1, 1, 2);
+        when(fakePetDao.getById(1)).thenReturn(pet);
+        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.selectHouseById(1)).thenReturn(house);
+        when(fakePetDao.updateById(1, expected)).thenReturn(1);
+
+        // WHEN
+        underTest.timeStep(1);
+        Pet actual = pet;
+
+        System.out.println(actual);
+        System.out.println(expected);
+
+        // THEN
+        assertEquals(actual, expected);
     }
 }
