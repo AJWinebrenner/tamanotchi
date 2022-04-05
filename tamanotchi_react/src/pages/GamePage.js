@@ -105,18 +105,18 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
 
  // ----------------------------------- 
     //audio attempt
-    let mainAudio = new Audio("/audio/tamagotchi-main-theme-v1.mp3")
+    // let mainAudio = new Audio("/audio/tamagotchi-main-theme-v1.mp3")
 
-    const mainAudioFunc = () => {
-         if (!audioPlaying){
-            toggleAudio();
-            mainAudio.volume = 0.1;
-            mainAudio.muted = false;
-            mainAudio.play()
-            mainAudio.loop = true
-        }
-    }
-    mainAudioFunc();
+    // const mainAudioFunc = () => {
+    //      if (!audioPlaying){
+    //         toggleAudio();
+    //         mainAudio.volume = 0.1;
+    //         mainAudio.muted = false;
+    //         mainAudio.play()
+    //         mainAudio.loop = true
+    //     }
+    // }
+    // mainAudioFunc();
     // -----------------------------------
 
     let navigate = useNavigate(); 
