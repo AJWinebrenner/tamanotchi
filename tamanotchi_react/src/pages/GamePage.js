@@ -150,8 +150,9 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
                 <ActivityContainer pet={currentPet} feedPet={feedPet} upgradeHouse={upgradeHouse} wonGame={wonGame}/>
 
             </div>
-            <button id="back-btn" className="btn pixel-box center-box break" onClick={routeChange}>Back</button>
-
+            <div className="middle-flex">
+                <button id="back-btn" className="btn pixel-box center-box" onClick={routeChange}>Back</button>
+            </div>
         </>
     );
 }
