@@ -140,6 +140,19 @@ class PetServiceTest {
     }
 
     @Test
+    void deletePetById_ThrowsErrorWhenPetIdDoesNotExists() {
+        // GIVEN
+        when(fakePetDao.getById(0)).thenReturn(null);
+        // WHEN
+        assertThatThrownBy(() -> {
+            underTest.deletePetById(0);
+            // THEN
+        }).isInstanceOf(PetNotFoundException.class)
+                .hasMessage("Pet with id 0 could not be found");
+        verify(fakePetDao).getById(0);
+    }
+
+    @Test
     void upgradeHouse_CanUpgradeHouseWhenPetIdIsCorrect() {
         // GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 100);;
