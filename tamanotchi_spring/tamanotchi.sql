@@ -237,11 +237,39 @@ INSERT INTO variants(
     upgrade
 )
 VALUES(
+    'firecracker',
+    3,
+    4,
+    45,
+    null
+);
+INSERT INTO variants(
+    name,
+    stage,
+    fave_food,
+    max_exp,
+    upgrade
+)
+VALUES(
+    'big eatie',
+    2,
+    6,
+    30,
+    4
+);
+INSERT INTO variants(
+    name,
+    stage,
+    fave_food,
+    max_exp,
+    upgrade
+)
+VALUES(
     'rexy',
     1,
     5,
     15,
-    null
+    5
 );
 
 INSERT INTO pets(
@@ -275,12 +303,32 @@ INSERT INTO pets(
     exp,
     money
 )
-
 VALUES(
     'Malcolm',
-    3,
-    2,
     1,
+    1,
+    5,
+    10,
+    1,
+    40,
+    20
+);
+
+INSERT INTO pets(
+    name,
+    house,
+    variant,
+    happiness,
+    energy,
+    mood,
+    exp,
+    money
+)
+VALUES(
+    'Alan',
+    3,
+    6,
+    5,
     10,
     1,
     0,
@@ -297,14 +345,13 @@ INSERT INTO pets(
     exp,
     money
 )
-
 VALUES(
-    'Alan',
-    3,
+    'David',
+    1,
     4,
     5,
     10,
     1,
-    0,
-    10
+    40,
+    50
 );
