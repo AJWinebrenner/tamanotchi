@@ -1,9 +1,9 @@
-# tamaNOTchi
+# Tama-NOT-chi
 
 ### Tama-NOT-chi Development team: <br>
 [Andrew Winebrenner](https://github.com/AJWinebrenner) <br> [Aoife Sandy Boyle](https://github.com/aoifeags) <br> [Cristian Rosca](https://github.com/Roscaaa) <br> [Nayan Gurung](https://github.com/Nayan-grg) <br> [Will Burdett](https://github.com/WillBurdett)
 
-## What is tamaNOTchi?
+## What is Tama-NOT-chi?
 tamaNOTchi is a revamp of the classic pocket digital pet game Tamagotchi. Here, you can create your own pet or select one from an existing list. Play games to earn coins, feed your pet to keep them happy and work to upgrade your pet to its final form. You'll have to look after your pet and maintain a balanced diet otherwise your pet will get sick. If you forget to take care of your pet, their health will deteriorate and they may die.
 ## Setup Instructions
 1. Make sure that you have installed java, react-router-dom and PostgreSQL,. 
@@ -57,4 +57,7 @@ Once you have reached the max EXP on your pet's final variant, you win the game!
 
 ## Future Developments
 • Implement additional mini-games for the user to play.
+• Further game balancing
+• Variable rewards from mini games
+
 
