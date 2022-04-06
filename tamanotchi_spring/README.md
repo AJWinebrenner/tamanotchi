@@ -59,5 +59,6 @@ Once you have reached the max EXP on your pet's final variant, you win the game!
 • Implement additional mini-games for the user to play.
 • Further game balancing
 • Variable rewards from mini games
+• Introduce additional pet variants and stages 
 
 
