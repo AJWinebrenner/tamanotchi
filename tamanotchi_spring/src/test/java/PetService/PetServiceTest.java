@@ -201,7 +201,7 @@ class PetServiceTest {
         when(fakePetDao.getHouseById(1)).thenReturn(new House(1, "Bigger", 10, 1, 1, 2));
         when(fakePetDao.getHouseById(2)).thenReturn(new House(2, "Biggest", 10, 1, 1, 3));
         // returning the correct variant
-        when(fakePetDao.getVariantById(1)).thenReturn(new Variant("variant", 1, 2, 500, 3));
+        when(fakePetDao.getVariantById(1)).thenReturn(new Variant(1, "variant", 1, 2, 500, 3));
         // return 1 when DAO is called to update
         when(fakePetDao.updateById(1, petAfterPurchase)).thenReturn(1);
 
@@ -247,7 +247,7 @@ class PetServiceTest {
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
         Pet petAfterEating = new Pet(1, "Bob", 1, 1, 10, 10, 2, 2, 99);
         Food food = new Food(1, "PIZZA", 1, 20, 20, false, false);
-        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
 
         when(fakePetDao.getById(1)).thenReturn(pet);
         when(fakePetDao.getFoodById(1)).thenReturn(food);
@@ -278,7 +278,7 @@ class PetServiceTest {
     void feedPet_WillThrowExceptionIfFoodIdIsWrong() {
         /// GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
-        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
         when(fakePetDao.getVariantById(1)).thenReturn(variant);
         when(fakePetDao.getFoodById(0)).thenReturn(null);
@@ -297,7 +297,7 @@ class PetServiceTest {
         /// GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 0, 0, 5, 1, 100);
         Food food = new Food(1, "PIZZA", 1, 20, 20, false, false);
-        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
         when(fakePetDao.getFoodById(1)).thenReturn(food);
         when(fakePetDao.getVariantById(1)).thenReturn(variant);
@@ -384,7 +384,7 @@ class PetServiceTest {
     void updateMood_UpdatesMoodWhenPetExists() {
         // GIVEN
         Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
-        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
         House house = new House(1, "Bigger", 10, 1, 1, 2);
 
         when(fakePetDao.getVariantById(1)).thenReturn(variant);
@@ -423,7 +423,7 @@ class PetServiceTest {
         // GIVEN
         Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
         Pet expected = new Pet(1, "Bob", 1, 1, 9, 9, 2, 2, 100);
-        Variant variant = new Variant("variant", 1, 2, 500, 2);
+        Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
         House house = new House(1, "Bigger", 10, 1, 1, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
         when(fakePetDao.getVariantById(1)).thenReturn(variant);

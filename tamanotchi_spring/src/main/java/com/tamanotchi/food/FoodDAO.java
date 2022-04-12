@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface FoodDAO {
 
-    List<Food> selectAllFood();
-
-    Food selectFoodById(Integer foodId);
+    List<Food> getAll();
+    Food getById(Integer id);
 }

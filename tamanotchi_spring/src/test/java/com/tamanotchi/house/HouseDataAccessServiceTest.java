@@ -1,21 +1,20 @@
 package com.tamanotchi.house;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class HouseDataAccessServiceTest {
 
     @Autowired
-    HouseDataAccessService underTest;
+    HouseSQL underTest;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -31,7 +30,7 @@ class HouseDataAccessServiceTest {
         expected.add(house2);
         expected.add(house3);
         //When
-        List<House> actual = underTest.selectAllHouses();
+        List<House> actual = underTest.getAll();
         //Then
         assertThat(expected).isEqualTo(actual);
     }
@@ -43,7 +42,7 @@ class HouseDataAccessServiceTest {
         House expected = new House(1,"mansion",30,2,3,0);
 
         //When
-        House actual = underTest.selectHouseById(1);
+        House actual = underTest.getById(1);
 
         //Then
         assertThat(expected).isEqualTo(actual);

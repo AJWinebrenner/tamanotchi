@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-@Repository("postgres")
+@Repository("petSQL")
 public class PetSQL implements PetDAO{
 
     private JdbcTemplate jdbc;
@@ -138,16 +138,16 @@ public class PetSQL implements PetDAO{
         try{
             return jdbc.queryForObject(sql, (rs, rowNum) ->
                 new House(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),
-                        rs.getInt("happiness_bonus"),
-                        rs.getInt("size"),
-                        rs.getInt("upgrade")
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("price"),
+                    rs.getInt("happiness_bonus"),
+                    rs.getInt("size"),
+                    rs.getInt("upgrade")
                 ),
                 id
             );
-        }catch(EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e){
             return null;
         }
     }
@@ -160,12 +160,12 @@ public class PetSQL implements PetDAO{
         try {
             return jdbc.queryForObject(sql, (rs, rowNum) ->
                 new Variant(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getInt("stage"),
-                        rs.getInt("fave_food"),
-                        rs.getInt("max_exp"),
-                        rs.getInt("upgrade")
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("stage"),
+                    rs.getInt("fave_food"),
+                    rs.getInt("max_exp"),
+                    rs.getInt("upgrade")
                 ),
                 id
             );
@@ -182,13 +182,13 @@ public class PetSQL implements PetDAO{
         try {
             return jdbc.queryForObject(sql, (rs, rowNum) ->
                 new Food(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),
-                        rs.getInt("energy"),
-                        rs.getInt("happiness"),
-                        rs.getBoolean("isUnhealthy"),
-                        rs.getBoolean("heals")
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("price"),
+                    rs.getInt("energy"),
+                    rs.getInt("happiness"),
+                    rs.getBoolean("isUnhealthy"),
+                    rs.getBoolean("heals")
                 ),
                 id
             );

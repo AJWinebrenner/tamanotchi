@@ -1,10 +1,10 @@
 package com.tamanotchi.house;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class HouseController {
@@ -15,13 +15,13 @@ public class HouseController {
         this.houseService = houseService;
     }
 
-    @GetMapping(path="houses")
+    @GetMapping(path = "houses")
     public List<House> getAllHouses (){
-        return houseService.selectAllHouses();
+        return houseService.getAllHouses();
     }
 
-    @GetMapping(path ="houses/{id}")
-    public House getHouseById(@PathVariable("id") Integer houseId){
-        return houseService.selectHouseById(houseId);
+    @GetMapping(path = "houses/{id}")
+    public House getHouseById(@PathVariable("id") Integer id){
+        return houseService.getHouseById(id);
     }
 }

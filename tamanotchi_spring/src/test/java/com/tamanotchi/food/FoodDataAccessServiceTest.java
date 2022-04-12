@@ -1,24 +1,19 @@
 package com.tamanotchi.food;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class FoodDataAccessServiceTest {
 
     @Autowired
-    private FoodDataAccessService underTest;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private FoodSQL underTest;
 
     @Test
     void selectAllFood() {
@@ -28,7 +23,7 @@ class FoodDataAccessServiceTest {
         expected.add(food1);
         expected.add(food2);
         //When
-        List <Food> actual = underTest.selectAllFood();
+        List <Food> actual = underTest.getAll();
         //Then
         assertThat(actual).isEqualTo(expected);
     }
@@ -39,7 +34,7 @@ class FoodDataAccessServiceTest {
         Food expected = new Food(1,"medicine", 8,0,0,false,true);
 
         //When
-        Food actual = underTest.selectFoodById(1);
+        Food actual = underTest.getById(1);
 
         //Then
         assertThat(actual).isEqualTo(expected);

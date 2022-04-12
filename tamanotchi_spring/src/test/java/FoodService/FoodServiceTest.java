@@ -1,17 +1,19 @@
 package FoodService;
 
-import com.tamanotchi.food.Food;
-import com.tamanotchi.food.FoodDAO;
-import com.tamanotchi.food.FoodService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import com.tamanotchi.food.Food;
+import com.tamanotchi.food.FoodDAO;
+import com.tamanotchi.food.FoodService;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FoodServiceTest {
 
@@ -25,40 +27,39 @@ public class FoodServiceTest {
     }
 
     @Test
-    void selectAllFood_ReturnsAllFoods() {
+    void getAllFood_ReturnsAllFoods() {
         //Given
         Food testFood = new Food(1,"pizza", 3,4,4,true,true);
         List<Food> foods = Arrays.asList(testFood);
-        when(fakeFoodDAO.selectAllFood()).thenReturn(foods);
+        when(fakeFoodDAO.getAll()).thenReturn(foods);
 
         //When
-        List<Food> actual = underTest.selectAllFood();
+        List<Food> actual = underTest.getAllFood();
 
         //Then
         assertThat(actual).isEqualTo(foods);
     }
 
-
     @Test
-    void selectFoodById_ReturnsFoodWithSpecificId() {
+    void getFoodById_ReturnsFoodWithSpecificId() {
         //Given
         Food testFood1 = new Food(1,"pizza", 3,4,4,true,true);
-        Food testFood2 = new Food(2,"burger", 3,4,4,true,true);
-        when(fakeFoodDAO.selectFoodById(1)).thenReturn(testFood1);
+
+        when(fakeFoodDAO.getById(1)).thenReturn(testFood1);
 
         //When
-        Food actual = underTest.selectFoodById(1);
+        Food actual = underTest.getFoodById(1);
 
         //Then
         assertThat(actual).isEqualTo(testFood1);
     }
 
     @Test
-    void selectFoodById_CanThrowFoodNotFoundException() {
+    void getFoodById_CanThrowFoodNotFoundException() {
 
         assertThatThrownBy(() -> {
-            underTest.selectFoodById(20);}
-        ).hasMessage("Food with id number 20 does not exist");
+            underTest.getFoodById(20);}
+        ).hasMessage("Food with id number 20 could not be found");
     }
 
 

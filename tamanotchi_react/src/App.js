@@ -1,23 +1,21 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import HomePage from './pages/HomePage';
-import GamePage from './pages/GamePage';
-import NewPetPage from './pages/NewPetPage';
+import { useEffect, useState } from 'react';
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route
+  BrowserRouter as Router, Route, Routes
 } from "react-router-dom";
+import './App.css';
+import GamePage from './pages/GamePage';
+import HomePage from './pages/HomePage';
+import NewPetPage from './pages/NewPetPage';
 
 function App() {
 
-  const [petId, setPetId] = useState(JSON.parse(window.localStorage.getItem('petId'))) || 1;
+  const [petId, setPetId] = useState(JSON.parse(window.sessionStorage.getItem('petId'))) || 1;
   const [audioPlaying, setAudioPlaying] = useState(false);
 
   const toggleAudio = () => {setAudioPlaying(true)};
 
   useEffect(() => {
-    window.localStorage.setItem('petId', petId);
+    window.sessionStorage.setItem('petId', petId);
   }, [petId]);
 
 

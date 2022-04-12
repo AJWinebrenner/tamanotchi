@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface HouseDAO {
 
-    List<House> selectAllHouses();
-    House selectHouseById(Integer houseId);
+    List<House> getAll();
+    House getById(Integer id);
 }

@@ -1,18 +1,19 @@
 package HouseService;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tamanotchi.house.House;
 import com.tamanotchi.house.HouseDAO;
 import com.tamanotchi.house.HouseService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
 
 public class HouseServiceTest {
     private HouseDAO fakeHouseDAO;
@@ -25,7 +26,7 @@ public class HouseServiceTest {
     }
 
     @Test
-    void selectAllHouses_ReturnsAllHouses() {
+    void getAllHouses_ReturnsAllHouses() {
         //Given
         House house_1 = new House(1, "house1" , 20 , 3 , 1 , 1);
         House house_2 = new House(2, "house2" , 20 , 3 , 2 , 1);
@@ -33,52 +34,35 @@ public class HouseServiceTest {
         houses.add(house_1);
         houses.add(house_2);
 
-        when(fakeHouseDAO.selectAllHouses()).thenReturn(houses);
+        when(fakeHouseDAO.getAll()).thenReturn(houses);
 
         //When
-        List<House> actual = underTest.selectAllHouses();
+        List<House> actual = underTest.getAllHouses();
 
         //Then
         assertThat(actual).isEqualTo(houses);
     }
 
     @Test
-    void selectAllHouses_CanThrowHouseNotFoundException() {
-        //Given
-//        House house_1 = new House(1, "house1" , 20 , 3 , 1 , 1);
-//        House house_2 = new House(2, "house2" , 20 , 3 , 2 , 1);
-//        List<House> houses = new ArrayList<>();
-
-
-        when(fakeHouseDAO.selectAllHouses()).thenReturn(null);
-
-//        When
-        assertThatThrownBy(() -> {
-            underTest.selectAllHouses();}
-        ).hasMessage("Houses not found");
-    }
-
-    @Test
-    void selectHouseById_ReturnsHouseWithSpecificId() {
+    void getHouseById_ReturnsHouseWithSpecificId() {
         //Given
         House house_1 = new House(1, "house1" , 20 , 3 , 1 , 1);
-        House house_2 = new House(2, "house2" , 20 , 3 , 2 , 1);
 
-        when(fakeHouseDAO.selectHouseById(1)).thenReturn(house_1);
+        when(fakeHouseDAO.getById(1)).thenReturn(house_1);
 
         //When
-        House actual = underTest.selectHouseById(1);
+        House actual = underTest.getHouseById(1);
 
         //Then
         assertThat(actual).isEqualTo(house_1);
     }
 
     @Test
-    void selectHouseById_CanThrowHouseNotFoundException() {
+    void getHouseById_CanThrowHouseNotFoundException() {
 
         assertThatThrownBy(() -> {
-            underTest.selectHouseById(20);}
-        ).hasMessage("House with id number 20 does not exist");
+            underTest.getHouseById(20);}
+        ).hasMessage("House with id number 20 could not be found");
     }
 
     }

@@ -3,26 +3,16 @@ package com.tamanotchi.variant;
 import java.util.Objects;
 
 public class Variant {
-        private Integer Id;
-        private String name;
-        private Integer stage;
-        private Integer fave_food;
-        private Integer max_exp;
-        private Integer upgrade;
 
-        public Variant() {
-        }
-
-        public Variant(String name, Integer stage, Integer fave_food, Integer max_exp, Integer upgrade) {
-        this.name = name;
-        this.stage = stage;
-        this.fave_food = fave_food;
-        this.max_exp = max_exp;
-        this.upgrade = upgrade;
-    }
+    private Integer id;
+    private String name;
+    private Integer stage;
+    private Integer fave_food;
+    private Integer max_exp;
+    private Integer upgrade;
 
     public Variant(Integer id, String name, Integer stage, Integer fave_food, Integer max_exp, Integer upgrade) {
-        Id = id;
+        this.id = id;
         this.name = name;
         this.stage = stage;
         this.fave_food = fave_food;
@@ -30,12 +20,14 @@ public class Variant {
         this.upgrade = upgrade;
     }
 
+    public Variant() {}
+
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -81,7 +73,7 @@ public class Variant {
     @Override
     public String toString() {
         return "Variant{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", stage=" + stage +
                 ", fave_food=" + fave_food +
@@ -95,11 +87,11 @@ public class Variant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Variant variant = (Variant) o;
-        return Objects.equals(Id, variant.Id) && Objects.equals(name, variant.name) && Objects.equals(stage, variant.stage) && Objects.equals(fave_food, variant.fave_food) && Objects.equals(max_exp, variant.max_exp) && Objects.equals(upgrade, variant.upgrade);
+        return Objects.equals(id, variant.id) && Objects.equals(name, variant.name) && Objects.equals(stage, variant.stage) && Objects.equals(fave_food, variant.fave_food) && Objects.equals(max_exp, variant.max_exp) && Objects.equals(upgrade, variant.upgrade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, name, stage, fave_food, max_exp, upgrade);
+        return Objects.hash(id, name, stage, fave_food, max_exp, upgrade);
     }
 }

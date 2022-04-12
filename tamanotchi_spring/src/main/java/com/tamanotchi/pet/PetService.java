@@ -7,6 +7,7 @@ import com.tamanotchi.food.FoodNotFoundException;
 import com.tamanotchi.house.House;
 import com.tamanotchi.house.HouseNotFoundException;
 import com.tamanotchi.variant.Variant;
+import com.tamanotchi.variant.VariantNotFoundException;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class PetService {
 
     private PetDAO DAO;
 
-    public PetService(@Qualifier("postgres") PetDAO DAO) {
+    public PetService(@Qualifier("petSQL") PetDAO DAO) {
         this.DAO = DAO;
     }
 
@@ -74,6 +75,7 @@ public class PetService {
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
+        if (pet.getMood() == Mood.DEAD) return;
 
         House upgrade = DAO.getHouseById((DAO.getHouseById(pet.getHouse()).getUpgrade()));
         if (upgrade == null) {
@@ -83,86 +85,88 @@ public class PetService {
         Integer money = pet.getMoney();
         Integer price = upgrade.getPrice();
 
-        if (money>= price) {
-            pet.setMoney(money - price);
-            pet.setHouse(upgrade.getId());
-            giveExp(pet, 3);
-
-            int result = DAO.updateById(id, pet);
-
-            if (result != 1) {
-                throw new IllegalStateException("House was not upgraded");
-            }
-        } else {
+        if (price > money) {
             throw new IllegalStateException("You're broke; no house for you");
+        }
+
+        pet.setMoney(money - price);
+        pet.setHouse(upgrade.getId());
+        giveExp(pet, 3);
+
+        int result = DAO.updateById(id, pet);
+
+        if (result != 1) {
+            throw new IllegalStateException("House was not upgraded");
         }
     }
 
     public void feedPet(Integer id, Integer foodId) {
-        if(isDead(id)) return;
+
         Pet pet = DAO.getById(id);
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
+        if (pet.getMood() == Mood.DEAD) return;
+
         Food food = DAO.getFoodById(foodId);
-        if (food == null){
+        if (food == null) {
             throw new FoodNotFoundException("Food with id " + foodId + " could not be found");
         }
         Variant variant = DAO.getVariantById(pet.getVariant());
-
-        Integer extraHappiness= 0;
-        if(variant.getFave_food()==foodId){
-            //This needs to be changed
-            extraHappiness=2;
+        if (variant == null) {
+            throw new VariantNotFoundException("Variant with id " + pet.getVariant() + " could not be found");
         }
-        if(food.isUnhealthy()){
-            if(!Pet.hasEatenUnhealthy){
-                Pet.hasEatenUnhealthy= true;
-            }else{
-                pet.setMood(4);
-            }
-        }else {
-            Pet.hasEatenUnhealthy=false;
-        }
-        if(pet.getMood()==4 && food.isHeals()){
-            pet.setMood(1);
-            Pet.hasEatenUnhealthy=false;
-        }
-
-
+        
+        //check if you can afford food
         Integer money = pet.getMoney();
-        Integer petEnergy = pet.getEnergy();
-        Integer petHappiness= pet.getHappiness();
-        Integer foodEnergy= food.getEnergy();
-        Integer foodHappiness= food.getHappiness();
         Integer price = food.getPrice();
-        Integer maxEnergy = pet.getMax_energy();
-        Integer maxHappiness= pet.getMax_happiness();
-
-        Integer updatedEnergy = petEnergy+foodEnergy;
-        Integer updatedHappiness = petHappiness+foodHappiness + extraHappiness;
-        if (money>= price) {
-            if(updatedEnergy>=maxEnergy){
-                pet.setEnergy(maxEnergy);
-            }else{
-                pet.setEnergy(updatedEnergy);
-            }
-            if(updatedHappiness>=maxHappiness){
-                pet.setHappiness(maxHappiness);
-            }else{
-                pet.setHappiness(updatedHappiness);
-            }
-            pet.setMoney(money - price);
-            updateMood(pet);
-            int result = DAO.updateById(id, pet);
-            if (result != 1) {
-                throw new IllegalStateException("Pet was not fed");
-            }
-        } else {
+        if (price > money) {
             throw new IllegalStateException("You're broke; no food for you");
         }
 
+        //check if the food is your pet's favourite
+        int extraHappiness = 0;
+        if (variant.getFave_food() == foodId){
+            extraHappiness = 1;
+        }
 
+        //resolve health effects
+        int mood = pet.getMood();
+        if (food.isUnhealthy()) {
+            if (!Pet.hasEatenUnhealthy) {
+                Pet.hasEatenUnhealthy = true;
+            } else {
+                if (mood == Mood.SICK) {
+                    pet.setMood(Mood.DEAD);
+                } else {
+                    pet.setMood(Mood.SICK);
+                }
+                Pet.hasEatenUnhealthy = false;
+            }
+        } else {
+            Pet.hasEatenUnhealthy = false;
+        }
+        if (pet.getMood() == Mood.SICK && food.isHeals()) {
+            pet.setMood(Mood.IDLE);
+        }
+
+        //general effects of food
+        int petEnergy = pet.getEnergy();
+        int petHappiness= pet.getHappiness();
+
+        int foodEnergy= food.getEnergy();
+        int foodHappiness= food.getHappiness();
+
+        pet.setEnergy(Math.min(petEnergy + foodEnergy, pet.getMax_energy()));
+        pet.setHappiness(Math.min(petHappiness + foodHappiness + extraHappiness, pet.getMax_happiness()));
+
+        //clean up and update
+        pet.setMoney(money - price);
+        updateMood(pet);
+        int result = DAO.updateById(id, pet);
+        if (result != 1) {
+            throw new IllegalStateException("Pet was not fed");
+        }
     }
 
     public boolean isDead(Integer id) {
@@ -171,10 +175,9 @@ public class PetService {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
         //if no exception, assume pet was found and has the fields required
-        Integer mood = pet.getMood(); // get pet's mood
-            if (mood == Mood.DEAD) {
-                // 5 is dead, but don't need the numbers here
-                return true;
+        Integer mood = pet.getMood();
+        if (mood == Mood.DEAD) {
+            return true;
         } else {
             return false;
         }
@@ -187,6 +190,7 @@ public class PetService {
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
+        if (pet.getMood() == Mood.DEAD) return;
 
         Integer money = pet.getMoney();
         pet.setMoney(money + 10);
@@ -234,28 +238,26 @@ public class PetService {
         } else {
             pet.setMood(Mood.IDLE);
         }
-        // to ask - why not have to return the pet here?
     }
 
-    public void giveExp(Pet pet, Integer exp) {
+    public void giveExp(Pet pet, int exp) {
 
-        pet.setExp(pet.getExp() + exp);
         Variant variant = DAO.getVariantById(pet.getVariant());
+        if (variant == null) {
+            throw new VariantNotFoundException("Variant with id " + pet.getVariant() + " could not be found");
+        }
+        
         Integer maxExp = variant.getMax_exp();
+        pet.setExp(Math.min(pet.getExp() + exp, maxExp));
 
-        if (pet.getExp() >= maxExp) {
-            pet.setExp(maxExp);
+        if (pet.getExp() == maxExp) {
             //check if there is an upgrade
             Integer upgradeId = variant.getUpgrade();
-            if (upgradeId == 0 ) {
-                //crown
-                System.out.println("can't upgrade");
-            } else {
+            if (upgradeId > 0 ) {
                 Variant upgrade = DAO.getVariantById(upgradeId);
                 House house = DAO.getHouseById(pet.getHouse());
-                // check if house
-                // check if happy
-                if(house.getSize() >= upgrade.getStage() && pet.getMood() == Mood.HAPPY){
+                // is pet ready to grow
+                if (house.getSize() >= upgrade.getStage() && pet.getMood() == Mood.HAPPY){
                     pet.setVariant(upgrade.getId());
                     pet.setExp(0);
                 }
@@ -270,27 +272,22 @@ public class PetService {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
 
+        Integer mood = pet.getMood();
+        if (mood == Mood.DEAD) return;
+
         Integer energy = pet.getEnergy();
         Integer happiness= pet.getHappiness();
-        Integer mood = pet.getMood();
 
         if (mood == Mood.TIRED){
-            pet.setHappiness(happiness - 1);
+            pet.setHappiness(Math.max(happiness - 1, 0));
         } else if (mood == Mood.SICK){
-            pet.setHappiness(happiness - 2);
+            pet.setHappiness(Math.max(happiness - 2, 0));
         }
 
         if (happiness == 0){
-            pet.setEnergy(energy - 2);
+            pet.setEnergy(Math.max(energy - 2, 0));
         } else {
-            pet.setEnergy(energy - 1);
-        }
-
-        if (pet.getEnergy() < 0) {
-            pet.setEnergy(0);
-        }
-        if (pet.getHappiness() < 0) {
-            pet.setHappiness(0);
+            pet.setEnergy(Math.max(energy - 1, 0));
         }
 
         updateMood(pet);

@@ -17,9 +17,6 @@ public class Pet {
     private Integer money;
     static boolean hasEatenUnhealthy;
 
-    public Pet() {
-    }
-
     public Pet(Integer id, String name, Integer house, Integer variant, Integer happiness, Integer energy, Integer mood, Integer exp, Integer money) {
         this.id = id;
         this.name = name;
@@ -33,6 +30,8 @@ public class Pet {
         this.exp = exp;
         this.money = money;
     }
+
+    public Pet() {}
 
     public Integer getId() {
         return id;

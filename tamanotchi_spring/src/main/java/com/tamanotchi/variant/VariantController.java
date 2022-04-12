@@ -15,13 +15,13 @@ public class VariantController {
         this.variantService = variantService;
     }
 
-    @GetMapping(path="variants")
+    @GetMapping(path = "variants")
     public List<Variant> getAllVariants(){
-        return variantService.selectAllVariants();
+        return variantService.getAllVariants();
     }
 
-    @GetMapping(path ="variants/{id}")
-    public Variant getVariantById(@PathVariable("id") Integer variantId){
-        return variantService.selectVariantById(variantId);
+    @GetMapping(path = "variants/{id}")
+    public Variant getVariantById(@PathVariable("id") Integer id){
+        return variantService.getVariantById(id);
     }
 }

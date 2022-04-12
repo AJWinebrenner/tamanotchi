@@ -11,7 +11,16 @@ public class House {
     private Integer size;
     private Integer upgrade;
 
+    public House(Integer id,String name, Integer price, Integer happiness_bonuses, Integer size, Integer upgrade) {
+        this.id=id;
+        this.name = name;
+        this.price = price;
+        this.happiness_bonus = happiness_bonuses;
+        this.size = size;
+        this.upgrade = upgrade;
+    }
 
+    public House() {}
 
     public Integer getId() {
         return id;
@@ -19,9 +28,7 @@ public class House {
 
     public void setId(Integer id) {
         this.id = id;
-
     }
-
 
     public String getName() {
         return name;
@@ -63,20 +70,6 @@ public class House {
         this.upgrade = upgrade;
     }
 
-
-
-    public House() {
-    }
-
-    public House(Integer id,String name, Integer price, Integer happiness_bonuses, Integer size, Integer upgrade) {
-        this.id=id;
-        this.name = name;
-        this.price = price;
-        this.happiness_bonus = happiness_bonuses;
-        this.size = size;
-        this.upgrade = upgrade;
-    }
-
     @Override
     public String toString() {
         return "House{" +
@@ -101,10 +94,5 @@ public class House {
     public int hashCode() {
         return Objects.hash(id, name, price, happiness_bonus, size, upgrade);
     }
-
-
-
-
-
 
 }

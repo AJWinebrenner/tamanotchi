@@ -12,16 +12,17 @@ public class FoodController {
     private FoodService foodService;
 
     public FoodController(FoodService foodService) {
-        this.foodService = foodService;}
+        this.foodService = foodService;
+    }
 
     @GetMapping(path="foods")
     public List<Food> getAllFoods (){
-        return foodService.selectAllFood();
+        return foodService.getAllFood();
     }
 
     @GetMapping(path ="foods/{id}")
-    public Food getFoodById(@PathVariable("id") Integer foodId){
-        return foodService.selectFoodById(foodId);
+    public Food getFoodById(@PathVariable("id") Integer id){
+        return foodService.getFoodById(id);
     }
 }
 

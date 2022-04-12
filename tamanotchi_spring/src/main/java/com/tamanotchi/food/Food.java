@@ -12,9 +12,6 @@ public class Food {
     private boolean isUnhealthy;
     private boolean heals;
 
-    public Food() {
-    }
-
     public Food(Integer foodId, String name, Integer price, Integer energy, Integer happiness, boolean isUnhealthy, boolean heals) {
         this.foodId = foodId;
         this.name = name;
@@ -25,7 +22,7 @@ public class Food {
         this.heals = heals;
     }
 
-
+    public Food() {}
 
     public Integer getFoodId() {
         return foodId;
@@ -83,7 +80,6 @@ public class Food {
         this.heals = heals;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,7 +92,6 @@ public class Food {
     public int hashCode() {
         return Objects.hash(foodId, name, price, energy, happiness, isUnhealthy, heals);
     }
-
 
     @Override
     public String toString() {
