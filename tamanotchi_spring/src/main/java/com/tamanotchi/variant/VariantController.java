@@ -1,13 +1,10 @@
 package com.tamanotchi.variant;
 
+import java.util.List;
 
-import com.tamanotchi.house.House;
-import com.tamanotchi.house.HouseService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class VariantController {

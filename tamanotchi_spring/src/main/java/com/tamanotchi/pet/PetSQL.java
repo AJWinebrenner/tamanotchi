@@ -1,15 +1,17 @@
 package com.tamanotchi.pet;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.tamanotchi.food.Food;
 import com.tamanotchi.house.House;
 import com.tamanotchi.variant.Variant;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Repository("postgres")
 public class PetSQL implements PetDAO{
@@ -23,7 +25,7 @@ public class PetSQL implements PetDAO{
     }
 
     @Override
-    public List<Pet> getAllPets() {
+    public List<Pet> getAll() {
 
         String sql = "SELECT id, name, house, variant, happiness, energy, mood, exp, money FROM pets";
 
@@ -62,25 +64,13 @@ public class PetSQL implements PetDAO{
                 ),
                 id
             );
-        } catch (Exception e) {
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
     @Override
     public int add(Pet pet) {
-//        String sql = "INSERT INTO pets (name, house, variant, happiness, energy, mood, exp, money) VALUES(?, ?, ?, ?, ?, ?, ?, ?) RETURNING id";
-//
-//        return jdbc.update(sql,
-//                pet.getName(),
-//                pet.getHouse(),
-//                pet.getVariant(),
-//                pet.getHappiness(),
-//                pet.getEnergy(),
-//                pet.getMood(),
-//                pet.getExp(),
-//                pet.getMoney()
-//        );
 
         final Map<String, Object> parameters = new HashMap<>();
         parameters.put("name", pet.getName());
@@ -120,15 +110,15 @@ public class PetSQL implements PetDAO{
         if (newMoney == null) newMoney = original.getMoney();
 
         return jdbc.update(sql,
-                newName,
-                newHouse,
-                newVariant,
-                newHappiness,
-                newEnergy,
-                newMood,
-                newExp,
-                newMoney,
-                id
+            newName,
+            newHouse,
+            newVariant,
+            newHappiness,
+            newEnergy,
+            newMood,
+            newExp,
+            newMoney,
+            id
         );
     }
 
@@ -141,67 +131,68 @@ public class PetSQL implements PetDAO{
     }
 
     @Override
-    public House selectHouseById(Integer id) {
-        var sql = """
-                SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE id = ?;
-                """;
+    public House getHouseById(Integer id) {
+
+        String sql = "SELECT id, name, price, happiness_bonus, size, upgrade FROM houses WHERE id = ?";
+
         try{
-            return jdbc.queryForObject(sql,(rs, rowNum) ->
-                    new House(
-                            rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getInt("price"),
-                            rs.getInt("happiness_bonus"),
-                            rs.getInt("size"),
-                            rs.getInt("upgrade")
-                    ), id);
-
-
+            return jdbc.queryForObject(sql, (rs, rowNum) ->
+                new House(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("price"),
+                        rs.getInt("happiness_bonus"),
+                        rs.getInt("size"),
+                        rs.getInt("upgrade")
+                ),
+                id
+            );
         }catch(EmptyResultDataAccessException e){
             return null;
         }
     }
 
     @Override
-    public Variant selectVariantById(Integer id) {
-        var sql = """
-                SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE id = ?;
-                """;
+    public Variant getVariantById(Integer id) {
+
+        String sql = "SELECT id, name, stage, fave_food, max_exp, upgrade FROM variants WHERE id = ?";
+        
         try {
-                return jdbc.queryForObject(sql,(rs, rowNum) ->
-                        new Variant(
-                                rs.getInt("id"),
-                                rs.getString("name"),
-                                rs.getInt("stage"),
-                                rs.getInt("fave_food"),
-                                rs.getInt("max_exp"),
-                                rs.getInt("upgrade")
-                        ), id);
-        } catch (Exception e){
+            return jdbc.queryForObject(sql, (rs, rowNum) ->
+                new Variant(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("stage"),
+                        rs.getInt("fave_food"),
+                        rs.getInt("max_exp"),
+                        rs.getInt("upgrade")
+                ),
+                id
+            );
+        } catch (EmptyResultDataAccessException e){
             return null;
         }
     }
 
     @Override
-    public Food selectFoodById(Integer id) {
+    public Food getFoodById(Integer id) {
 
         String sql = "SELECT id, name, price, energy, happiness, isUnhealthy, heals FROM foods WHERE id = ?";
 
         try {
             return jdbc.queryForObject(sql, (rs, rowNum) ->
-                            new Food(
-                                    rs.getInt("id"),
-                                    rs.getString("name"),
-                                    rs.getInt("price"),
-                                    rs.getInt("energy"),
-                                    rs.getInt("happiness"),
-                                    rs.getBoolean("isUnhealthy"),
-                                    rs.getBoolean("heals")
-                            ),
-                    id
+                new Food(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("price"),
+                        rs.getInt("energy"),
+                        rs.getInt("happiness"),
+                        rs.getBoolean("isUnhealthy"),
+                        rs.getBoolean("heals")
+                ),
+                id
             );
-
-        } catch (Exception e) {
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }

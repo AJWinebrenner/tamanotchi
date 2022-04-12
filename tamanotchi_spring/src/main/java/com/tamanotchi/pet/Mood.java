@@ -1,7 +1,5 @@
 package com.tamanotchi.pet;
 
-import org.springframework.http.HttpStatus;
-
 public final class Mood {
     public static final int IDLE = 1;
     public static final int HAPPY = 2;

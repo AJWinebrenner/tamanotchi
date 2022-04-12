@@ -1,16 +1,15 @@
 package com.tamanotchi.pet;
 
+import java.util.List;
+
 import com.tamanotchi.food.Food;
 import com.tamanotchi.food.FoodNotFoundException;
-import com.tamanotchi.house.HouseNotFoundException;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 import com.tamanotchi.house.House;
-
+import com.tamanotchi.house.HouseNotFoundException;
 import com.tamanotchi.variant.Variant;
 
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PetService {
@@ -22,7 +21,7 @@ public class PetService {
     }
 
     public List<Pet> getAllPets() {
-        return DAO.getAllPets();
+        return DAO.getAll();
     }
 
     public Pet getPetById(Integer id) {
@@ -76,7 +75,7 @@ public class PetService {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
 
-        House upgrade = DAO.selectHouseById((DAO.selectHouseById(pet.getHouse()).getUpgrade()));
+        House upgrade = DAO.getHouseById((DAO.getHouseById(pet.getHouse()).getUpgrade()));
         if (upgrade == null) {
             throw new HouseNotFoundException("Upgrade house could not be found");
         }
@@ -105,11 +104,11 @@ public class PetService {
         if (pet == null) {
             throw new PetNotFoundException("Pet with id " + id + " could not be found");
         }
-        Food food = DAO.selectFoodById(foodId);
+        Food food = DAO.getFoodById(foodId);
         if (food == null){
             throw new FoodNotFoundException("Food with id " + foodId + " could not be found");
         }
-        Variant variant = DAO.selectVariantById(pet.getVariant());
+        Variant variant = DAO.getVariantById(pet.getVariant());
 
         Integer extraHappiness= 0;
         if(variant.getFave_food()==foodId){
@@ -241,7 +240,7 @@ public class PetService {
     public void giveExp(Pet pet, Integer exp) {
 
         pet.setExp(pet.getExp() + exp);
-        Variant variant = DAO.selectVariantById(pet.getVariant());
+        Variant variant = DAO.getVariantById(pet.getVariant());
         Integer maxExp = variant.getMax_exp();
 
         if (pet.getExp() >= maxExp) {
@@ -252,8 +251,8 @@ public class PetService {
                 //crown
                 System.out.println("can't upgrade");
             } else {
-                Variant upgrade = DAO.selectVariantById(upgradeId);
-                House house = DAO.selectHouseById(pet.getHouse());
+                Variant upgrade = DAO.getVariantById(upgradeId);
+                House house = DAO.getHouseById(pet.getHouse());
                 // check if house
                 // check if happy
                 if(house.getSize() >= upgrade.getStage() && pet.getMood() == Mood.HAPPY){

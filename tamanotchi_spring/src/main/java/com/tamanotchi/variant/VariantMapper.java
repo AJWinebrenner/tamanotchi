@@ -1,9 +1,5 @@
 package com.tamanotchi.variant;
 
-
-import com.tamanotchi.house.House;
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

@@ -1,24 +1,30 @@
 package PetService;
 
-import com.tamanotchi.food.Food;
-import com.tamanotchi.food.FoodNotFoundException;
-import com.tamanotchi.house.House;
-import com.tamanotchi.pet.*;
-import com.tamanotchi.variant.Variant;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.springframework.data.relational.core.sql.In;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import com.tamanotchi.food.Food;
+import com.tamanotchi.food.FoodNotFoundException;
+import com.tamanotchi.house.House;
+import com.tamanotchi.pet.Pet;
+import com.tamanotchi.pet.PetDAO;
+import com.tamanotchi.pet.PetNotFoundException;
+import com.tamanotchi.pet.PetService;
+import com.tamanotchi.variant.Variant;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 class PetServiceTest {
 
@@ -36,7 +42,7 @@ class PetServiceTest {
         // Given
         Pet pet = new Pet(4, "Bob", 1, 1, 5, 5, 5, 1, 1);
         List<Pet> pets = Arrays.asList(pet);
-        when(fakePetDao.getAllPets()).thenReturn(pets);
+        when(fakePetDao.getAll()).thenReturn(pets);
 
         // When
         List<Pet> actual = underTest.getAllPets();
@@ -49,7 +55,7 @@ class PetServiceTest {
     void getAllPets_DoesNotErrorWhenAllPetsIsEmpty() {
         // Given
         List<Pet> pets = new ArrayList<>();
-        when(fakePetDao.getAllPets()).thenReturn(pets);
+        when(fakePetDao.getAll()).thenReturn(pets);
 
         // When
         List<Pet> actual = underTest.getAllPets();
@@ -63,7 +69,7 @@ class PetServiceTest {
         // GIVEN
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 1);;
         List<Pet> pets = Arrays.asList(pet);
-        when(fakePetDao.getAllPets()).thenReturn(pets);
+        when(fakePetDao.getAll()).thenReturn(pets);
         when(fakePetDao.getById(1)).thenReturn(pet);
 
         // WHEN
@@ -99,7 +105,7 @@ class PetServiceTest {
         Pet pet1 = new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 1);
         Pet pet2 = new Pet(12, "Melissa", 1, 1, 5, 5, 5, 1, 1);
         List<Pet> pets = Arrays.asList(pet1);
-        when(fakePetDao.getAllPets()).thenReturn(pets);
+        when(fakePetDao.getAll()).thenReturn(pets);
         when(fakePetDao.add(pet2)).thenReturn(1);
 
         // WHEN
@@ -189,13 +195,13 @@ class PetServiceTest {
         Pet petAfterPurchase = new Pet(1, "Bob", 2, 1, 5, 5, 5, 4, 90);
         List<Pet> pets = Arrays.asList(pet);
         // finding the correct pet
-        when(fakePetDao.getAllPets()).thenReturn(pets);
+        when(fakePetDao.getAll()).thenReturn(pets);
         when(fakePetDao.getById(1)).thenReturn(pet);
         // finding the correct house to upgrade to
-        when(fakePetDao.selectHouseById(1)).thenReturn(new House(1, "Bigger", 10, 1, 1, 2));
-        when(fakePetDao.selectHouseById(2)).thenReturn(new House(2, "Biggest", 10, 1, 1, 3));
+        when(fakePetDao.getHouseById(1)).thenReturn(new House(1, "Bigger", 10, 1, 1, 2));
+        when(fakePetDao.getHouseById(2)).thenReturn(new House(2, "Biggest", 10, 1, 1, 3));
         // returning the correct variant
-        when(fakePetDao.selectVariantById(1)).thenReturn(new Variant("variant", 1, 2, 500, 3));
+        when(fakePetDao.getVariantById(1)).thenReturn(new Variant("variant", 1, 2, 500, 3));
         // return 1 when DAO is called to update
         when(fakePetDao.updateById(1, petAfterPurchase)).thenReturn(1);
 
@@ -207,14 +213,14 @@ class PetServiceTest {
         Integer capturedPetIdParameter = captor.getValue();
 
         // capturing multiple calls to same DAO method
-        verify(fakePetDao, times(2)).selectHouseById(captor.capture());
+        verify(fakePetDao, times(2)).getHouseById(captor.capture());
         List<Integer> capturedHouseIdParameter = captor.getAllValues();
         //System.out.println(capturedHouseIdParameter);
 
         // THEN
         verify(fakePetDao).getById(1);
-        verify(fakePetDao).selectHouseById(1);
-        verify(fakePetDao).selectHouseById(2);
+        verify(fakePetDao).getHouseById(1);
+        verify(fakePetDao).getHouseById(2);
         verify(fakePetDao).updateById(1, petAfterPurchase);
         assertEquals(1, capturedPetIdParameter);
 
@@ -244,8 +250,8 @@ class PetServiceTest {
         Variant variant = new Variant("variant", 1, 2, 500, 2);
 
         when(fakePetDao.getById(1)).thenReturn(pet);
-        when(fakePetDao.selectFoodById(1)).thenReturn(food);
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getFoodById(1)).thenReturn(food);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
         when(fakePetDao.updateById(1, petAfterEating)).thenReturn(1);
 
         // WHEN
@@ -274,8 +280,8 @@ class PetServiceTest {
         Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 3, 1, 100);
         Variant variant = new Variant("variant", 1, 2, 500, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
-        when(fakePetDao.selectFoodById(0)).thenReturn(null);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getFoodById(0)).thenReturn(null);
 
         // WHEN
         assertThatThrownBy(() -> {
@@ -283,7 +289,7 @@ class PetServiceTest {
             // THEN
         }).isInstanceOf(FoodNotFoundException.class)
                 .hasMessage("Food with id 0 could not be found");
-        verify(fakePetDao).selectFoodById(0);
+        verify(fakePetDao).getFoodById(0);
     }
 
     @Test
@@ -293,8 +299,8 @@ class PetServiceTest {
         Food food = new Food(1, "PIZZA", 1, 20, 20, false, false);
         Variant variant = new Variant("variant", 1, 2, 500, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
-        when(fakePetDao.selectFoodById(1)).thenReturn(food);
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getFoodById(1)).thenReturn(food);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
 
         // WHEN
         underTest.feedPet(1,1);
@@ -351,7 +357,7 @@ class PetServiceTest {
         Pet updated= new Pet(1, "Bob", 1, 1, 5, 5, 3, 3, 110);
         Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
         when(fakePetDao.updateById(1, updated)).thenReturn(1);
 
         // WHEN
@@ -381,8 +387,8 @@ class PetServiceTest {
         Variant variant = new Variant("variant", 1, 2, 500, 2);
         House house = new House(1, "Bigger", 10, 1, 1, 2);
 
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
-        when(fakePetDao.selectHouseById(1)).thenReturn(house);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getHouseById(1)).thenReturn(house);
 
 
         // WHEN
@@ -399,7 +405,7 @@ class PetServiceTest {
         // GIVEN
         Pet pet = new Pet(1, "Bob", 1, 1, 10, 10, 3, 1, 100);
         Variant variant = new Variant(1, "variant", 1, 2, 500, 2);
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
 
 
         // WHEN
@@ -420,8 +426,8 @@ class PetServiceTest {
         Variant variant = new Variant("variant", 1, 2, 500, 2);
         House house = new House(1, "Bigger", 10, 1, 1, 2);
         when(fakePetDao.getById(1)).thenReturn(pet);
-        when(fakePetDao.selectVariantById(1)).thenReturn(variant);
-        when(fakePetDao.selectHouseById(1)).thenReturn(house);
+        when(fakePetDao.getVariantById(1)).thenReturn(variant);
+        when(fakePetDao.getHouseById(1)).thenReturn(house);
         when(fakePetDao.updateById(1, expected)).thenReturn(1);
 
         // WHEN

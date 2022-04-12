@@ -1,11 +1,8 @@
 package com.tamanotchi.food;
 
-import com.tamanotchi.food.Food;
-import com.tamanotchi.food.FoodDAO;
-import com.tamanotchi.house.HouseNotFoundException;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class FoodService {

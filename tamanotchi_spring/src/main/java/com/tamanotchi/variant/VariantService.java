@@ -1,13 +1,8 @@
 package com.tamanotchi.variant;
 
-import com.tamanotchi.house.House;
-import com.tamanotchi.house.HouseDAO;
-import com.tamanotchi.pet.Pet;
-import com.tamanotchi.pet.PetNotFoundException;
-import com.tamanotchi.variant.Exceptions.VariantNotFoundException;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class VariantService {
