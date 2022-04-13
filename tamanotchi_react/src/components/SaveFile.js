@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SaveFile = ({id, name, mood, exp, variantId, setId, del, handleDelete}) => {
+const SaveFile = ({id, name, mood, exp, variantId, setId, del, showPop_up}) => {
  
     const [crown, setCrown] = useState(false);
 
@@ -31,7 +31,7 @@ const SaveFile = ({id, name, mood, exp, variantId, setId, del, handleDelete}) =>
                     setId(id);
                     routeChange();
                 } else {
-                    handleDelete(id, name);
+                    showPop_up(id, name);
                 }
             }} 
             className={del ? "pixel-box delete column-flex" : "pixel-box save column-flex"}

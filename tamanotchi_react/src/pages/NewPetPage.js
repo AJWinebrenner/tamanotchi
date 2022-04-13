@@ -15,6 +15,10 @@ const NewPetPage = ({setPetId}) => {
         navigate(path);
     }
 
+    const goBack = () => {
+        navigate("/");
+    }
+
     const pickEgg = () => {
         fetch(`http://localhost:8080/variants/`)
         .then(response => response.json())
@@ -38,7 +42,7 @@ const NewPetPage = ({setPetId}) => {
                 setBabyId(babies[Math.floor(Math.random() * babies.length)]);
             }
             setAnimation("poof");
-            }, 4000);
+            }, 3500);
            
         const timer2 = setTimeout(() => {
             setHatched(true);
@@ -70,7 +74,6 @@ const NewPetPage = ({setPetId}) => {
             })
             .then(response => response.json())       
             .then(pet => { 
-                console.log(pet);
                 setPetId(pet.id);
                 routeChange(); 
             })
@@ -90,9 +93,12 @@ const NewPetPage = ({setPetId}) => {
                 <div className="break"/>
                 <h1 className="big-break center-text">TAMA-NOT-CHI</h1>
                 <h2 className="center-text big-break">CLICK THE EGG</h2>
-                <section className="column-flex">
+                <section className="column-flex big-break">
                     <img onClick={handleEggClick} className="sprite" src={require(`../sprites/misc/${animation}.gif`)} />
                 </section>
+                <div className="middle-flex">
+                    <button id="back-btn" className="btn pixel-box" onClick={goBack}>Back</button>
+                </div>
             </>
         );
 
@@ -102,7 +108,7 @@ const NewPetPage = ({setPetId}) => {
                 <div className="break"/>
                 <h1 className="big-break center-text">TAMA-NOT-CHI</h1>
                 <h2 className="center-text big-break">Welcome!</h2>
-                <section className="column-flex">
+                <section className="column-flex big-break">
                     <img className="sprite big-break" src={require(`../sprites/variants/${babyId}/2.gif`)}/>
                     <form className="middle-flex gap" onSubmit={handleFormSubmit} id="new-pet-name-form">
                         <input id="submit-box" className="pixel-box" onChange={handleNameChange} type="text" name="name-input" value={petName} placeholder="Give me a name!"/>

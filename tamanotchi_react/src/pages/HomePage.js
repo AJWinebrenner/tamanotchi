@@ -8,6 +8,27 @@ const HomePage = ({setPetId}) => {
     const [saveCards, setSaveCards] = useState([]);
     const [deleteState, setDeleteState] = useState(false);
     const [pop_up, setPop_up] = useState(null);
+
+    const showPop_up = (id, name) => {
+        if (pop_up == null) {
+            setPop_up(<DeleteBox id={id} name={name} setPop_up={setPop_up} handleCancel={toggleDelete} handleDelete={deletePet}/>)
+        }
+    }
+
+    const toggleDelete = () => {
+        setDeleteState(!deleteState);
+        setPop_up(null);
+    }
+
+    const deletePet = (id) => {
+        fetch(`http://localhost:8080/pets/${id}`, {
+                method:"DELETE"
+            })
+        .then(() => {
+            setDeleteState(false)
+            setPop_up(null);
+        })
+    }
     
     const getPets = () => {
         fetch("http://localhost:8080/pets")
@@ -25,7 +46,7 @@ const HomePage = ({setPetId}) => {
                             variantId={pet.variant}
                             setId={setPetId}
                             del={deleteState}
-                            handleDelete={deletePet}
+                            showPop_up={showPop_up}
                         />
                     );
                 }
@@ -33,12 +54,6 @@ const HomePage = ({setPetId}) => {
             })
             // catch error
             .catch(error => console.error(error))   
-    }
-
-    const deletePet = (id, name) => {
-        if (pop_up == null) {
-            setPop_up(<DeleteBox id={id} name={name} setPop_up={setPop_up}/>)
-        }
     }
 
     useEffect(getPets, [deleteState]);
@@ -54,10 +69,7 @@ const HomePage = ({setPetId}) => {
                 <NewSave key={"newPet"}/>
             </section>
             <div className="middle-flex break">
-                <button id="del-btn" className="btn pixel-box" onClick={() => {
-                    setDeleteState(!deleteState);
-                    setPop_up(null);
-                }}>
+                <button id="del-btn" className="btn pixel-box" onClick={toggleDelete}>
                     {deleteState ? "CANCEL" : "DELETE"}
                 </button>
             </div>

@@ -83,6 +83,10 @@ h1 {
 	text-align: center;
 }
 
+.caps {
+  text-transform: uppercase;
+}
+
 .break {
 	margin: 0 0 var(--pixel) 0;
 }
@@ -159,11 +163,12 @@ h1 {
 
 #pop_up {
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
+  min-width: calc(var(--save-size)*var(--scale));;
   background-color: var(--white);
   box-shadow: 0 0 calc(var(--sprite-size) * var(--scale)) calc(var(--sprite-size) * var(--scale)) var(--background);
 }

@@ -18,7 +18,7 @@ const NewSave = () => {
             <div className="save-header break middle-flex gap">
                 <h2>New Pet</h2>
             </div>
-            <img className="sprite" src={require(`../sprites/misc/egg.gif`)}/>
+            <img className="sprite" src={require(`../sprites/misc/egg.png`)}/>
         </div>
     );
     
