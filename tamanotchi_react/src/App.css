@@ -133,6 +133,41 @@ h1 {
   width: calc(var(--save-size)*var(--scale));
 }
 
+.delete {
+  position: relative;
+  image-rendering: pixelated;
+  background-color: var(--beige); 
+  height: calc(var(--save-size)*var(--scale));
+  width: calc(var(--save-size)*var(--scale));
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: var(--white);
+    transform: rotate(0deg);
+  }
+  50% {
+    background-color: var(--beige);
+    transform: rotate(2deg);
+  }
+  100% {
+    background-color: var(--white);
+    transform: rotate(0deg);
+  }
+}
+
+#pop_up {
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: var(--white);
+  box-shadow: 0 0 calc(var(--sprite-size) * var(--scale)) calc(var(--sprite-size) * var(--scale)) var(--background);
+}
+
 .save-header {
   height: calc(var(--save-header)*var(--scale));
 }
@@ -401,6 +436,10 @@ h1 {
 #back-btn{ 
   height: calc(var(--font-size)*3*var(--scale));
   max-width: calc(var(--display-size)*var(--scale));
+}
+
+#del-btn{ 
+  max-width: calc(var(--save-size)*var(--scale));
 }
 
 #submit-btn{ 

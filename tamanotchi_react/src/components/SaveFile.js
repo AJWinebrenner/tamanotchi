@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SaveFile = ({id, name, mood, exp, variantId, setId}) => {
+const SaveFile = ({id, name, mood, exp, variantId, setId, del, handleDelete}) => {
  
     const [crown, setCrown] = useState(false);
 
@@ -27,10 +27,14 @@ const SaveFile = ({id, name, mood, exp, variantId, setId}) => {
         // 2) This is NOT ACCESSIBLE to screenreaders etc but other ways to do this are much more complex
         <div 
             onClick={() => {
-                setId(id);
-                routeChange();
+                if (!del) {
+                    setId(id);
+                    routeChange();
+                } else {
+                    handleDelete(id, name);
+                }
             }} 
-            className="pixel-box save column-flex"
+            className={del ? "pixel-box delete column-flex" : "pixel-box save column-flex"}
         >
             {(mood == 5)? <img className="icon corner" src={require(`../sprites/icons/ghost.png`)}/> : (crown? <img className="icon corner" src={require(`../sprites/icons/crown.png`)}/> : null)}
             <div className="save-header break middle-flex gap">

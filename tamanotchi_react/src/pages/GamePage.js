@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ActivityContainer from "../containers/ActivityContainer";
 import PetContainer from "../containers/PetContainer";
-import { useNavigate } from "react-router-dom";
 
 const GamePage = ({petId, toggleAudio, audioPlaying}) => {
 
@@ -151,7 +151,7 @@ const GamePage = ({petId, toggleAudio, audioPlaying}) => {
 
             </div>
             <div className="middle-flex">
-                <button id="back-btn" className="btn pixel-box center-box" onClick={routeChange}>Back</button>
+                <button id="back-btn" className="btn pixel-box" onClick={routeChange}>Back</button>
             </div>
         </>
     );
