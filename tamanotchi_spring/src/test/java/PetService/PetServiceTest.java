@@ -191,8 +191,8 @@ class PetServiceTest {
     @Test
     void upgradeHouse_CanUpgradeHouseWhenPetIdIsCorrect() {
         // GIVEN
-        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 5, 1, 100);;
-        Pet petAfterPurchase = new Pet(1, "Bob", 2, 1, 5, 5, 5, 4, 90);
+        Pet pet= new Pet(1, "Bob", 1, 1, 5, 5, 1, 1, 100);;
+        Pet petAfterPurchase = new Pet(1, "Bob", 2, 1, 5, 5, 1, 4, 90);
         List<Pet> pets = Arrays.asList(pet);
         // finding the correct pet
         when(fakePetDao.getAll()).thenReturn(pets);
